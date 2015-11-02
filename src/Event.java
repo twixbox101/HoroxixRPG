@@ -135,7 +135,7 @@ public class Event {
         generateMonster();
         System.out.println("You have encountered a " + generateMonster() + "!");
     }
-    
+
 //Deal damage
     public void attackDamage(){
         int totalDamage = Character.myCharacter.power + Character.myCharacter.myWeapon.power;
