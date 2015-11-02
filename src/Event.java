@@ -130,7 +130,11 @@ public class Event {
         }
     return Monster.currentMonster;
     }
-
+//Enters Battle, generates the monster that the character fights
+    public void enterBattle(){
+        generateMonster();
+        System.out.println("You have encountered a " + generateMonster() + "!");
+    }
 
 //Deal damage
     public void attackDamage(){
