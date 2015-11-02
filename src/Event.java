@@ -17,14 +17,14 @@ public class Event {
 
     public Event(){
     }
-//uses a potion to restore 30 health!
+//uses a potion to restore 30 currentHealth!
     public static void usePotion(Character myCharacter){
         int howMany = Character.inventory.get(Item.potion);
         if(howMany > 0) {
             Character.inventory.put(Item.potion, howMany-1);
             System.out.println("You have used a potion.");
             System.out.println("30 Health healed!");
-            myCharacter.currentHealth +=Item.potion.heal;
+            myCharacter.currentHealth += Item.potion.heal;
             if(myCharacter.currentHealth > myCharacter.maxHealth){
                 myCharacter.currentHealth = myCharacter.maxHealth;
             }
@@ -48,7 +48,7 @@ public class Event {
         }
         else
         {
-            System.out.println("You don't have any elixers!");
+            System.out.println("You don't have any elixirs!");
         }
     }
 //Adds item to My Character's Inventory
@@ -101,10 +101,12 @@ public class Event {
                     }
                 }
 //Generate random number
-    public int generateRandom(){
+    public int generateRandom() {
         Random randomNumber = new Random();
         return randomNumber.nextInt(6);
     }
+
+
 //Generate random monster based on value
     public Monster generateMonster(){
         int value = generateRandom();
@@ -134,58 +136,95 @@ public class Event {
     public void enterBattle(){
         generateMonster();
         System.out.println("You have encountered a " + generateMonster() + "!");
+        fight();
     }
-
+//Battle System 1.0
+    public void fight() {
+        while (Character.myCharacter.currentHealth > 0 || Monster.currentMonster.currentHealth >0) {
+            String battleChoice;
+            Scanner battleInput = new Scanner(System.in);
+            battleChoice = battleInput.next();
+            System.out.println("What do you do?");
+            System.out.println("[Attack][Skill][Item][Run]");
+            switch (battleChoice.toLowerCase()){
+                case "attack":
+                    System.out.println("You attack!");
+                    attackDamage();
+                    break;
+                case "skill":
+                    getSkillChoice();
+                    break;
+                case "item":
+                    System.out.println(Character.myCharacter.inventory);
+                    break;
+                case "run":
+                    System.out.println("coward");
+                    break;
+                default:
+                    System.out.println("Select an action!");
+                    break;
+            }
+        }
+    }
 //Deal damage
     public void attackDamage(){
-        int totalDamage = Character.myCharacter.power + Character.myCharacter.myWeapon.power;
-        Monster.currentMonster.health -= totalDamage += Monster.currentMonster.defense;
-        double damageDealt = totalDamage -= Monster.currentMonster.defense;
-        System.out.println("Damage dealt: " + damageDealt + "!");
-        System.out.println(Monster.currentMonster.health);
+        Random hitMiss = new Random();
+        int value = hitMiss.nextInt(10);
+        if(value <3){
+            System.out.println("Your attack missed!");
+        }
+        else{
+            int totalDamage = Character.myCharacter.power + Character.myCharacter.myWeapon.power;
+            Monster.currentMonster.currentHealth -= totalDamage;
+            Monster.currentMonster.currentHealth += Monster.currentMonster.defense;
+            double damageDealt = totalDamage - Monster.currentMonster.defense;
+            System.out.println("Damage dealt: " + damageDealt + "!");
+            System.out.println(Monster.currentMonster.currentHealth);
+        }
     }
 //Level Up!
     public static void levelUP(Character myCharacter){
         System.out.println("Congratulations! You have leveled up.");
-        if(myCharacter.charClass.equalsIgnoreCase("knight")) {
-            myCharacter.maxHealth *=1.65;
-            myCharacter.defense *=1.25;
-            myCharacter.level +=1;
-            myCharacter.power *=1.25;
-            myCharacter.maxMana *=1.10;
-            myCharacter.currentHealth = myCharacter.maxHealth;
-        }
-        else if(myCharacter.charClass.equalsIgnoreCase("ranger")) {
-            myCharacter.maxHealth *=1.45;
-            myCharacter.defense *=1.15;
-            myCharacter.level +=1;
-            myCharacter.power *=1.45;
-            myCharacter.maxMana *=1.25;
-            myCharacter.currentHealth = myCharacter.maxHealth;
-        }
-        else if(myCharacter.charClass.equalsIgnoreCase("wizard")) {
-            myCharacter.maxHealth *=1.25;
-            myCharacter.defense *=1.10;
-            myCharacter.level +=1;
-            myCharacter.power *=1.65;
-            myCharacter.maxMana *=1.50;
-            myCharacter.currentHealth = myCharacter.maxHealth;
-        }
-        else if(myCharacter.charClass.equalsIgnoreCase("druid")) {
-            myCharacter.maxHealth *=1.50;
-            myCharacter.defense *=1.20;
-            myCharacter.level +=1;
-            myCharacter.power *=1.30;
-            myCharacter.maxMana *=1.30;
-            myCharacter.currentHealth = myCharacter.maxHealth;
-        }
-        else if(myCharacter.charClass.equalsIgnoreCase("priest")) {
-            myCharacter.maxHealth *=1.40;
-            myCharacter.defense *=1.15;
-            myCharacter.level +=1;
-            myCharacter.power *=1.10;
-            myCharacter.maxMana *=1.45;
-            myCharacter.currentHealth = myCharacter.maxHealth;
+        switch (myCharacter.charClass){
+            case "knight":
+                myCharacter.maxHealth *=1.65;
+                myCharacter.defense *=1.25;
+                myCharacter.level +=1;
+                myCharacter.power *=1.25;
+                myCharacter.maxMana *=1.10;
+                myCharacter.currentHealth = myCharacter.maxHealth;
+                break;
+            case "ranger":
+                myCharacter.maxHealth *=1.45;
+                myCharacter.defense *=1.15;
+                myCharacter.level +=1;
+                myCharacter.power *=1.45;
+                myCharacter.maxMana *=1.25;
+                myCharacter.currentHealth = myCharacter.maxHealth;
+                break;
+            case "wizard":
+                myCharacter.maxHealth *=1.25;
+                myCharacter.defense *=1.10;
+                myCharacter.level +=1;
+                myCharacter.power *=1.65;
+                myCharacter.maxMana *=1.50;
+                myCharacter.currentHealth = myCharacter.maxHealth;
+                break;
+            case "druid":
+                myCharacter.maxHealth *=1.50;
+                myCharacter.defense *=1.20;
+                myCharacter.level +=1;
+                myCharacter.power *=1.30;
+                myCharacter.maxMana *=1.30;
+                myCharacter.currentHealth = myCharacter.maxHealth;
+                break;
+            case "priest":
+                myCharacter.maxHealth *=1.40;
+                myCharacter.defense *=1.15;
+                myCharacter.level +=1;
+                myCharacter.power *=1.10;
+                myCharacter.maxMana *=1.45;
+                myCharacter.currentHealth = myCharacter.maxHealth;
         }
     }
     // equips a weapon. change myWeapon to the weapon you want to equip.
@@ -212,10 +251,10 @@ public class Event {
             System.out.println(Character.myCharacter.currentHealth);
         }
         else {
-            Monster.currentMonster.health -= mySkill.damage += Monster.currentMonster.defense;
+            Monster.currentMonster.currentHealth -= mySkill.damage += Monster.currentMonster.defense;
             double damageDealt = mySkill.damage -= Monster.currentMonster.defense;
             System.out.println("Damage dealt: " + damageDealt + "!");
-            System.out.println(Monster.currentMonster.health);
+            System.out.println(Monster.currentMonster.currentHealth);
         }
     }/*Asks to choose a skill. You input a skill name (currently a letter) and it will see if you have that in your
     skills.If it does, it executes. If not it will not execute. This currently only works for Knights. */
@@ -236,15 +275,7 @@ public class Event {
         }
     }
     public static void main(String[] args) {
-        Inventory inv = new Inventory();
-        System.out.println(inv);
-        Character.myCharacter.equipMyWeapon(Weapon.excalibur);
-        System.out.println(Character.myCharacter.myWeapon);
-        useSkill(Skill.doubleSlash);
-        useSkill(Skill.cure);
-        Character.myCharacter.skills = Skill.knightSkills;
-        getSkillChoice();
-        enterShop();
+
 
     }
 

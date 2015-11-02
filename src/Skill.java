@@ -26,6 +26,14 @@ public class Skill {
         priestSkills.put(cure.name, cure);
 
     }
+
+    /**
+     *
+     * @param skillName name of the skill.
+     * @param skillDamage damage value of the skill (if any)
+     * @param skillManaCost mana cost of the skill.
+     * @param skillHeal heal value of the skill (if any)
+     */
 //default assigning of skills.
     public Skill(String skillName, double skillDamage, int skillManaCost, double skillHeal){
         name = skillName;

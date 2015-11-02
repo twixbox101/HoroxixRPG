@@ -6,7 +6,7 @@ import java.util.Map;
  */
 public class Armor extends Item {
 
-//assigns variables for defense and health
+//assigns variables for defense and currentHealth
     int defense;
     int health;
     String name;
@@ -35,7 +35,7 @@ public class Armor extends Item {
      * @param armorPrice price of the Armor for the store.
      * @param armorDefense defense value of the Armor.
      * @param armorSell sell value of the Armor.
-     * @param armorHealth added health value of the Armor.
+     * @param armorHealth added currentHealth value of the Armor.
      */
 //defines armor and it's parameters
     public Armor(String armorName, int armorPrice, int armorDefense, int armorSell, int armorHealth){

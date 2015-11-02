@@ -23,6 +23,14 @@ public class Item {
         mapOfItems.put(elixir, elixir.price);
     }
 
+    /**
+     *
+     * @param itemName name of the item.
+     * @param itemPrice price of the item in the store.
+     * @param itemHeal heal value of the item.
+     * @param itemSell sell value of the item.
+     */
+
     public Item(String itemName, int itemPrice, int itemHeal, int itemSell){
         price = itemPrice;
         name = itemName;
