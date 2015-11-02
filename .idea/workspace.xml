@@ -6,40 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f670a6-438e-47d8-84c9-311f079a379f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Armor.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Character.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Event.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Inventory.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Items.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Location.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Monster.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md'" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Skill.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/Weapon.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Holden's RPG 2/aMain.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.37-bin.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Armor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Character.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Event.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Holden's RPG 2.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Inventory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Item.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Location.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Monster.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Skill.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Weapon.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aMain.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/hjohnson.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Event.java" afterPath="$PROJECT_DIR$/src/Event.java" />
     </list>
     <ignored path="Holden's RPG 2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7477876">
+            <state vertical-scroll-proportion="0.0">
               <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -80,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Event.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Event.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.88384956">
+              <caret line="137" column="4" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -207,9 +174,9 @@
         <option value="$PROJECT_DIR$/src/Inventory.java" />
         <option value="$PROJECT_DIR$/src/Monster.java" />
         <option value="$PROJECT_DIR$/src/Skill.java" />
-        <option value="$PROJECT_DIR$/src/Event.java" />
         <option value="$PROJECT_DIR$/src/Armor.java" />
         <option value="$PROJECT_DIR$/src/Character.java" />
+        <option value="$PROJECT_DIR$/src/Event.java" />
       </list>
     </option>
   </component>
@@ -224,8 +191,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2531" />
-    <option name="y" value="10" />
+    <option name="x" value="2300" />
+    <option name="y" value="8" />
     <option name="width" value="1252" />
     <option name="height" value="1040" />
   </component>
@@ -556,7 +523,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2531" y="10" width="1252" height="1040" extended-state="0" />
+    <frame x="2300" y="8" width="1252" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -793,20 +760,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7477876">
+        <state vertical-scroll-proportion="0.0">
           <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -817,6 +773,17 @@
             <element signature="e#5018#5019#0" expanded="true" />
             <element signature="e#5137#5138#0" expanded="true" />
             <element signature="e#5175#5176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88384956">
+          <caret line="137" column="4" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
