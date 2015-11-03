@@ -11,16 +11,16 @@ public class Armor extends Item {
     int health;
     String name;
 //creates hashmap of armor
-    public static Map<String,Armor> mapOfArmor = new HashMap<>();
+    Map<String,Armor> mapOfArmor = new HashMap<>();
 //lists all armor to add to hashmap
-    public static Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
-    public static Armor silverArmor = new Armor("Silver Armor", 120, 35, 50, 60);
-    public static Armor goldArmor = new Armor("Gold Armor", 425, 80, 50, 125);
-    public static Armor mythrilArmor = new Armor("Mythril Armor", 800, 155, 300, 225);
-    public static Armor rubyArmor = new Armor("Ruby Armor", 1400, 355, 625, 450);
-    public static Armor samuraiArmor = new Armor("Samurai Armor", 1600, 300, 400, 600);
+    Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
+    Armor silverArmor = new Armor("Silver Armor", 120, 35, 50, 60);
+    Armor goldArmor = new Armor("Gold Armor", 425, 80, 50, 125);
+    Armor mythrilArmor = new Armor("Mythril Armor", 800, 155, 300, 225);
+    Armor rubyArmor = new Armor("Ruby Armor", 1400, 355, 625, 450);
+    Armor samuraiArmor = new Armor("Samurai Armor", 1600, 300, 400, 600);
 //adds Armor to mapOfArmor. (To grab use .get())
-    static {
+     {
         mapOfArmor.put("Wood Armor", woodArmor);
         mapOfArmor.put("Silver Armor", silverArmor);
         mapOfArmor.put("Gold Armor", goldArmor);
@@ -39,7 +39,7 @@ public class Armor extends Item {
      */
 //defines armor and it's parameters
     public Armor(String armorName, int armorPrice, int armorDefense, int armorSell, int armorHealth){
-        super(armorName,armorPrice, 0, armorSell);
+        super(armorName,armorPrice, 0, armorSell, 0);
         price = armorPrice;
         name = armorName;
         sell = armorSell;

@@ -10,12 +10,13 @@ public class Item {
     int heal;
     int sell;
     String name;
+    int quantity;
 
     //creates map for items
     public static Map<Item, Integer> mapOfItems= new HashMap<>();
     //list of items and their values
-    public static Item potion = new Item("Potion", 20, 40, 5);
-    public static Item elixir = new Item("Elixir", 50, 20, 24);
+    public static Item potion = new Item("Potion", 20, 40, 5, 0);
+    public static Item elixir = new Item("Elixir", 50, 20, 24, 0);
     //adds Item to mapOfItems(To get them use .get)
     static
     {
@@ -31,11 +32,12 @@ public class Item {
      * @param itemSell sell value of the item.
      */
 
-    public Item(String itemName, int itemPrice, int itemHeal, int itemSell){
+    public Item(String itemName, int itemPrice, int itemHeal, int itemSell, int itemQuantity){
         price = itemPrice;
         name = itemName;
         heal = itemHeal;
         sell = itemSell;
+        quantity = itemQuantity;
 
     }
     public String toString() {

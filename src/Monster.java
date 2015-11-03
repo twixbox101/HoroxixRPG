@@ -42,8 +42,7 @@ public class Monster {
     }
 
     public static void main(String[] args){
-        System.out.println(goblin.currentHealth);
-        System.out.println(bat.power);
+
 
     }
 }

@@ -10,18 +10,20 @@ public class Event {
 
     Weapon myWeapon;
     Armor myArmor;
-    public static Skill mySkill;
+    Skill mySkill;
     Monster monsterHealth;
-    public static String skillChoice;
-    public static String shopChoice;
+    String skillChoice;
+    String shopChoice;
+
 
     public Event(){
     }
 //uses a potion to restore 30 currentHealth!
-    public static void usePotion(Character myCharacter){
-        int howMany = Character.inventory.get(Item.potion);
+    public void usePotion(Character myCharacter){
+        int howMany = myCharacter.inventory.get(Item.potion).quantity;
         if(howMany > 0) {
-            Character.inventory.put(Item.potion, howMany-1);
+            myCharacter.inventory.put(Item.elixir.name, Item.potion);
+
             System.out.println("You have used a potion.");
             System.out.println("30 Health healed!");
             myCharacter.currentHealth += Item.potion.heal;
@@ -35,10 +37,10 @@ public class Event {
         }
     }
 //Uses an elixir to heal 20 mana.
-    public static void useElixir(Character myCharacter){
-        int howMany = Character.inventory.get(Item.elixir);
+    public void useElixir(Character myCharacter){
+        int howMany = myCharacter.inventory.get(Item.elixir).quantity;
         if(howMany > 0) {
-            Character.inventory.put(Item.elixir, howMany-1);
+            myCharacter.inventory.put(Item.elixir.name, Item.elixir);
             System.out.println("You have used an elixir.");
             System.out.println("20 Mana restored!");
             myCharacter.currentMana +=Item.elixir.heal;
@@ -52,18 +54,19 @@ public class Event {
         }
     }
 //Adds item to My Character's Inventory
-    public static void addItem(Item myItem, Character myCharacter){
-        Integer howMany = Character.inventory.get(myItem);
+    public void addItem(Item myItem, Character myCharacter){
+        Integer howMany = myCharacter.inventory.get(myItem).quantity;
         if(howMany == null) {
-            Character.inventory.put(myItem, 1);
+            myCharacter.inventory.put(myItem.name, myItem);
+            myItem.quantity++;
         }
         else
         {
-            Character.inventory.put(myItem, howMany+1);
+            myItem.quantity++;
         }
     }
 //Enters the shop and displays a list of items.
-    public static void enterShop(){
+    public void enterShop(Character myCharacter){
         System.out.println("Welcome to the shop!");
         System.out.println("What can I get you?");
         for (Map.Entry<Item, Integer> entry : Item.mapOfItems.entrySet()) {
@@ -75,20 +78,22 @@ public class Event {
                 shopChoice = myInput.next();
                 switch (shopChoice.toLowerCase()){
                     case "potion":
-                        if(Character.myCharacter.gold >= Item.potion.price){
+                        if(myCharacter.gold >= Item.potion.price){
                             System.out.println("You have purchased a Potion!");
-                            Character.inventory.put(Item.potion, 1);
-                            Character.myCharacter.gold -= Item.potion.price;
+                            myCharacter.inventory.put(Item.potion.name, Item.potion);
+                            Item.potion.quantity++;
+                            myCharacter.gold -= Item.potion.price;
                             }
                         else{
                             System.out.println("You don't have enough gold!");
                             }
                         break;
                     case "elixir":
-                        if(Character.myCharacter.gold >= Item.elixir.price){
+                        if(myCharacter.gold >= Item.elixir.price){
                             System.out.println("You have purchased an Elixir!");
-                            Character.inventory.put(Item.elixir, 1);
-                            Character.myCharacter.gold -= Item.elixir.price;
+                            myCharacter.inventory.put(Item.elixir.name, Item.elixir);
+                            Item.elixir.quantity++;
+                            myCharacter.gold -= Item.elixir.price;
                         }
                         else{
                             System.out.println("You don't have enough gold!");
@@ -133,14 +138,14 @@ public class Event {
     return Monster.currentMonster;
     }
 //Enters Battle, generates the monster that the character fights
-    public void enterBattle(){
+    public void enterBattle(Character myCharacter){
         generateMonster();
         System.out.println("You have encountered a " + generateMonster() + "!");
-        fight();
+        fight(myCharacter);
     }
 //Battle System 1.0
-    public void fight() {
-        while (Character.myCharacter.currentHealth > 0 || Monster.currentMonster.currentHealth >0) {
+    public void fight(Character myCharacter) {
+        while (myCharacter.currentHealth > 0 || Monster.currentMonster.currentHealth > 0) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             battleChoice = battleInput.next();
@@ -149,13 +154,13 @@ public class Event {
             switch (battleChoice.toLowerCase()){
                 case "attack":
                     System.out.println("You attack!");
-                    attackDamage();
+                    attackDamage(myCharacter);
                     break;
                 case "skill":
-                    getSkillChoice();
+                    getSkillChoice(myCharacter);
                     break;
                 case "item":
-                    System.out.println(Character.myCharacter.inventory);
+                    System.out.println(myCharacter.inventory);
                     break;
                 case "run":
                     System.out.println("coward");
@@ -167,14 +172,14 @@ public class Event {
         }
     }
 //Deal damage
-    public void attackDamage(){
+    public void attackDamage(Character myCharacter){
         Random hitMiss = new Random();
         int value = hitMiss.nextInt(10);
         if(value <3){
             System.out.println("Your attack missed!");
         }
         else{
-            int totalDamage = Character.myCharacter.power + Character.myCharacter.myWeapon.power;
+            int totalDamage = myCharacter.power + myCharacter.myWeapon.power;
             Monster.currentMonster.currentHealth -= totalDamage;
             Monster.currentMonster.currentHealth += Monster.currentMonster.defense;
             double damageDealt = totalDamage - Monster.currentMonster.defense;
@@ -182,8 +187,93 @@ public class Event {
             System.out.println(Monster.currentMonster.currentHealth);
         }
     }
+
+//MainMenu 1.0 WIP
+    public void mainMenu(Character myCharacter) {
+        String menuChoice;
+        Scanner menuInput = new Scanner(System.in);
+        menuChoice = menuInput.next();
+        System.out.println("[Travel][Shop][Inventory][Stats]");
+        switch (menuChoice.toLowerCase()) {
+            case "travel":
+                break;
+            case "shop":
+                break;
+            case "inventory":
+                inInventory(myCharacter);
+                break;
+            case "stats":
+                System.out.println("Class: " + myCharacter.charClass);
+                System.out.println("Level: " + myCharacter.level);
+                System.out.println("EXP: " + myCharacter.exp);
+                System.out.println("Health: " + myCharacter.currentHealth + "/" + myCharacter.maxHealth);
+                System.out.println("Power: " + (myCharacter.power + myCharacter.myWeapon.power));
+                System.out.println("Defense: " + (myCharacter.defense + myCharacter.myArmor.defense));
+                System.out.println("Weapon: " + myCharacter.myWeapon);
+                System.out.println("Armor: " + myCharacter.myArmor);
+                break;
+            default:
+                System.out.println("Please select a valid option.");
+
+        }
+    }
+//Inventory 1.0 WIP
+    public void inInventory(Character myCharacter){
+        System.out.println(myCharacter.inventory);
+        System.out.println("What would you like to do?");
+        String invChoice;
+        Scanner menuInput = new Scanner(System.in);
+        invChoice = menuInput.next();
+        System.out.println("[Equip][Exit]");
+        switch(invChoice.toLowerCase()){
+            case "equip":
+                equipMenu(myCharacter);
+                break;
+            case "exit":
+                System.out.println("You leave.");
+                mainMenu(myCharacter);
+                break;
+            default:
+                System.out.println("Please select a valid option.");
+        }
+    }
+//Equip Menu 1.0 WIP
+    public void equipMenu(Character myCharacter){
+        String equipChoice;
+        Scanner menuInput = new Scanner(System.in);
+        equipChoice = menuInput.next();
+        System.out.println("What would you like to equip?");
+        System.out.println("[Armor][Weapon]");
+        switch(equipChoice.toLowerCase()){
+            case "armor":
+                break;
+            case "weapon":
+                break;
+        }
+    }
+//equip armor by choice WIP
+    public void equipArmor(Character myCharacter){
+        String armorChoice;
+        Scanner menuInput = new Scanner(System.in);
+        armorChoice = menuInput.next();
+        System.out.println("Please type the name of the armor you'd like to equip.");
+        //if(myCharacter.inventory.containsKey(armorChoice)){
+            //int checkAmount = myCharacter.inventory.get(armorChoice);
+           // if(checkAmount > 0) {
+            //myCharacter.inventory.put(armorChoice, checkAmount-1);
+            //equipMyArmor(armorChoice);
+
+            }
+
+            //else
+        {
+            System.out.println("You don't have any!");
+        }
+    //}
+    //}
+
 //Level Up!
-    public static void levelUP(Character myCharacter){
+    public void levelUP(Character myCharacter){
         System.out.println("Congratulations! You have leveled up.");
         switch (myCharacter.charClass){
             case "knight":
@@ -237,18 +327,17 @@ public class Event {
         this.myArmor = myArmor;
         System.out.println("You have equipped " + myArmor);
     }
-
 //Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.
-    public static void useSkill(Skill aMySkill) {
+    public void useSkill(Character myCharacter, Skill aMySkill) {
         mySkill = aMySkill;
         System.out.println("You use " + mySkill + "!");
         if (mySkill.heal > 0) {
-            Character.myCharacter.currentHealth += mySkill.heal;
-            if (Character.myCharacter.currentHealth > Character.myCharacter.maxHealth) {
-                Character.myCharacter.currentHealth = Character.myCharacter.maxHealth;
+            myCharacter.currentHealth += mySkill.heal;
+            if (myCharacter.currentHealth > myCharacter.maxHealth) {
+                myCharacter.currentHealth = myCharacter.maxHealth;
             }
             System.out.println("Healed for " + mySkill.heal + "!");
-            System.out.println(Character.myCharacter.currentHealth);
+            System.out.println(myCharacter.currentHealth);
         }
         else {
             Monster.currentMonster.currentHealth -= mySkill.damage += Monster.currentMonster.defense;
@@ -258,13 +347,13 @@ public class Event {
         }
     }/*Asks to choose a skill. You input a skill name (currently a letter) and it will see if you have that in your
     skills.If it does, it executes. If not it will not execute. This currently only works for Knights. */
-    public static void getSkillChoice() {
+    public void getSkillChoice(Character myCharacter) {
         Scanner inputChoice = new Scanner(System.in);
         System.out.println("Choose a skill!");
         skillChoice = inputChoice.next();
         if (skillChoice != null) {
-            if(Character.myCharacter.skills.containsKey(Skill.doubleSlash.name) && skillChoice.equalsIgnoreCase("d")){
-                useSkill(Skill.doubleSlash);
+            if(myCharacter.skills.containsKey(Skill.doubleSlash.name) && skillChoice.equalsIgnoreCase("d")){
+                useSkill(myCharacter, Skill.doubleSlash);
             }
             else{
                 System.out.println("You don't have that skill!");
@@ -275,6 +364,7 @@ public class Event {
         }
     }
     public static void main(String[] args) {
+
 
 
     }

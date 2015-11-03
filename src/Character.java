@@ -25,8 +25,9 @@ public class Character {
     Map skills;
     Weapon myWeapon;
     Armor myArmor;
-    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
-    public static Map<Item,Integer> inventory = new HashMap<>();
+    public Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
+    public Map <String,Item> inventory = new HashMap<>();
+
 
     /**
      *
@@ -58,6 +59,7 @@ public class Character {
         maxMana = myMana;
         gold = myGold;
         currentHealth = myCurrentHealth;
+
     }
 //ChooseName method for character
     public void chooseName(){
@@ -129,8 +131,6 @@ public class Character {
                 break;
         }
     }
-
-
 // gets weapon
     public Weapon getWeapon(){
         return myWeapon;
@@ -162,23 +162,7 @@ public class Character {
 
 
     public static void main(String[] args) {
-        myCharacter.chooseName();
-        myCharacter.chooseGender();
-        myCharacter.chooseClass();
-        System.out.println(myCharacter.charClass);
-        System.out.println(myCharacter.name);
-        System.out.println(myCharacter.gender);
-        System.out.println(myCharacter.power);
-        System.out.println(myCharacter.defense);
-        System.out.println(myCharacter.maxHealth);
-        Event.addItem(Weapon.goldSword, myCharacter);
-        Event.addItem(Weapon.goldSword, myCharacter);
-        Event.levelUP(myCharacter);
-        System.out.println(myCharacter.level);
-        System.out.println(myCharacter.power);
-        System.out.println(myCharacter.defense);
-        System.out.println(myCharacter.maxHealth);
-        System.out.println(myCharacter.skills);
+
 
         //equips a weapon to myCharacter
         //    myCharacter.equipMyWeapon(Weapon.goldSword);
