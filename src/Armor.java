@@ -7,10 +7,37 @@ import java.util.Map;
 public class Armor extends Item {
 
 //assigns variables for defense and currentHealth
-    int defense;
-    int health;
-    String name;
-//creates hashmap of armor
+    private int defense;
+    private int health;
+    private String name;
+
+    //<editor-fold desc="Getters and Setters">
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    //</editor-fold>
+
+    //creates hashmap of armor
     Map<String,Armor> mapOfArmor = new HashMap<>();
 //lists all armor to add to hashmap
     Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);

@@ -3,15 +3,66 @@
  */
 public class Monster {
 
-    int currentHealth;
-    int power;
-    int defense;
-    int exp;
-    int maxHealth;
-    String name;
+    private int currentHealth;
+    private int power;
+    private int defense;
+    private int exp;
+    private int maxHealth;
+    private String name;
+
+    //<editor-fold desc="Getters and Setters">
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //</editor-fold>
 
     /**
-     *
+     * default constructor
      * @param monsterName name of the monster.
      * @param monsterHealth current health of the monster.
      * @param monsterMaxHealth maximum health of the monster.
@@ -29,7 +80,12 @@ public class Monster {
         defense = monsterDefense;
         exp = monsterExp;
     }
-    public static Monster currentMonster = new Monster("",0,1,0,0,0);
+
+    public void init()
+    {
+        currentHealth = maxHealth;
+    }
+//    private static Monster currentMonster = new Monster("",0,1,0,0,0);
     public static Monster goblin = new Monster("Goblin",150,150,30,5,20);
     public static Monster bat = new Monster("Bat",80,80,40,2,10);
     public static Monster troll = new Monster("Troll",300,300,90,45,80);

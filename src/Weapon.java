@@ -5,9 +5,22 @@ import java.util.Map;
 /**
  Created by Holden Johnson on 10/26/2015.
  */
+
+
 public class Weapon extends Item {
 //creates map for weapons
     Map<String, Weapon> mapOfWeapons = new HashMap<>();
+
+    //<editor-fold desc="Getters and Setters">
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+    //</editor-fold>
+
 //list of weapons and their values
     Weapon woodSword = new Weapon("Wood Sword", 40, 25, 8);
     Weapon silverSword = new Weapon("Silver Sword", 150, 80, 45);
@@ -31,7 +44,7 @@ public class Weapon extends Item {
     }
 //creates the variables/string
 
-    int power;
+    private int power;
 
 //sets up arguments for Weapon
     public Weapon(String weaponName, int weaponPrice, int weaponPower, int weaponSell){
@@ -47,6 +60,7 @@ public class Weapon extends Item {
     public String toString() {
         return name;
     }
+
 
 
 }

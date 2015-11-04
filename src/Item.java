@@ -6,11 +6,54 @@ Created by holden johnson on 10/24/2015.
  */
 public class Item {
 
-    int price;
-    int heal;
-    int sell;
-    String name;
-    int quantity;
+    protected int price;
+    protected int heal;
+    protected int sell;
+    protected String name;
+    protected int quantity;
+
+    //<editor-fold desc="Getters and Setters">
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getHeal() {
+        return heal;
+    }
+
+    public void setHeal(int heal) {
+        this.heal = heal;
+    }
+
+    public int getSell() {
+        return sell;
+    }
+
+    public void setSell(int sell) {
+        this.sell = sell;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+//</editor-fold>
 
     //creates map for items
     public static Map<Item, Integer> mapOfItems= new HashMap<>();

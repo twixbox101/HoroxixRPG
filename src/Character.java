@@ -11,7 +11,7 @@ public class Character {
 //Defines variables for the character
     String name;
     String gender;
-    String charClass;
+    String charClass = "";
     String location;
     int level;
     int currentHealth;
@@ -25,7 +25,7 @@ public class Character {
     Map skills;
     Weapon myWeapon;
     Armor myArmor;
-    public Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
+    //public Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
     public Map <String,Item> inventory = new HashMap<>();
 
 
@@ -61,23 +61,25 @@ public class Character {
         currentHealth = myCurrentHealth;
 
     }
-//ChooseName method for character
+
+    public Character() {
+    }
+
+    //ChooseName method for character
     public void chooseName(){
         Scanner inputName = new Scanner( System.in );
-        while(name.equals("")) {
             System.out.print("Please name your Character!");
             name = inputName.next();
             System.out.println("Your Character has been named " + name);
-        }
     }
 //ChooseClass method for character
     public void chooseClass() {
-        while (!charClass.equalsIgnoreCase("knight") && !charClass.equalsIgnoreCase("ranger") && !charClass.equalsIgnoreCase("wizard") && !charClass.equalsIgnoreCase("druid") && !charClass.equalsIgnoreCase("priest")) {
+        while (!"knight".equalsIgnoreCase(charClass) && !"ranger".equalsIgnoreCase(charClass) && !"wizard".equalsIgnoreCase(charClass) && !"druid".equalsIgnoreCase(charClass) && !"priest".equalsIgnoreCase(charClass)) {
             Scanner inputClass = new Scanner(System.in);
             System.out.print("Please choose a class!");
             System.out.println("[Knight][Ranger][Wizard][Druid][Priest]");
             charClass = inputClass.next();
-            if (!charClass.equalsIgnoreCase("knight") && !charClass.equalsIgnoreCase("ranger") && !charClass.equalsIgnoreCase("wizard") && !charClass.equalsIgnoreCase("druid") && !charClass.equalsIgnoreCase("priest")) {
+            if (!"knight".equalsIgnoreCase(charClass) && !"ranger".equalsIgnoreCase(charClass) && !"wizard".equalsIgnoreCase(charClass) && !"druid".equalsIgnoreCase(charClass) && !"priest".equalsIgnoreCase(charClass)) {
                 System.out.println("Please select a valid class!");
             } else {
                 System.out.println("You have chosen the " + charClass);
@@ -86,6 +88,7 @@ public class Character {
         switch (charClass) {
             case "knight":
                 maxHealth = 120;
+                level = 1;
                 currentHealth = maxHealth;
                 power = 80;
                 defense = 15;
@@ -95,6 +98,7 @@ public class Character {
                 break;
             case "ranger":
                 maxHealth = 95;
+                level = 1;
                 currentHealth = maxHealth;
                 power = 95;
                 defense = 8;
@@ -104,6 +108,7 @@ public class Character {
                 break;
             case "wizard":
                 maxHealth = 80;
+                level = 1;
                 currentHealth = maxHealth;
                 power = 120;
                 defense = 2;
@@ -113,6 +118,7 @@ public class Character {
                 break;
             case "druid":
                 maxHealth = 100;
+                level = 1;
                 currentHealth = maxHealth;
                 power = 85;
                 defense = 8;
@@ -122,6 +128,7 @@ public class Character {
                 break;
             case "priest":
                 maxHealth = 85;
+                level = 1;
                 currentHealth = maxHealth;
                 power = 105;
                 defense = 4;
@@ -146,10 +153,10 @@ public class Character {
 //choose gender method
     public void chooseGender(){
         Scanner inputGender = new Scanner( System.in );
-        while(!gender.equalsIgnoreCase("boy") && !gender.equalsIgnoreCase("girl")) {
+        while(!"boy".equalsIgnoreCase(gender) && !"girl".equalsIgnoreCase(gender)) {
             System.out.print("Are you a Boy or a Girl?");
             gender = inputGender.next();
-            if(!gender.equalsIgnoreCase("boy") && !gender.equalsIgnoreCase("girl")) {
+            if(!"boy".equalsIgnoreCase(gender) && !"girl".equalsIgnoreCase(gender)) {
                 System.out.println("I don't understand what you're saying...");
             }
             else {

@@ -18,8 +18,8 @@ public class Skill {
     public static Map<String,Skill> rangerSkills = new HashMap<>();
     public static Map<String,Skill> wizardSkills = new HashMap<>();
 //Creating different skills.
-    public static Skill doubleSlash = new Skill("Double Slash", Character.myCharacter.power * 1.5, 8, 0);
-    public static Skill cure = new Skill("Cure", 0, 10, Character.myCharacter.maxHealth * 0.33);
+    public static Skill doubleSlash = new Skill("Double Slash", 1.5, 8, 0);
+    public static Skill cure = new Skill("Cure", 0, 10, 30);
 //Adding skills to certain hashmaps
     static {
         knightSkills.put(doubleSlash.name, doubleSlash);
