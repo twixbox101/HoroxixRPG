@@ -14,8 +14,8 @@ public class Character {
     String charClass = "";
     String location;
     int level;
-    int currentHealth;
-    int maxHealth;
+    private int currentHealth;
+    private int maxHealth;
     int power;
     int defense;
     int exp;
@@ -28,6 +28,145 @@ public class Character {
     //public Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
     public Map <String,Item> inventory = new HashMap<>();
 
+//<editor-fold desc="Getters and Setters">
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getCharClass() {
+        return charClass;
+    }
+
+    public void setCharClass(String charClass) {
+        this.charClass = charClass;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getCurrentMana() {
+        return currentMana;
+    }
+
+    public void setCurrentMana(int currentMana) {
+        this.currentMana = currentMana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public Map getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Map skills) {
+        this.skills = skills;
+    }
+
+    public Weapon getMyWeapon() {
+        return myWeapon;
+    }
+
+    public void setMyWeapon(Weapon myWeapon) {
+        this.myWeapon = myWeapon;
+    }
+
+    public Armor getMyArmor() {
+        return myArmor;
+    }
+
+    public void setMyArmor(Armor myArmor) {
+        this.myArmor = myArmor;
+    }
+
+    public Map<String, Item> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Map<String, Item> inventory) {
+        this.inventory = inventory;
+    }
+
+    //</editor-fold>
 
     /**
      *
@@ -186,5 +325,6 @@ public class Character {
         //    myCharacter.equipMyWeapon(Weapon.goldSword);
         //displays characters weapon + power
         //    System.out.println(myCharacter.power + myCharacter.getWeapon().power);
-    }
-}
+
+
+    }}

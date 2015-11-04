@@ -23,12 +23,13 @@ public class Event {
         int howMany = myCharacter.inventory.get(Item.potion).quantity;
         if(howMany > 0) {
             myCharacter.inventory.put(Item.elixir.name, Item.potion);
-
             System.out.println("You have used a potion.");
             System.out.println("30 Health healed!");
-            myCharacter.currentHealth += Item.potion.heal;
-            if(myCharacter.currentHealth > myCharacter.maxHealth){
-                myCharacter.currentHealth = myCharacter.maxHealth;
+            int myHealth = myCharacter.getCurrentHealth();
+            myCharacter.setCurrentHealth(myHealth + Item.potion.heal);
+            if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()){
+                int healthCheck = myCharacter.getMaxHealth();
+                myCharacter.setCurrentHealth(healthCheck);
             }
         }
         else
@@ -150,7 +151,7 @@ public class Event {
     }
 //Battle System 1.0
     public void fight(Character myCharacter, Monster currentMonster) {
-        while (myCharacter.currentHealth > 0 || currentMonster.getCurrentHealth() > 0) {
+        while (myCharacter.getCurrentHealth() > 0 || currentMonster.getCurrentHealth() > 0) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             battleChoice = battleInput.next();
@@ -214,7 +215,7 @@ public class Event {
                 System.out.println("Class: " + myCharacter.charClass);
                 System.out.println("Level: " + myCharacter.level);
                 System.out.println("EXP: " + myCharacter.exp);
-                System.out.println("Health: " + myCharacter.currentHealth + "/" + myCharacter.maxHealth);
+                System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
                 System.out.println("Power: " + (myCharacter.power + myCharacter.myWeapon.getPower()));
                 System.out.println("Defense: " + (myCharacter.defense + myCharacter.myArmor.getDefense()));
                 System.out.println("Weapon: " + myCharacter.myWeapon);
@@ -285,44 +286,49 @@ public class Event {
         System.out.println("Congratulations! You have leveled up.");
         switch (myCharacter.charClass){
             case "knight":
-                myCharacter.maxHealth *=1.65;
+                double maxHealthKnight = myCharacter.getMaxHealth();
+                myCharacter.setMaxHealth((int) Math.round(maxHealthKnight * 1.65));
                 myCharacter.defense *=1.25;
                 myCharacter.level +=1;
                 myCharacter.power *=1.25;
                 myCharacter.maxMana *=1.10;
-                myCharacter.currentHealth = myCharacter.maxHealth;
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "ranger":
-                myCharacter.maxHealth *=1.45;
+                double maxHealthRanger = myCharacter.getMaxHealth();
+                myCharacter.setMaxHealth((int) Math.round(maxHealthRanger * 1.45));
                 myCharacter.defense *=1.15;
                 myCharacter.level +=1;
                 myCharacter.power *=1.45;
                 myCharacter.maxMana *=1.25;
-                myCharacter.currentHealth = myCharacter.maxHealth;
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "wizard":
-                myCharacter.maxHealth *=1.25;
+                double maxHealthWizard = myCharacter.getMaxHealth();
+                myCharacter.setMaxHealth((int) Math.round(maxHealthWizard * 1.25));
                 myCharacter.defense *=1.10;
                 myCharacter.level +=1;
                 myCharacter.power *=1.65;
                 myCharacter.maxMana *=1.50;
-                myCharacter.currentHealth = myCharacter.maxHealth;
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "druid":
-                myCharacter.maxHealth *=1.50;
+                double maxHealthDruid = myCharacter.getMaxHealth();
+                myCharacter.setMaxHealth((int) Math.round(maxHealthDruid * 1.50));
                 myCharacter.defense *=1.20;
                 myCharacter.level +=1;
                 myCharacter.power *=1.30;
                 myCharacter.maxMana *=1.30;
-                myCharacter.currentHealth = myCharacter.maxHealth;
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "priest":
-                myCharacter.maxHealth *=1.40;
+                double maxHealthPriest = myCharacter.getMaxHealth();
+                myCharacter.setMaxHealth((int) Math.round(maxHealthPriest * 1.40));
                 myCharacter.defense *=1.15;
                 myCharacter.level +=1;
                 myCharacter.power *=1.10;
                 myCharacter.maxMana *=1.45;
-                myCharacter.currentHealth = myCharacter.maxHealth;
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
         }
     }
     // equips a weapon. change myWeapon to the weapon you want to equip.
@@ -341,12 +347,14 @@ public class Event {
         mySkill = aMySkill;
         System.out.println("You use " + mySkill + "!");
         if (mySkill.heal > 0) {
-            myCharacter.currentHealth += mySkill.heal;
-            if (myCharacter.currentHealth > myCharacter.maxHealth) {
-                myCharacter.currentHealth = myCharacter.maxHealth;
+            int toHeal = myCharacter.getCurrentHealth();
+            myCharacter.setCurrentHealth(toHeal += mySkill.heal);
+            if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
+                int healthCheck = myCharacter.getMaxHealth();
+                myCharacter.setCurrentHealth(healthCheck);
             }
             System.out.println("Healed for " + mySkill.heal + "!");
-            System.out.println(myCharacter.currentHealth);
+            System.out.println(myCharacter.getCurrentHealth());
         }
         else {
             double newHealth;
