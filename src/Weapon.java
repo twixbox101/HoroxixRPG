@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Weapon extends Item {
 //creates map for weapons
-    Map<String, Weapon> mapOfWeapons = new HashMap<>();
+    public Map<String, Weapon> mapOfWeapons = new HashMap<>();
 
     //<editor-fold desc="Getters and Setters">
     public int getPower() {
@@ -22,14 +22,19 @@ public class Weapon extends Item {
     //</editor-fold>
 
 //list of weapons and their values
-    Weapon woodSword = new Weapon("Wood Sword", 40, 25, 8);
-    Weapon silverSword = new Weapon("Silver Sword", 150, 80, 45);
-    Weapon goldSword = new Weapon("Gold Sword", 450, 300, 125);
-    Weapon mythrilSword = new Weapon("Mythril Sword", 750, 575, 325);
-    Weapon rubySword = new Weapon("Ruby Sword", 1200, 825, 525);
-    Weapon katana = new Weapon("Katana", 1400, 875, 600);
-    Weapon excalibur = new Weapon("Excalibur", 2500, 1200, 1100);
-    Weapon ultimaWeapon = new Weapon("Ultima Weapon", 9999, 1800, 1);
+    public static Weapon woodSword = new Weapon("Wood Sword", 40, 25, 8);
+    public static Weapon knightSword = new Weapon("Knight's Sword", 0, 15, 1);
+    public static Weapon rangerBow = new Weapon("Ranger's Bow", 0, 9, 1);
+    public static Weapon wizardStaff = new Weapon("Wizard's Staff", 0, 20, 1);
+    public static Weapon druidClaws = new Weapon("Druid's Claws", 0, 12, 1);
+    public static Weapon priestStaff = new Weapon("Priest's Staff", 0, 8, 1);
+    public static Weapon silverSword = new Weapon("Silver Sword", 150, 80, 45);
+    public static Weapon goldSword = new Weapon("Gold Sword", 450, 300, 125);
+    public static Weapon mythrilSword = new Weapon("Mythril Sword", 750, 575, 325);
+    public static Weapon rubySword = new Weapon("Ruby Sword", 1200, 825, 525);
+    public static Weapon katana = new Weapon("Katana", 1400, 875, 600);
+    public static Weapon excalibur = new Weapon("Excalibur", 2500, 1200, 1100);
+    public static Weapon ultimaWeapon = new Weapon("Ultima Weapon", 9999, 1800, 1);
 //adds Weapon to the mapOfWeapons(To get them use .get)
 
     {
@@ -41,6 +46,7 @@ public class Weapon extends Item {
         mapOfWeapons.put("Katana", katana);
         mapOfWeapons.put("Excalibur", excalibur);
         mapOfWeapons.put("Ultima Weapon", ultimaWeapon);
+        mapOfWeapons.put("Knight's Sword", knightSword);
     }
 //creates the variables/string
 

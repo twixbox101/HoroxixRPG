@@ -197,6 +197,7 @@ public class Event {
     public void mainMenu(Character myCharacter) {
         String menuChoice;
         Scanner menuInput = new Scanner(System.in);
+        while(myCharacter.location == "mainMenu"){
         System.out.println("[Travel][Shop][Inventory][Stats]");
         menuChoice = menuInput.next();
 
@@ -221,17 +222,17 @@ public class Event {
                 break;
             default:
                 System.out.println("Please select a valid option.");
-
+        }
         }
     }
 //Inventory 1.0 WIP
     public void inInventory(Character myCharacter){
         System.out.println(myCharacter.inventory);
         System.out.println("What would you like to do?");
+        System.out.println("[Equip][Exit]");
         String invChoice;
         Scanner menuInput = new Scanner(System.in);
         invChoice = menuInput.next();
-        System.out.println("[Equip][Exit]");
         switch(invChoice.toLowerCase()){
             case "equip":
                 equipMenu(myCharacter);
@@ -247,10 +248,10 @@ public class Event {
 //Equip Menu 1.0 WIP
     public void equipMenu(Character myCharacter){
         String equipChoice;
-        Scanner menuInput = new Scanner(System.in);
-        equipChoice = menuInput.next();
         System.out.println("What would you like to equip?");
         System.out.println("[Armor][Weapon]");
+        Scanner menuInput = new Scanner(System.in);
+        equipChoice = menuInput.next();
         switch(equipChoice.toLowerCase()){
             case "armor":
                 equipArmor(myCharacter);

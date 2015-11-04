@@ -85,7 +85,7 @@ public class Character {
                 System.out.println("You have chosen the " + charClass);
             }
         }
-        switch (charClass) {
+        switch (charClass.toLowerCase()) {
             case "knight":
                 maxHealth = 120;
                 level = 1;
@@ -95,6 +95,8 @@ public class Character {
                 maxMana = 25;
                 currentMana = maxMana;
                 skills = Skill.knightSkills;
+                equipMyWeapon(Weapon.knightSword);
+                equipMyArmor(Armor.knightArmor);
                 break;
             case "ranger":
                 maxHealth = 95;
@@ -105,6 +107,8 @@ public class Character {
                 maxMana = 50;
                 currentMana = maxMana;
                 skills = Skill.rangerSkills;
+                equipMyWeapon(Weapon.rangerBow);
+                equipMyArmor(Armor.rangerArmor);
                 break;
             case "wizard":
                 maxHealth = 80;
@@ -115,6 +119,8 @@ public class Character {
                 maxMana = 100;
                 currentMana = maxMana;
                 skills = Skill.wizardSkills;
+                equipMyWeapon(Weapon.wizardStaff);
+                equipMyArmor(Armor.wizardArmor);
                 break;
             case "druid":
                 maxHealth = 100;
@@ -125,6 +131,8 @@ public class Character {
                 maxMana = 80;
                 currentMana = maxMana;
                 skills = Skill.druidSkills;
+                equipMyWeapon(Weapon.druidClaws);
+                equipMyArmor(Armor.druidArmor);
                 break;
             case "priest":
                 maxHealth = 85;
@@ -135,6 +143,8 @@ public class Character {
                 maxMana = 90;
                 currentMana = maxMana;
                 skills = Skill.priestSkills;
+                equipMyWeapon(Weapon.priestStaff);
+                equipMyArmor(Armor.priestArmor);
                 break;
         }
     }
@@ -151,7 +161,7 @@ public class Character {
         this.myArmor = myArmor;
     }
 //choose gender method
-    public void chooseGender(){
+    public void chooseGender(Character myCharacter){
         Scanner inputGender = new Scanner( System.in );
         while(!"boy".equalsIgnoreCase(gender) && !"girl".equalsIgnoreCase(gender)) {
             System.out.print("Are you a Boy or a Girl?");
@@ -161,6 +171,7 @@ public class Character {
             }
             else {
                 System.out.println("Ah, that's right. You're a " + gender);
+                myCharacter.location = "mainMenu";
             }
         }
     }

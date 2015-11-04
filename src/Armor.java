@@ -40,12 +40,18 @@ public class Armor extends Item {
     //creates hashmap of armor
     Map<String,Armor> mapOfArmor = new HashMap<>();
 //lists all armor to add to hashmap
-    Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
-    Armor silverArmor = new Armor("Silver Armor", 120, 35, 50, 60);
-    Armor goldArmor = new Armor("Gold Armor", 425, 80, 50, 125);
-    Armor mythrilArmor = new Armor("Mythril Armor", 800, 155, 300, 225);
-    Armor rubyArmor = new Armor("Ruby Armor", 1400, 355, 625, 450);
-    Armor samuraiArmor = new Armor("Samurai Armor", 1600, 300, 400, 600);
+    public static Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
+    public static Armor knightArmor = new Armor("Knight's Armor", 0, 3, 1, 5);
+    public static Armor rangerArmor = new Armor("Ranger's Armor", 0, 1, 1, 3);
+    public static Armor wizardArmor = new Armor("Wizard's Robes", 0, 1, 1, 2);
+    public static Armor druidArmor = new Armor("Druid's Armor", 0, 3, 1, 4);
+    public static Armor priestArmor = new Armor("Priest's Robes", 0, 0, 1, 9);
+    public static Armor silverArmor = new Armor("Silver Armor", 120, 35, 50, 60);
+    public static Armor goldArmor = new Armor("Gold Armor", 425, 80, 50, 125);
+    public static Armor mythrilArmor = new Armor("Mythril Armor", 800, 155, 300, 225);
+    public static Armor rubyArmor = new Armor("Ruby Armor", 1400, 355, 625, 450);
+    public static Armor samuraiArmor = new Armor("Samurai Armor", 1600, 300, 400, 600);
+
 //adds Armor to mapOfArmor. (To grab use .get())
      {
         mapOfArmor.put("Wood Armor", woodArmor);

@@ -13,7 +13,7 @@ public class aMain {
         Character newCharacter = new Character();
         newCharacter.chooseName();
         newCharacter.chooseClass();
-        newCharacter.chooseGender();
+        newCharacter.chooseGender(newCharacter);
         Event mainEvent = new Event();
         mainEvent.mainMenu(newCharacter);
         //Game newGame = new Game();
