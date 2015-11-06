@@ -9,16 +9,16 @@ import java.util.Scanner;
 public class Character {
 
 //Defines variables for the character
-    String name;
-    String gender;
-    String charClass = "";
-    String location;
-    int level;
+    private String name;
+    private String gender;
+    private String charClass = "";
+    private String location;
+    private int level;
     private int currentHealth;
     private int maxHealth;
-    int power;
-    int defense;
-    int exp;
+    private int power;
+    private int defense;
+    private int exp;
     int currentMana;
     int maxMana;
     int gold;

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Event {
 
     Weapon myWeapon;
@@ -14,7 +13,6 @@ public class Event {
     Monster monsterHealth;
     String skillChoice;
     String shopChoice;
-
 
     public Event(){
     }
@@ -68,13 +66,14 @@ public class Event {
     }
 //Enters the shop and displays a list of items.
     public void enterShop(Character myCharacter){
+        myCharacter.setLocation("shop");
         System.out.println("Welcome to the shop!");
         System.out.println("What can I get you?");
         for (Map.Entry<Item, Integer> entry : Item.mapOfItems.entrySet()) {
             Item key = entry.getKey();
             System.out.println(key + " : " + entry.getValue());
         }
-            while(!shopChoice.equalsIgnoreCase("potion") && !shopChoice.equalsIgnoreCase("elixir") && !shopChoice.equalsIgnoreCase("exit")){
+            while(myCharacter.getLocation() == "shop"){
                 Scanner myInput = new Scanner(System.in);
                 shopChoice = myInput.next();
                 switch (shopChoice.toLowerCase()){
@@ -102,7 +101,10 @@ public class Event {
                         break;
                     case "exit":
                         System.out.println("You leave the shop");
+                        myCharacter.setLocation("mainMenu");
                         break;
+                    default:
+                        System.out.println("Please select a valid option.");
                         }
                     }
                 }
@@ -185,7 +187,7 @@ public class Event {
             System.out.println("Your attack missed!");
         }
         else{
-            int totalDamage = myCharacter.power + myCharacter.myWeapon.getPower();
+            int totalDamage = myCharacter.getPower()+ myCharacter.myWeapon.getPower();
             int newHealth = currentMonster.getCurrentHealth() - totalDamage + currentMonster.getDefense();
             currentMonster.setCurrentHealth(newHealth);
             double damageDealt = totalDamage - currentMonster.getDefense();
@@ -198,7 +200,7 @@ public class Event {
     public void mainMenu(Character myCharacter) {
         String menuChoice;
         Scanner menuInput = new Scanner(System.in);
-        while(myCharacter.location == "mainMenu"){
+        while(myCharacter.getLocation() == "mainMenu"){
         System.out.println("[Travel][Shop][Inventory][Stats]");
         menuChoice = menuInput.next();
 
@@ -212,12 +214,12 @@ public class Event {
                 inInventory(myCharacter);
                 break;
             case "stats":
-                System.out.println("Class: " + myCharacter.charClass);
-                System.out.println("Level: " + myCharacter.level);
-                System.out.println("EXP: " + myCharacter.exp);
+                System.out.println("Class: " + myCharacter.getCharClass());
+                System.out.println("Level: " + myCharacter.getLevel());
+                System.out.println("EXP: " + myCharacter.getExp());
                 System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
-                System.out.println("Power: " + (myCharacter.power + myCharacter.myWeapon.getPower()));
-                System.out.println("Defense: " + (myCharacter.defense + myCharacter.myArmor.getDefense()));
+                System.out.println("Power: " + (myCharacter.getPower() + myCharacter.myWeapon.getPower()));
+                System.out.println("Defense: " + (myCharacter.getDefense() + myCharacter.myArmor.getDefense()));
                 System.out.println("Weapon: " + myCharacter.myWeapon);
                 System.out.println("Armor: " + myCharacter.myArmor);
                 break;
@@ -284,49 +286,64 @@ public class Event {
 //Level Up!
     public void levelUP(Character myCharacter){
         System.out.println("Congratulations! You have leveled up.");
-        switch (myCharacter.charClass){
+        switch (myCharacter.getCharClass().toLowerCase()){
             case "knight":
                 double maxHealthKnight = myCharacter.getMaxHealth();
                 myCharacter.setMaxHealth((int) Math.round(maxHealthKnight * 1.65));
-                myCharacter.defense *=1.25;
-                myCharacter.level +=1;
-                myCharacter.power *=1.25;
+                double defenseKnight = myCharacter.getDefense();
+                myCharacter.setDefense((int) Math.round(defenseKnight * 1.25));
+                int newLevelKnight = myCharacter.getLevel();
+                myCharacter.setLevel(newLevelKnight + 1);
+                double powerKnight = myCharacter.getPower();
+                myCharacter.setPower((int) Math.round(powerKnight * 1.25));
                 myCharacter.maxMana *=1.10;
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "ranger":
                 double maxHealthRanger = myCharacter.getMaxHealth();
                 myCharacter.setMaxHealth((int) Math.round(maxHealthRanger * 1.45));
-                myCharacter.defense *=1.15;
-                myCharacter.level +=1;
-                myCharacter.power *=1.45;
+                double defenseRanger = myCharacter.getDefense();
+                myCharacter.setDefense((int) Math.round(defenseRanger * 1.15));
+                int newLevelRanger = myCharacter.getLevel();
+                myCharacter.setLevel(newLevelRanger + 1);
+                double powerRanger = myCharacter.getPower();
+                myCharacter.setPower((int) Math.round(powerRanger * 1.45));
                 myCharacter.maxMana *=1.25;
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "wizard":
                 double maxHealthWizard = myCharacter.getMaxHealth();
                 myCharacter.setMaxHealth((int) Math.round(maxHealthWizard * 1.25));
-                myCharacter.defense *=1.10;
-                myCharacter.level +=1;
-                myCharacter.power *=1.65;
+                double defenseWizard = myCharacter.getDefense();
+                myCharacter.setDefense((int) Math.round(defenseWizard * 1.10));
+                int newLevelWizard = myCharacter.getLevel();
+                myCharacter.setLevel(newLevelWizard + 1);
+                double powerWizard = myCharacter.getPower();
+                myCharacter.setPower((int) Math.round(powerWizard * 1.65));
                 myCharacter.maxMana *=1.50;
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "druid":
                 double maxHealthDruid = myCharacter.getMaxHealth();
                 myCharacter.setMaxHealth((int) Math.round(maxHealthDruid * 1.50));
-                myCharacter.defense *=1.20;
-                myCharacter.level +=1;
-                myCharacter.power *=1.30;
+                double defenseDruid = myCharacter.getDefense();
+                myCharacter.setDefense((int) Math.round(defenseDruid * 1.20));
+                int newLevelDruid = myCharacter.getLevel();
+                myCharacter.setLevel(newLevelDruid + 1);
+                double powerDruid = myCharacter.getPower();
+                myCharacter.setPower((int) Math.round(powerDruid * 1.30));
                 myCharacter.maxMana *=1.30;
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
                 break;
             case "priest":
                 double maxHealthPriest = myCharacter.getMaxHealth();
                 myCharacter.setMaxHealth((int) Math.round(maxHealthPriest * 1.40));
-                myCharacter.defense *=1.15;
-                myCharacter.level +=1;
-                myCharacter.power *=1.10;
+                double defensePriest = myCharacter.getDefense();
+                myCharacter.setDefense((int) Math.round(defensePriest * 1.15));
+                int newLevelPriest = myCharacter.getLevel();
+                myCharacter.setLevel(newLevelPriest + 1);
+                double powerPriest = myCharacter.getPower();
+                myCharacter.setPower((int) Math.round(powerPriest * 1.10));
                 myCharacter.maxMana *=1.45;
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
         }

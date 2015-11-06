@@ -16,6 +16,7 @@ public class aMain {
         newCharacter.chooseGender(newCharacter);
         Event mainEvent = new Event();
         mainEvent.levelUP(newCharacter);
+        mainEvent.levelUP(newCharacter);
         mainEvent.mainMenu(newCharacter);
         //Game newGame = new Game();
         //newGame.start();
