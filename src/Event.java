@@ -13,6 +13,8 @@ public class Event {
     Monster monsterHealth;
     String skillChoice;
     String shopChoice;
+    String travelChoice;
+    String forestChoice;
 
     public Event(){
     }
@@ -64,6 +66,152 @@ public class Event {
             myItem.quantity++;
         }
     }
+
+    public void travel(Character myCharacter) {
+        myCharacter.setLocation("travel");
+        System.out.println("You have decided to travel");
+        System.out.println("Where would you like to go?");
+        Scanner myInput = new Scanner(System.in);
+        while (myCharacter.getLocation().equals("travel")) {
+            System.out.println("[Plains][Forest][Mountains][Island][Swamp][Info]");
+            travelChoice = myInput.next();
+            switch (travelChoice.toLowerCase()) {
+                case "plains":
+                    myCharacter.setLocation("plains");
+                    atPlains(myCharacter);
+                    break;
+                case "forest":
+                    if (myCharacter.getLevel() < 5) {
+                        System.out.println("Your level is not high enough for this area");
+                    } else {
+                        myCharacter.setLocation("forest");
+                        atForest(myCharacter);
+                    }
+                    break;
+                case "mountains":
+                    if (myCharacter.getLevel() < 10) {
+                        System.out.println("Your level is not high enough for this area");
+                    } else {
+                        myCharacter.setLocation("mountains");
+                    }
+                    break;
+                case "island":
+                    if (myCharacter.getLevel() < 15) {
+                        System.out.println("Your level is not high enough for this area");
+                    } else {
+                        myCharacter.setLocation("island");
+                    }
+                    break;
+                case "swamp":
+                    if (myCharacter.getLevel() < 20) {
+                        System.out.println("Your level is not high enough for this area");
+                    } else {
+                        myCharacter.setLocation("swamp");
+                    }
+                    break;
+                case "dev":
+                    myCharacter.setLevel(25);
+                    myCharacter.setGold(9999);
+                    myCharacter.setMyWeapon(Weapon.ultimaWeapon);
+                    myCharacter.setMyArmor(Armor.rubyArmor);
+                    System.out.println("dev!");
+                    break;
+                case "info":
+                    System.out.println("[Plains : Levels 1-5]\n" +
+                            "[Forest: Levels 5-10]\n" +
+                            "[Mountains : Levels 10-15]\n" +
+                            "[Island : Levels 15-20]\n" +
+                            "[Swamp : Levels 20+]\n"
+                    );
+                    break;
+                case "exit":
+                    System.out.println("You decide not to travel");
+                    myCharacter.setLocation("mainMenu");
+                    break;
+                default:
+                    System.out.println("Please select a valid option.");
+
+            }
+        }
+    }
+
+    public void atPlains(Character myCharacter) {
+        System.out.println("You have arrived at the Thunder Plains. Dry fields span in front of you as far as the eye can see.");
+        System.out.println("What would you like to do?");
+        Scanner myInput = new Scanner(System.in);
+        while (myCharacter.getLocation().equals("plains")) {
+            System.out.println("[Explore][Inventory][Leave]");
+            forestChoice = myInput.next();
+            switch (forestChoice.toLowerCase()) {
+                case "explore":
+                    System.out.println("You explore.");
+                    generateRandom();
+                    if (generateRandom() <= 2) {
+                        findGoldPlains(myCharacter);
+                    } else
+                        enterBattle(myCharacter);
+                    break;
+                case "inventory":
+                    inInventory(myCharacter);
+                    break;
+                case "leave":
+                    System.out.println("You decide to leave");
+                    myCharacter.setLocation("travel");
+                    break;
+                default:
+                    System.out.println("Please select a valid option.");
+            }
+        }
+    }
+
+    public void atForest(Character myCharacter) {
+        System.out.println("You have arrived at the forests of Eldra. The air is humid and the green leaves blow eerily in the wind.");
+        System.out.println("What would you like to do?");
+        Scanner myInput = new Scanner(System.in);
+        while (myCharacter.getLocation().equals("forest")) {
+            System.out.println("[Explore][Inventory][Leave]");
+            forestChoice = myInput.next();
+            switch (forestChoice.toLowerCase()) {
+                case "explore":
+                    System.out.println("You explore.");
+                    generateRandom();
+                    if (generateRandom() <= 2) {
+                        findGoldForest(myCharacter);
+                    } else
+                        enterBattle(myCharacter);
+                    break;
+                case "inventory":
+                    inInventory(myCharacter);
+                    break;
+                case "leave":
+                    System.out.println("You decide to leave");
+                    myCharacter.setLocation("travel");
+                    break;
+                default:
+                    System.out.println("Please select a valid option.");
+            }
+        }
+    }
+
+    public void findGoldPlains(Character myCharacter){
+        Random randomGold = new Random();
+        int foundGold = randomGold.nextInt(10);
+        myCharacter.setGold(foundGold);
+        System.out.println("You discover " + foundGold);
+        System.out.println("Total " + myCharacter.getGold());
+    }
+
+    public void findGoldForest(Character myCharacter){
+        Random randomGold = new Random();
+        int foundGold = randomGold.nextInt(25);
+        myCharacter.setGold(foundGold);
+        System.out.println("You discover " + foundGold);
+        System.out.println("Total " + myCharacter.getGold());
+    }
+
+
+
+
 //Enters the shop and displays a list of items.
     public void enterShop(Character myCharacter){
         myCharacter.setLocation("shop");
@@ -114,7 +262,6 @@ public class Event {
         return randomNumber.nextInt(6);
     }
 
-
 //Generate random monster based on value
     public Monster generateMonster(){
         int value = generateRandom();
@@ -153,12 +300,12 @@ public class Event {
     }
 //Battle System 1.0
     public void fight(Character myCharacter, Monster currentMonster) {
-        while (myCharacter.getCurrentHealth() > 0 || currentMonster.getCurrentHealth() > 0) {
+        while (myCharacter.getCurrentHealth() >= 1 || currentMonster.getCurrentHealth() >= 1) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
-            battleChoice = battleInput.next();
             System.out.println("What do you do?");
             System.out.println("[Attack][Skill][Item][Run]");
+            battleChoice = battleInput.next();
             switch (battleChoice.toLowerCase()){
                 case "attack":
                     System.out.println("You attack!");
@@ -192,7 +339,7 @@ public class Event {
             currentMonster.setCurrentHealth(newHealth);
             double damageDealt = totalDamage - currentMonster.getDefense();
             System.out.println("Damage dealt: " + damageDealt + "!");
-            System.out.println(currentMonster.getCurrentHealth());
+            System.out.println(currentMonster.getName() + " health remaining " + currentMonster.getCurrentHealth());
         }
     }
 
@@ -206,6 +353,7 @@ public class Event {
 
         switch (menuChoice.toLowerCase()) {
             case "travel":
+                travel(myCharacter);
                 break;
             case "shop":
                 enterShop(myCharacter);
