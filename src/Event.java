@@ -1,6 +1,8 @@
 /**
  Created by holden johnson on 10/24/2015.
  */
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -17,53 +19,50 @@ public class Event {
     String forestChoice;
 
 
-    public Event(){
+    public Event() {
     }
-//uses a potion to restore 30 currentHealth!
-    public void usePotion(Character myCharacter){
+
+    //uses a potion to restore 30 currentHealth!
+    public void usePotion(Character myCharacter) {
         int howMany = myCharacter.inventory.get(Item.potion).quantity;
-        if(howMany > 0) {
+        if (howMany > 0) {
             myCharacter.inventory.put(Item.elixir.name, Item.potion);
             System.out.println("You have used a potion.");
             System.out.println("30 Health healed!");
             int myHealth = myCharacter.getCurrentHealth();
             myCharacter.setCurrentHealth(myHealth + Item.potion.heal);
-            if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()){
+            if (myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
                 int healthCheck = myCharacter.getMaxHealth();
                 myCharacter.setCurrentHealth(healthCheck);
             }
-        }
-        else
-        {
+        } else {
             System.out.println("You don't have any potions!");
         }
     }
-//Uses an elixir to heal 20 mana.
-    public void useElixir(Character myCharacter){
+
+    //Uses an elixir to heal 20 mana.
+    public void useElixir(Character myCharacter) {
         int howMany = myCharacter.inventory.get(Item.elixir).quantity;
-        if(howMany > 0) {
+        if (howMany > 0) {
             myCharacter.inventory.put(Item.elixir.name, Item.elixir);
             System.out.println("You have used an elixir.");
             System.out.println("20 Mana restored!");
-            myCharacter.currentMana +=Item.elixir.heal;
-            if(myCharacter.currentMana > myCharacter.maxMana){
+            myCharacter.currentMana += Item.elixir.heal;
+            if (myCharacter.currentMana > myCharacter.maxMana) {
                 myCharacter.currentMana = myCharacter.maxMana;
             }
-        }
-        else
-        {
+        } else {
             System.out.println("You don't have any elixirs!");
         }
     }
-//Adds item to My Character's Inventory
-    public void addItem(Item myItem, Character myCharacter){
+
+    //Adds item to My Character's Inventory
+    public void addItem(Item myItem, Character myCharacter) {
         Item invItem = myCharacter.inventory.get(myItem.name);
-        if(invItem == null) {
+        if (invItem == null) {
             myCharacter.inventory.put(myItem.name, myItem);
             myItem.quantity++;
-        }
-        else
-        {
+        } else {
             myItem.quantity++;
         }
     }
@@ -194,7 +193,7 @@ public class Event {
         }
     }
 
-    public void findGoldPlains(Character myCharacter){
+    public void findGoldPlains(Character myCharacter) {
         Random randomGold = new Random();
         int foundGold = randomGold.nextInt(10);
         myCharacter.setGold(foundGold);
@@ -202,7 +201,7 @@ public class Event {
         System.out.println("Total " + myCharacter.getGold());
     }
 
-    public void findGoldForest(Character myCharacter){
+    public void findGoldForest(Character myCharacter) {
         Random randomGold = new Random();
         int foundGold = randomGold.nextInt(25);
         myCharacter.setGold(foundGold);
@@ -211,10 +210,8 @@ public class Event {
     }
 
 
-
-
-//Enters the shop and displays a list of items.
-    public void enterShop(Character myCharacter){
+    //Enters the shop and displays a list of items.
+    public void enterShop(Character myCharacter) {
         myCharacter.setLocation("shop");
         System.out.println("Welcome to the shop!");
         System.out.println("What can I get you?");
@@ -222,83 +219,73 @@ public class Event {
             Item key = entry.getKey();
             System.out.println(key + " : " + entry.getValue());
         }
-            while(myCharacter.getLocation() == "shop"){
-                Scanner myInput = new Scanner(System.in);
-                shopChoice = myInput.next();
-                switch (shopChoice.toLowerCase()){
-                    case "potion":
-                        if(myCharacter.gold >= Item.potion.price){
-                            System.out.println("You have purchased a Potion!");
-                            myCharacter.inventory.put(Item.potion.name, Item.potion);
-                            Item.potion.quantity++;
-                            myCharacter.gold -= Item.potion.price;
-                            }
-                        else{
-                            System.out.println("You don't have enough gold!");
-                            }
-                        break;
-                    case "elixir":
-                        if(myCharacter.gold >= Item.elixir.price){
-                            System.out.println("You have purchased an Elixir!");
-                            myCharacter.inventory.put(Item.elixir.name, Item.elixir);
-                            Item.elixir.quantity++;
-                            myCharacter.gold -= Item.elixir.price;
-                        }
-                        else{
-                            System.out.println("You don't have enough gold!");
-                        }
-                        break;
-                    case "exit":
-                        System.out.println("You leave the shop");
-                        myCharacter.setLocation("mainMenu");
-                        break;
-                    default:
-                        System.out.println("Please select a valid option.");
-                        }
+        while (myCharacter.getLocation() == "shop") {
+            Scanner myInput = new Scanner(System.in);
+            shopChoice = myInput.next();
+            switch (shopChoice.toLowerCase()) {
+                case "potion":
+                    if (myCharacter.gold >= Item.potion.price) {
+                        System.out.println("You have purchased a Potion!");
+                        myCharacter.inventory.put(Item.potion.name, Item.potion);
+                        Item.potion.quantity++;
+                        myCharacter.gold -= Item.potion.price;
+                    } else {
+                        System.out.println("You don't have enough gold!");
                     }
-                }
-//Generate random number
+                    break;
+                case "elixir":
+                    if (myCharacter.gold >= Item.elixir.price) {
+                        System.out.println("You have purchased an Elixir!");
+                        myCharacter.inventory.put(Item.elixir.name, Item.elixir);
+                        Item.elixir.quantity++;
+                        myCharacter.gold -= Item.elixir.price;
+                    } else {
+                        System.out.println("You don't have enough gold!");
+                    }
+                    break;
+                case "exit":
+                    System.out.println("You leave the shop");
+                    myCharacter.setLocation("mainMenu");
+                    break;
+                default:
+                    System.out.println("Please select a valid option.");
+            }
+        }
+    }
+
+    //Generate random number
     public int generateRandom() {
         Random randomNumber = new Random();
         return randomNumber.nextInt(6);
     }
 
-//Generate random monster based on value
-    public Monster generateMonster(){
-        int value = generateRandom();
-        Monster monster;
-        switch (value){
-            case 0:
-                monster = Monster.goblin;
-                break;
-            case 1:
-                monster = Monster.bat;
-                break;
-            case 2:
-                monster = Monster.troll;
-                break;
-            case 3:
-                monster = Monster.skeleton;
-                break;
-            case 4:
-                monster = Monster.barbarian;
-                break;
-            case 5:
-                monster = Monster.dragon;
-                break;
-            default:
-                monster = Monster.dragon;
-                break;
+
+    //Generate random monster based on value
+    //TODO - finish for each location. Verify that it's not modifying the original monster, and only a new instance of it.
+    Monster generateMonster(Character myCharacter) {
+        Monster value = new Monster("test", 0,0,0,0,0,0,0,0,0);
+        String location = myCharacter.getLocation();
+        switch (location) {
+            case "plains":
+                Random generator = new Random();
+                int randomIndex = generator.nextInt(Plains.enemyList.size());
+                Monster monster = Plains.enemyList.get(randomIndex);
+                System.out.println(monster.getName());
+                return monster;
+            case "b":
+                System.out.println("ok");
         }
-    return monster;
+        return value;
     }
+
 //Enters Battle, generates the monster that the character fights
     public void enterBattle(Character myCharacter){
-        Monster currentMonster = generateMonster();
+        Monster currentMonster = generateMonster(myCharacter);
         System.out.println("You have encountered a " + currentMonster + "!");
         fight(myCharacter, currentMonster);
     }
 //Battle System 1.0
+    //TODO - Run system
     public void fight(Character myCharacter, Monster currentMonster) {
         while (myCharacter.getCurrentHealth() >= 1 || currentMonster.getCurrentHealth() >= 1) {
             String battleChoice;
