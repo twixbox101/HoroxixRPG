@@ -15,7 +15,7 @@ public class Character extends Creature{
     protected Weapon myWeapon;
     protected Armor myArmor;
     protected Map skills;
-    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
+    public static Character newCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
     public static Map<String, Item> inventory = new HashMap<>();
 
     /**

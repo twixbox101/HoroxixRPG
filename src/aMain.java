@@ -10,7 +10,7 @@ public class aMain {
 
     public static void main(String[] args)
     {
-        Character newCharacter = new Character();
+        Character newCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
         newCharacter.chooseName();
         newCharacter.chooseClass();
         newCharacter.chooseGender(newCharacter);
