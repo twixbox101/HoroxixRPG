@@ -11,7 +11,6 @@ public class Event {
     Weapon myWeapon;
     Armor myArmor;
     public static Skill mySkill;
-    Monster monsterHealth;
     public static String skillChoice;
     public static String shopChoice;
 
@@ -139,10 +138,10 @@ public class Event {
 //Deal damage
     public void attackDamage(){
         int totalDamage = Character.myCharacter.power + Character.myCharacter.myWeapon.power;
-        Monster.currentMonster.health -= totalDamage += Monster.currentMonster.defense;
+        Monster.currentMonster.currentHealth -= totalDamage += Monster.currentMonster.defense;
         double damageDealt = totalDamage -= Monster.currentMonster.defense;
         System.out.println("Damage dealt: " + damageDealt + "!");
-        System.out.println(Monster.currentMonster.health);
+        System.out.println(Monster.currentMonster.currentHealth + "/" + Monster.currentMonster.maxHealth);
     }
 //Level Up!
     public static void levelUP(Character myCharacter){
@@ -212,10 +211,10 @@ public class Event {
             System.out.println(Character.myCharacter.currentHealth);
         }
         else {
-            Monster.currentMonster.health -= mySkill.damage += Monster.currentMonster.defense;
+            Monster.currentMonster.currentHealth -= mySkill.damage += Monster.currentMonster.defense;
             double damageDealt = mySkill.damage -= Monster.currentMonster.defense;
             System.out.println("Damage dealt: " + damageDealt + "!");
-            System.out.println(Monster.currentMonster.health);
+            System.out.println(Monster.currentMonster.currentHealth + "/" + Monster.currentMonster.maxHealth);
         }
     }/*Asks to choose a skill. You input a skill name (currently a letter) and it will see if you have that in your
     skills.If it does, it executes. If not it will not execute. This currently only works for Knights. */

@@ -6,44 +6,24 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-public class Character {
+public class Character extends Creature{
 
 //Defines variables for the character
-    String name;
-    String gender;
-    String charClass;
-    String location;
-    int level;
-    int currentHealth;
-    int maxHealth;
-    int power;
-    int defense;
-    int exp;
-    int currentMana;
-    int maxMana;
-    int gold;
-    Map skills;
-    Weapon myWeapon;
-    Armor myArmor;
+    public String location;
+    protected String gender;
+    protected String charClass;
+    protected Weapon myWeapon;
+    protected Armor myArmor;
+    protected Map skills;
     public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
     public static Map<Item,Integer> inventory = new HashMap<>();
 
-
 //defines the Character class with his//hers arguments
-    public Character(String myName, String myGender, String myClass, int myLevel, int myCurrentHealth, int myHealth, int myPower, int myDefense, int myEXP, int myCurrentMana, int myMana, int myGold) {
-        name = myName;
-        gender = myGender;
-        charClass = myClass;
-        level = myLevel;
-        maxHealth = myHealth;
-        power = myPower;
-        defense = myDefense;
-        exp = myEXP;
-        currentMana = myCurrentMana;
-        maxMana = myMana;
-        gold = myGold;
-        currentHealth = myCurrentHealth;
-    }
+    public Character(String name, String gender, String myClass, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold) {
+        super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
+        this.gender = gender;
+        this.charClass = myClass;
+}
 //ChooseName method for character
     public void chooseName(){
         Scanner inputName = new Scanner( System.in );
