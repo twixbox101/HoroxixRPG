@@ -29,6 +29,62 @@ public class Monster extends Creature{
     public static Monster barbarian = new Monster("Barbarian",15,750,750,100,100,500,100,200,75);
     public static Monster dragon = new Monster("Dragon",25,1000,1000,500,500,800,250,500,250);
 
+    //<editor-fold desc="Getters and Setters">
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //</editor-fold>
+
+
+
+
+
+
     //Returns actual name of monster
     public String toString() {
         return name;
@@ -36,6 +92,7 @@ public class Monster extends Creature{
 
     //Main tests
     public static void main(String[] args){
+
         System.out.println(goblin.currentHealth);
         System.out.println(bat.power);
 

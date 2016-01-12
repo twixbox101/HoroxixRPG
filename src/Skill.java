@@ -18,14 +18,22 @@ public class Skill {
     public static Map<String,Skill> rangerSkills = new HashMap<>();
     public static Map<String,Skill> wizardSkills = new HashMap<>();
 //Creating different skills.
-    public static Skill doubleSlash = new Skill("Double Slash", Character.myCharacter.power * 1.5, 8, 0);
-    public static Skill cure = new Skill("Cure", 0, 10, Character.myCharacter.maxHealth * 0.33);
+    public static Skill doubleSlash = new Skill("Double Slash", 1.5, 8, 0);
+    public static Skill cure = new Skill("Cure", 0, 10, 30);
 //Adding skills to certain hashmaps
     static {
         knightSkills.put(doubleSlash.name, doubleSlash);
         priestSkills.put(cure.name, cure);
 
     }
+
+    /**
+     *
+     * @param skillName name of the skill.
+     * @param skillDamage damage value of the skill (if any)
+     * @param skillManaCost mana cost of the skill.
+     * @param skillHeal heal value of the skill (if any)
+     */
 //default assigning of skills.
     public Skill(String skillName, double skillDamage, int skillManaCost, double skillHeal){
         name = skillName;

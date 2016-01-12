@@ -30,8 +30,7 @@ public class Inventory {
     }
 //test
     public static void main(String[] args) {
-        Inventory inv = new Inventory();
-        System.out.println(inv);
+
 
     }
 }
