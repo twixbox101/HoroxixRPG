@@ -58,11 +58,20 @@ public class Skill {
 //Creating different skills.
     public static Skill doubleSlash = new Skill("Double Slash", 1.5, 8, 0);
     public static Skill cure = new Skill("Cure", 0, 10, 30);
+    public static Skill fireBall = new Skill("Fireball", 0, 10, 30);
+    public static Skill death = new Skill("Death", 0, 10, 30);
+    public static Skill triShot = new Skill("Tri-Shot", 0, 10, 30);
+    public static Skill drain = new Skill("Drain", 0, 10, 30);
+    public static Skill headShot = new Skill("Head Shot", 0, 10, 30);
+    public static Skill shock = new Skill("Shock", 0, 10, 30);
+    public static Skill stab = new Skill("Stab", 0, 10, 30);
 //Adding skills to certain hashmaps
     static {
         knightSkills.put(doubleSlash.name, doubleSlash);
         priestSkills.put(cure.name, cure);
-
+        rangerSkills.put(triShot.name, triShot);
+        wizardSkills.put(fireBall.name, fireBall);
+        druidSkills.put(death.name, death);
     }
 
     /**

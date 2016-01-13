@@ -181,9 +181,9 @@ public class Character extends Creature {
     //ChooseName method for character
     public void chooseName(){
         Scanner inputName = new Scanner( System.in );
-            System.out.print("Please name your Creatures.Character!");
+            System.out.print("Please name your Character!");
             name = inputName.next();
-            System.out.println("Your Creatures.Character has been named " + name);
+            System.out.println("Your Character has been named " + name);
     }
 //ChooseClass method for character
     public void chooseClass() {

@@ -5,7 +5,7 @@ import Creatures.Character;
 /**
  * Created by hjohnson on 10/24/2015.
  */
-public class aMain {
+public class Main {
 
 
 
@@ -17,6 +17,8 @@ public class aMain {
         newCharacter.chooseClass();
         newCharacter.chooseGender(newCharacter);
         Event mainEvent = new Event();
+        mainEvent.levelUP(newCharacter);
+        mainEvent.levelUP(newCharacter);
         mainEvent.levelUP(newCharacter);
         mainEvent.levelUP(newCharacter);
         mainEvent.mainMenu(newCharacter);

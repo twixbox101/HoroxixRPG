@@ -24,7 +24,6 @@ public class Event {
     String travelChoice;
 
 
-
     public Event() {
     }
 
@@ -149,7 +148,7 @@ public class Event {
         System.out.println("What would you like to do?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("plains")) {
-            System.out.println("[Explore][Inventories.Inventory][Leave]");
+            System.out.println("[Explore][Inventory][Leave]");
             String plainsChoice = myInput.next();
             switch (plainsChoice.toLowerCase()) {
                 case "explore":
@@ -178,7 +177,7 @@ public class Event {
         System.out.println("What would you like to do?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("forest")) {
-            System.out.println("[Explore][Inventories.Inventory][Leave]");
+            System.out.println("[Explore][Inventory][Leave]");
             String forestChoice = myInput.next();
             switch (forestChoice.toLowerCase()) {
                 case "explore":
@@ -274,7 +273,7 @@ public class Event {
     //Generate random monster based on value
     //TODO - finish for each location. Verify that it's not modifying the original monster, and only a new instance of it.
     Monster generateMonster(Character myCharacter) {
-        Monster value = new Monster("test", 0,0,0,0,0,0,0,0,0);
+        Monster value = new Monster("test", 0, 0, 0, 0, 0, 0, 0, 0, 0);
         String location = myCharacter.getLocation();
         switch (location) {
             case "plains":
@@ -289,25 +288,35 @@ public class Event {
         return value;
     }
 
-//Enters Battle, generates the monster that the character fights
-    public void enterBattle(Character myCharacter){
+    //Enters Battle, generates the monster that the character fights
+    public void enterBattle(Character myCharacter) {
         Monster currentMonster = generateMonster(myCharacter);
         System.out.println("You have encountered a " + currentMonster + "!");
         fight(myCharacter, currentMonster);
     }
-//Battle System 1.0
+
+    //Battle System 1.0
     //TODO - Run system
     public void fight(Character myCharacter, Monster currentMonster) {
-        while (myCharacter.getCurrentHealth() >= 1 || currentMonster.getCurrentHealth() >= 1) {
+        int currentMonsterHealth = currentMonster.getMaxHealth();
+        while (myCharacter.getCurrentHealth() >= 1 && currentMonsterHealth >= 1 && !myCharacter.getLocation().equals("travel")) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             System.out.println("What do you do?");
-            System.out.println("[Attack][Skills.Skill][Items.Item][Run]");
+            System.out.println("[Attack][Skill][Item][Run]");
             battleChoice = battleInput.next();
-            switch (battleChoice.toLowerCase()){
+            switch (battleChoice.toLowerCase()) {
                 case "attack":
                     System.out.println("You attack!");
-                    attackDamage(myCharacter, currentMonster);
+                    int value = hitOrMiss();
+                    if(value < 2){
+                        System.out.println("Your attack missed!");}
+                    else {
+                        int damage =  attackDamage(myCharacter, currentMonster);
+                        System.out.println("Your attack deals " + damage + " damage!");
+                        currentMonsterHealth -= damage;
+                        System.out.println(currentMonster.getName() + " health remaining: " + currentMonsterHealth + "/ " + currentMonster.getMaxHealth());
+                    }
                     break;
                 case "skill":
                     getSkillChoice(myCharacter, currentMonster);
@@ -317,6 +326,7 @@ public class Event {
                     break;
                 case "run":
                     System.out.println("coward");
+                    myCharacter.setLocation("travel");
                     break;
                 default:
                     System.out.println("Select an action!");
@@ -324,20 +334,11 @@ public class Event {
             }
         }
     }
-//Deal damage
-    public void attackDamage(Character myCharacter, Monster currentMonster){
-        int value = hitOrMiss();
-        if(value <3){
-            System.out.println("Your attack missed!");
-        }
-        else{
-            int totalDamage = damageDealt(myCharacter);
-            int newHealth = currentMonster.getCurrentHealth() - totalDamage + currentMonster.getDefense();
-            currentMonster.setCurrentHealth(newHealth);
-            double damageDealt = totalDamage - currentMonster.getDefense();
-            System.out.println("Damage dealt: " + damageDealt + "!");
-            System.out.println(currentMonster.getName() + " health remaining " + currentMonster.getCurrentHealth());
-        }
+
+    //Deal damage
+    public int attackDamage(Character myCharacter, Monster currentMonster) {
+        int totalDamage = damageDealt(myCharacter) - currentMonster.getDefense();
+        return totalDamage;
     }
 
 //Hit or Miss
@@ -355,6 +356,10 @@ public class Event {
         int resultDamage = damage.nextInt(maxDamage-minDamage) + minDamage;
         return resultDamage;
     }
+    //TODO - add victory taunt, exp, gold, drops, etc.
+    public void victory(Character myCharacter, Monster currentMonster){
+        System.out.println(currentMonster + "has been slain!");
+    }
 
 
 //MainMenu 1.0 WIP
@@ -362,7 +367,7 @@ public class Event {
         String menuChoice;
         Scanner menuInput = new Scanner(System.in);
         while(myCharacter.getLocation() == "mainMenu"){
-        System.out.println("[Travel][Shop][Inventories.Inventory][Stats]");
+        System.out.println("[Travel][Shop][Inventory][Stats]");
         menuChoice = menuInput.next();
         switch (menuChoice.toLowerCase()) {
             case "travel":
@@ -381,8 +386,9 @@ public class Event {
                 System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
                 System.out.println("Power: " + (myCharacter.getPower() + myCharacter.getMyWeapon().getPower()));
                 System.out.println("Defense: " + (myCharacter.getDefense() + myCharacter.getMyArmor().getDefense()));
-                System.out.println("Items.Weapon: " + myCharacter.getMyWeapon());
-                System.out.println("Items.Armor: " + myCharacter.getMyArmor());
+                System.out.println("Weapon: " + myCharacter.getMyWeapon());
+                System.out.println("Armor: " + myCharacter.getMyArmor());
+                System.out.println("Skills: " + myCharacter.getSkills());
                 break;
             default:
                 System.out.println("Please select a valid option.");
@@ -414,7 +420,7 @@ public class Event {
     public void equipMenu(Character myCharacter){
         String equipChoice;
         System.out.println("What would you like to equip?");
-        System.out.println("[Items.Armor][Items.Weapon]");
+        System.out.println("[Armor][Weapon]");
         Scanner menuInput = new Scanner(System.in);
         equipChoice = menuInput.next();
         switch(equipChoice.toLowerCase()){
@@ -489,6 +495,16 @@ public class Event {
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.10));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.45));
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
+        }
+        skillCheck(myCharacter);
+    }
+    public void skillCheck(Character myCharacter){
+        switch (myCharacter.getCharClass().toLowerCase()) {
+            case "knight":
+                if(myCharacter.getLevel() == 5){
+                    Skill.knightSkills.put(Skill.stab.getName(), Skill.stab);
+                    System.out.println("You have gained the skill [Stab]!");
+                }
         }
     }
     // equips a weapon. change myWeapon to the weapon you want to equip.
