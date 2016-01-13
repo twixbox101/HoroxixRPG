@@ -1,4 +1,5 @@
-//imports hashmap and map to use
+package Items;//imports hashmap and map to use
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +35,8 @@ public class Weapon extends Item {
     public static Weapon rubySword = new Weapon("Ruby Sword", 1200, 825, 525);
     public static Weapon katana = new Weapon("Katana", 1400, 875, 600);
     public static Weapon excalibur = new Weapon("Excalibur", 2500, 1200, 1100);
-    public static Weapon ultimaWeapon = new Weapon("Ultima Weapon", 9999, 1800, 1);
-//adds Weapon to the mapOfWeapons(To get them use .get)
+    public static Weapon ultimaWeapon = new Weapon("Ultima Items.Weapon", 9999, 1800, 1);
+//adds Items.Weapon to the mapOfWeapons(To get them use .get)
 
     {
         mapOfWeapons.put("Gold Sword", goldSword);
@@ -45,14 +46,14 @@ public class Weapon extends Item {
         mapOfWeapons.put("Ruby Sword", rubySword);
         mapOfWeapons.put("Katana", katana);
         mapOfWeapons.put("Excalibur", excalibur);
-        mapOfWeapons.put("Ultima Weapon", ultimaWeapon);
+        mapOfWeapons.put("Ultima Items.Weapon", ultimaWeapon);
         mapOfWeapons.put("Knight's Sword", knightSword);
     }
 //creates the variables/string
 
     private int power;
 
-//sets up arguments for Weapon
+//sets up arguments for Items.Weapon
     public Weapon(String weaponName, int weaponPrice, int weaponPower, int weaponSell){
         //Sets weapons to an ITEM class
         super(weaponName, weaponPrice, 0, weaponSell, 0);

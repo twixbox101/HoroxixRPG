@@ -1,10 +1,12 @@
-import java.util.HashMap;
-import java.util.Map;
+package Game;
+
+import Creatures.Character;
 
 /**
  * Created by hjohnson on 10/24/2015.
  */
 public class aMain {
+
 
 
 

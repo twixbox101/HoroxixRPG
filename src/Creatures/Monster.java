@@ -1,7 +1,9 @@
+package Creatures;
+
 /**
  Created by Holden Johnson on 10/24/2015.
  */
-public class Monster extends Creature{
+public class Monster extends Creature {
 
     /**
      *
@@ -20,7 +22,7 @@ public class Monster extends Creature{
     public Monster(String name, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold){
         super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
     }
-    //Creating Monster instances
+    //Creating Creatures.Monster instances
     public static Monster currentMonster = new Monster("",0,0,1,0,0,0,0,0,1);
     public static Monster goblin = new Monster("Goblin",2,150,150,0,0,30,5,20,5);
     public static Monster bat = new Monster("Bat",1,80,80,5,5,40,2,10,3);

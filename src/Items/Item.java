@@ -1,3 +1,5 @@
+package Items;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +62,7 @@ public class Item {
     //list of items and their values
     public static Item potion = new Item("Potion", 20, 40, 5, 0);
     public static Item elixir = new Item("Elixir", 50, 20, 24, 0);
-    //adds Item to mapOfItems(To get them use .get)
+    //adds Items.Item to mapOfItems(To get them use .get)
     static
     {
         mapOfItems.put(potion, potion.price);

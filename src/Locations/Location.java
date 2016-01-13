@@ -1,13 +1,17 @@
+package Locations;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hjohnson on 10/23/2015.
  */
 public class Location {
 
-    String myLocation;
-    String myLocationName;
     protected String name;
     protected int levelRequired;
+
 
     //<editor-fold desc="Getters and Setters">
     public String getName() {
@@ -27,7 +31,7 @@ public class Location {
     }
     //</editor-fold>
 
-    public Location (String name, int levelRequired){
+    public Location(String name, int levelRequired) {
         this.name = name;
         this.levelRequired = levelRequired;
     }

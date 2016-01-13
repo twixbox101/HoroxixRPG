@@ -1,12 +1,17 @@
-/**
+package Creatures; /**
  Created by Holden Johnson on 10/23/2015.
  */
 
 
+import Items.Armor;
+import Items.Item;
+import Items.Weapon;
+import Skills.Skill;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-public class Character extends Creature{
+public class Character extends Creature {
 
 //Defines variables for the character
     public String location;
@@ -20,20 +25,20 @@ public class Character extends Creature{
 
     /**
      *
-     * @param name name of Character
-     * @param gender gender of Character
-     * @param myClass class of Character
-     * @param level current level of Character
-     * @param currentHealth current Health of Character
-     * @param maxHealth maximum health of Character
-     * @param currentMana current Mana of Character
-     * @param maxMana maximum mana of Character
-     * @param power power of Character
-     * @param defense defense of Character
-     * @param exp current experience of Character
-     * @param gold current gold carried by Character
+     * @param name name of Creatures.Character
+     * @param gender gender of Creatures.Character
+     * @param myClass class of Creatures.Character
+     * @param level current level of Creatures.Character
+     * @param currentHealth current Health of Creatures.Character
+     * @param maxHealth maximum health of Creatures.Character
+     * @param currentMana current Mana of Creatures.Character
+     * @param maxMana maximum mana of Creatures.Character
+     * @param power power of Creatures.Character
+     * @param defense defense of Creatures.Character
+     * @param exp current experience of Creatures.Character
+     * @param gold current gold carried by Creatures.Character
      */
-//defines the Character class with his//hers arguments
+//defines the Creatures.Character class with his//hers arguments
     public Character(String name, String gender, String myClass, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold) {
         super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
         this.gender = gender;
@@ -176,9 +181,9 @@ public class Character extends Creature{
     //ChooseName method for character
     public void chooseName(){
         Scanner inputName = new Scanner( System.in );
-            System.out.print("Please name your Character!");
+            System.out.print("Please name your Creatures.Character!");
             name = inputName.next();
-            System.out.println("Your Character has been named " + name);
+            System.out.println("Your Creatures.Character has been named " + name);
     }
 //ChooseClass method for character
     public void chooseClass() {
@@ -291,7 +296,7 @@ public class Character extends Creature{
 
 
         //equips a weapon to myCharacter
-        //    myCharacter.equipMyWeapon(Weapon.goldSword);
+        //    myCharacter.equipMyWeapon(Items.Weapon.goldSword);
         //displays characters weapon + power
         //    System.out.println(myCharacter.power + myCharacter.getWeapon().power);
 

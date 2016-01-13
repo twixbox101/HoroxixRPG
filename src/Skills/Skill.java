@@ -1,3 +1,7 @@
+package Skills;
+
+import Creatures.Character;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,12 +10,46 @@ import java.util.Map;
  */
 public class Skill {
     Character myCharacter;
-    String name;
-    double damage;
-    int manaCost;
-    double heal;
+    protected String name;
+    protected double damage;
+    protected int manaCost;
+    protected double heal;
 
-//Different skill hashmaps for each class
+    //<editor-fold desc="Getters and Setters">
+    public String getName() {
+        return name;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public int getManaCost() {
+        return manaCost;
+    }
+
+    public double getHeal() {
+        return heal;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public void setManaCost(int manaCost) {
+        this.manaCost = manaCost;
+    }
+
+    public void setHeal(double heal) {
+        this.heal = heal;
+    }
+    //</editor-fold>
+
+    //Different skill hashmaps for each class
     public static Map<String,Skill> knightSkills = new HashMap<>();
     public static Map<String,Skill> priestSkills = new HashMap<>();
     public static Map<String,Skill> druidSkills = new HashMap<>();

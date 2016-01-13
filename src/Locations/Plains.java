@@ -1,32 +1,38 @@
+package Locations;
+
+import Creatures.Monster;
+import Items.Item;
+
+
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 /**
  * Created by horox_000 on 1/12/2016.
  */
-public class Plains extends Location{
+    public class Plains extends Location {
 
 
 
 //Initiates the dropList ArrayList
-    public static ArrayList<Item> dropList = new ArrayList<>();
+    public static List<Item> dropList = new ArrayList<>();
 
-    //Adds items to the Plains droppable item's list
+    //Adds items to the Locations.Plains droppable item's list
     {
         dropList.add(Item.potion);
     }
 
     //Initiates the enemyList ArrayList
-    public static ArrayList<Monster> enemyList= new ArrayList<>();
+    public static List<Monster> enemyList= new ArrayList<>();
 
-//Adds monsters to the Plains random encounters
+//Adds monsters to the Locations.Plains random encounters
     {
         enemyList.add(Monster.goblin);
         enemyList.add(Monster.bat);
     }
 
     //<editor-fold desc="Getters and Setters">
-    public ArrayList<Item> getDropList() {
+    public List<Item> getDropList() {
         return dropList;
     }
 
@@ -34,7 +40,7 @@ public class Plains extends Location{
         this.dropList = dropList;
     }
 
-    public ArrayList<Monster> getEnemyList() {
+    public List<Monster> getEnemyList() {
         return enemyList;
     }
 
@@ -44,13 +50,11 @@ public class Plains extends Location{
     //</editor-fold>
 
 
-    protected Plains(String name, int levelRequired, ArrayList enemyList, ArrayList dropList){
+    protected Plains(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
         super(name, levelRequired);
         this.dropList = dropList;
         this.enemyList = enemyList;
 
     }
-
-    protected static Plains Plains = new Plains("Plains", 1, enemyList, dropList);
-
+    protected static Plains Plains = new Plains("Locations.Plains", 1, enemyList, dropList);
 }

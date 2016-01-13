@@ -1,6 +1,8 @@
-/**
+package Inventories; /**
  Created by Holden Johnson on 10/24/2015.
  */
+import Items.Item;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ public class Inventory {
     public void addItem(Item myItem){
         inventory.put(myItem, 1);
    }
-// displays Item : Value
+// displays Items.Item : Value
     public String toString() {
         StringBuilder str = new StringBuilder();
         for(Map.Entry<Item,Integer> entry : inventory.entrySet())
