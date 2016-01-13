@@ -6,27 +6,39 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-public class Character {
+public class Character extends Creature{
 
 //Defines variables for the character
-    private String name;
-    private String gender;
-    private String charClass = "";
-    private String location;
-    private int level;
-    private int currentHealth;
-    private int maxHealth;
-    private int power;
-    private int defense;
-    private int exp;
-    int currentMana;
-    int maxMana;
-    int gold;
-    Map skills;
-    Weapon myWeapon;
-    Armor myArmor;
-    //public Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
-    public Map <String,Item> inventory = new HashMap<>();
+    public String location;
+    protected String gender;
+    protected String charClass;
+    protected Weapon myWeapon;
+    protected Armor myArmor;
+    protected Map skills;
+    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
+    public static Map<String, Item> inventory = new HashMap<>();
+
+    /**
+     *
+     * @param name name of Character
+     * @param gender gender of Character
+     * @param myClass class of Character
+     * @param level current level of Character
+     * @param currentHealth current Health of Character
+     * @param maxHealth maximum health of Character
+     * @param currentMana current Mana of Character
+     * @param maxMana maximum mana of Character
+     * @param power power of Character
+     * @param defense defense of Character
+     * @param exp current experience of Character
+     * @param gold current gold carried by Character
+     */
+//defines the Character class with his//hers arguments
+    public Character(String name, String gender, String myClass, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold) {
+        super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
+        this.gender = gender;
+        this.charClass = myClass;
+}
 
 //<editor-fold desc="Getters and Setters">
 
@@ -158,51 +170,8 @@ public class Character {
         this.myArmor = myArmor;
     }
 
-    public Map<String, Item> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Map<String, Item> inventory) {
-        this.inventory = inventory;
-    }
 
     //</editor-fold>
-
-    /**
-     *
-     * @param myName chosen name of your Character.
-     * @param myGender chosen gender of your Character.
-     * @param myClass chosen class of your Character.
-     * @param myLevel current level of your Character. Changes by levelUp()
-     * @param myCurrentHealth current Health of your Character.
-     * @param myHealth total possible Health value of your Character.
-     * @param myPower your character's power, or damage value.
-     * @param myDefense your character's defense value.
-     * @param myEXP character's current experience value. Goes up by fighting.
-     * @param myCurrentMana character's current mana value.
-     * @param myMana character's maximum mana value.
-     * @param myGold current gold amount value.
-     */
-
-//defines the Character class with his//hers arguments
-    public Character(String myName, String myGender, String myClass, int myLevel, int myCurrentHealth, int myHealth, int myPower, int myDefense, int myEXP, int myCurrentMana, int myMana, int myGold) {
-        name = myName;
-        gender = myGender;
-        charClass = myClass;
-        level = myLevel;
-        maxHealth = myHealth;
-        power = myPower;
-        defense = myDefense;
-        exp = myEXP;
-        currentMana = myCurrentMana;
-        maxMana = myMana;
-        gold = myGold;
-        currentHealth = myCurrentHealth;
-
-    }
-
-    public Character() {
-    }
 
     //ChooseName method for character
     public void chooseName(){

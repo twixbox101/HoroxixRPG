@@ -1,9 +1,4 @@
 
-
-import java.util.Scanner;
-
-
-
 /**
  * Created by hjohnson on 10/23/2015.
  */
@@ -11,45 +6,37 @@ public class Location {
 
     String myLocation;
     String myLocationName;
-    String myLocationChoice = "";
+    protected String name;
+    protected int levelRequired;
 
+    //<editor-fold desc="Getters and Setters">
+    public String getName() {
+        return name;
+    }
 
-    public Location (){
+    public int getLevelRequired() {
+        return levelRequired;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLevelRequired(int levelRequired) {
+        this.levelRequired = levelRequired;
+    }
+    //</editor-fold>
+
+    public Location (String name, int levelRequired){
+        this.name = name;
+        this.levelRequired = levelRequired;
     }
 
     public String toString() {
-            return getClass().getSimpleName() + myLocationChoice;
+            return getClass().getSimpleName();
     }
 
-    public void getLocationChoice(String choice) {
-        System.out.print("Please choose a location!");
-        Scanner inputChoice = new Scanner(System.in);
-        while (!myLocationChoice.equalsIgnoreCase("forest") && !myLocationChoice.equalsIgnoreCase("dungeon") && !myLocationChoice.equalsIgnoreCase("mountains")){
-            System.out.println("[Forest][Dungeons][Mountains]");
-            myLocationChoice = inputChoice.next();
-            if(myLocationChoice.equalsIgnoreCase("forest") || myLocationChoice.equalsIgnoreCase("dungeon") || myLocationChoice.equalsIgnoreCase("mountains")) {
-                System.out.println("You travel to the " + myLocationChoice + "!");
-            }
-            else{
-                System.out.println("Please choose a valid location!");
-            }
-
-            }
-        }
-
-
-
-
-
-
     public static void main(String[] args) {
-        Location Choice = new Location();
-        Location Forest = new Location();
-        Location Dungeon = new Location();
-        Location Mountains = new Location();
-        Choice.getLocationChoice("");
-
     }
 }
 
