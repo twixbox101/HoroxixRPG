@@ -16,7 +16,7 @@ public class Event {
     public static String shopChoice;
     Monster monsterHealth;
     String travelChoice;
-    String forestChoice;
+
 
 
     public Event() {
@@ -141,8 +141,8 @@ public class Event {
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("plains")) {
             System.out.println("[Explore][Inventory][Leave]");
-            forestChoice = myInput.next();
-            switch (forestChoice.toLowerCase()) {
+            String plainsChoice = myInput.next();
+            switch (plainsChoice.toLowerCase()) {
                 case "explore":
                     System.out.println("You explore.");
                     generateRandom();
@@ -170,7 +170,7 @@ public class Event {
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("forest")) {
             System.out.println("[Explore][Inventory][Leave]");
-            forestChoice = myInput.next();
+            String forestChoice = myInput.next();
             switch (forestChoice.toLowerCase()) {
                 case "explore":
                     System.out.println("You explore.");
@@ -196,9 +196,10 @@ public class Event {
     public void findGoldPlains(Character myCharacter) {
         Random randomGold = new Random();
         int foundGold = randomGold.nextInt(10);
-        myCharacter.setGold(foundGold);
-        System.out.println("You discover " + foundGold);
-        System.out.println("Total " + myCharacter.getGold());
+        int currentGold = myCharacter.getGold() + foundGold;
+        myCharacter.setGold(currentGold);
+        System.out.println("You discover " + foundGold + " gold!");
+        System.out.println("Total : " + myCharacter.getGold());
     }
 
     public void findGoldForest(Character myCharacter) {
@@ -315,13 +316,12 @@ public class Event {
     }
 //Deal damage
     public void attackDamage(Character myCharacter, Monster currentMonster){
-        Random hitMiss = new Random();
-        int value = hitMiss.nextInt(10);
+        int value = hitOrMiss();
         if(value <3){
             System.out.println("Your attack missed!");
         }
         else{
-            int totalDamage = myCharacter.getPower()+ myCharacter.myWeapon.getPower();
+            int totalDamage = damageDealt(myCharacter);
             int newHealth = currentMonster.getCurrentHealth() - totalDamage + currentMonster.getDefense();
             currentMonster.setCurrentHealth(newHealth);
             double damageDealt = totalDamage - currentMonster.getDefense();
@@ -330,6 +330,23 @@ public class Event {
         }
     }
 
+//Hit or Miss
+    public int hitOrMiss(){
+        Random hitMiss = new Random();
+        return hitMiss.nextInt(10);
+    }
+
+//Calculates Damage Dealt including min/max
+    public int damageDealt(Character myCharacter){
+        Random damage = new Random();
+        int power = myCharacter.getPower() + myCharacter.myWeapon.getPower();
+        int maxDamage = power + 50;
+        int minDamage = power - 25;
+        int resultDamage = damage.nextInt(maxDamage-minDamage) + minDamage;
+        return resultDamage;
+    }
+
+
 //MainMenu 1.0 WIP
     public void mainMenu(Character myCharacter) {
         String menuChoice;
@@ -337,7 +354,6 @@ public class Event {
         while(myCharacter.getLocation() == "mainMenu"){
         System.out.println("[Travel][Shop][Inventory][Stats]");
         menuChoice = menuInput.next();
-
         switch (menuChoice.toLowerCase()) {
             case "travel":
                 travel(myCharacter);

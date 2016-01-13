@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by horox_000 on 1/12/2016.
@@ -51,6 +52,5 @@ public class Plains extends Location{
     }
 
     protected static Plains Plains = new Plains("Plains", 1, enemyList, dropList);
-
 
 }
