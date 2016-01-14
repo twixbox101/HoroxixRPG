@@ -299,7 +299,9 @@ public class Event {
     //TODO - Run system
     public void fight(Character myCharacter, Monster currentMonster) {
         int currentMonsterHealth = currentMonster.getMaxHealth();
-        while (myCharacter.getCurrentHealth() >= 1 && currentMonsterHealth >= 1 && !myCharacter.getLocation().equals("travel")) {
+        String currentLocation = myCharacter.getLocation();
+        myCharacter.setLocation("fight");
+        while (myCharacter.getCurrentHealth() >= 1 && currentMonsterHealth >= 1 && !myCharacter.getLocation().equals(currentLocation)) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             System.out.println("What do you do?");
@@ -326,15 +328,15 @@ public class Event {
                     break;
                 case "run":
                     System.out.println("coward");
-                    myCharacter.setLocation("travel");
+                    myCharacter.setLocation("plains");
                     break;
                 default:
                     System.out.println("Select an action!");
                     break;
             }
         }
+        victory(myCharacter, currentMonster, currentLocation);
     }
-
     //Deal damage
     public int attackDamage(Character myCharacter, Monster currentMonster) {
         int totalDamage = damageDealt(myCharacter) - currentMonster.getDefense();
@@ -357,8 +359,14 @@ public class Event {
         return resultDamage;
     }
     //TODO - add victory taunt, exp, gold, drops, etc.
-    public void victory(Character myCharacter, Monster currentMonster){
-        System.out.println(currentMonster + "has been slain!");
+    public void victory(Character myCharacter, Monster currentMonster, String currentLocation){
+        System.out.println(currentMonster + " has been slain!");
+        System.out.println("Gained " + currentMonster.getExp() + " EXP.");
+        myCharacter.setExp(myCharacter.getExp() + currentMonster.getExp());
+        System.out.println("Total EXP: " + myCharacter.getExp());
+        System.out.println(currentMonster.getName() + " dropped " + currentMonster.getGold() + " gold!");
+        myCharacter.setGold(myCharacter.getGold() + currentMonster.getGold());
+        myCharacter.setLocation(currentLocation);
     }
 
 

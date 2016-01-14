@@ -80,6 +80,10 @@ public class Monster extends Creature {
         this.name = name;
     }
 
+    public int getGold() {return gold; }
+
+    public void setGol(int gold) { this.gold = gold; }
+
     //</editor-fold>
 
 
