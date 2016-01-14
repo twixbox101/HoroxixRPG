@@ -81,7 +81,7 @@ public class Event {
         System.out.println("Where would you like to go?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("travel")) {
-            System.out.println("[Locations.Plains][Forest][Mountains][Island][Swamp][Info]");
+            System.out.println("[Plains][Forest][Mountains][Island][Swamp][Info]");
             travelChoice = myInput.next();
             switch (travelChoice.toLowerCase()) {
                 case "plains":
@@ -319,6 +319,9 @@ public class Event {
                         currentMonsterHealth -= damage;
                         System.out.println(currentMonster.getName() + " health remaining: " + currentMonsterHealth + "/ " + currentMonster.getMaxHealth());
                     }
+                    if(currentMonsterHealth > 0){
+                    attackBack(myCharacter, currentMonster);
+                    }
                     break;
                 case "skill":
                     getSkillChoice(myCharacter, currentMonster);
@@ -358,6 +361,32 @@ public class Event {
         int resultDamage = damage.nextInt(maxDamage-minDamage) + minDamage;
         return resultDamage;
     }
+
+    public int attackBack(Character myCharacter, Monster currentMonster){
+        System.out.println("The " + currentMonster.getName() + " attacks!");
+        int value = hitOrMiss();
+        int resultDamage = 0;
+        if(value < 3){
+            System.out.println(currentMonster.getName() + "'s attack misses!");
+        }
+        else{
+            System.out.println("It hits!");
+            Random damage = new Random();
+            int maxDmg = ((int) Math.round(currentMonster.getPower() * 1.25));
+            int minDmg = ((int) Math.round(currentMonster.getPower() * -.25));
+            resultDamage = damage.nextInt(maxDmg-minDmg) + minDmg;
+            System.out.println("The " + currentMonster.getName() + " deals " + resultDamage);
+            editHealth(myCharacter, resultDamage);
+            return resultDamage;
+        }
+        return resultDamage;
+    }
+
+    public void editHealth(Character myCharacter, int resultDamage){
+        myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() - resultDamage);
+        System.out.println("Health : " + myCharacter.getCurrentHealth() + " / " + myCharacter.getMaxHealth());
+    }
+
     //TODO - add victory taunt, exp, gold, drops, etc.
     public void victory(Character myCharacter, Monster currentMonster, String currentLocation){
         System.out.println(currentMonster + " has been slain!");
