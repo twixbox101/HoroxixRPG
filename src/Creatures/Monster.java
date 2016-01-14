@@ -82,7 +82,7 @@ public class Monster extends Creature {
 
     public int getGold() {return gold; }
 
-    public void setGol(int gold) { this.gold = gold; }
+    public void setGold(int gold) { this.gold = gold; }
 
     //</editor-fold>
 
