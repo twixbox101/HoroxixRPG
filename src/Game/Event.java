@@ -6,9 +6,9 @@ import Creatures.Monster;
 import Items.Armor;
 import Items.Item;
 import Items.Weapon;
+import Locations.Location;
 import Locations.Plains;
 import Skills.Skill;
-
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -74,26 +74,26 @@ public class Event {
             //myItem.quantity++;
         }
     }
-
+    //Travel Menu. Select a destination.
     public void travel(Character myCharacter) {
         myCharacter.setLocation("travel");
         System.out.println("You have decided to travel");
         System.out.println("Where would you like to go?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("travel")) {
-            System.out.println("[Plains][Forest][Mountains][Island][Swamp][Info]");
+            System.out.println("[Plains][Forest][Mountains][Island][Swamp][Info][Exit]");
             travelChoice = myInput.next();
             switch (travelChoice.toLowerCase()) {
                 case "plains":
                     myCharacter.setLocation("plains");
-                    atPlains(myCharacter);
+                    atLocation(myCharacter, myCharacter.getLocation());
                     break;
                 case "forest":
                     if (myCharacter.getLevel() < 5) {
                         System.out.println("Your level is not high enough for this area");
                     } else {
                         myCharacter.setLocation("forest");
-                        atForest(myCharacter);
+                        atLocation(myCharacter, myCharacter.getLocation());
                     }
                     break;
                 case "mountains":
@@ -142,20 +142,21 @@ public class Event {
             }
         }
     }
-
-    public void atPlains(Character myCharacter) {
-        System.out.println("You have arrived at the Thunder Locations.Plains. Dry fields span in front of you as far as the eye can see.");
+    //Plains Menu.
+    //TODO - can i make one method for At, and pass in the location?
+    public void atLocation(Character myCharacter, String currentLocation) {
+        System.out.println("You have arrived at the " + currentLocation);
         System.out.println("What would you like to do?");
         Scanner myInput = new Scanner(System.in);
-        while (myCharacter.getLocation().equals("plains")) {
+        while (myCharacter.getLocation().equals(currentLocation)) {
             System.out.println("[Explore][Inventory][Leave]");
-            String plainsChoice = myInput.next();
-            switch (plainsChoice.toLowerCase()) {
+            String choice = myInput.next();
+            switch (choice.toLowerCase()) {
                 case "explore":
                     System.out.println("You explore.");
                     generateRandom();
                     if (generateRandom() <= 2) {
-                        findGoldPlains(myCharacter);
+                        findGold(myCharacter, currentLocation);
                     } else
                         enterBattle(myCharacter);
                     break;
@@ -171,56 +172,26 @@ public class Event {
             }
         }
     }
-
-    public void atForest(Character myCharacter) {
-        System.out.println("You have arrived at the forests of Eldra. The air is humid and the green leaves blow eerily in the wind.");
-        System.out.println("What would you like to do?");
-        Scanner myInput = new Scanner(System.in);
-        while (myCharacter.getLocation().equals("forest")) {
-            System.out.println("[Explore][Inventory][Leave]");
-            String forestChoice = myInput.next();
-            switch (forestChoice.toLowerCase()) {
-                case "explore":
-                    System.out.println("You explore.");
-                    generateRandom();
-                    if (generateRandom() <= 2) {
-                        findGoldForest(myCharacter);
-                    } else
-                        enterBattle(myCharacter);
-                    break;
-                case "inventory":
-                    inInventory(myCharacter);
-                    break;
-                case "leave":
-                    System.out.println("You decide to leave");
-                    myCharacter.setLocation("travel");
-                    break;
-                default:
-                    System.out.println("Please select a valid option.");
-            }
+    //Finds gold based on location
+    //TODO - add the rest of the locations.
+    public void findGold(Character myCharacter, String currentLocation) {
+        Random randomGold = new Random();
+        switch (currentLocation){
+            case "plains":
+                int foundGold = randomGold.nextInt(10);
+                myCharacter.setGold(myCharacter.getGold() + foundGold);
+                System.out.println("You discover " + foundGold + " gold!");
+                System.out.println("Total : " + myCharacter.getGold());
+                break;
+            case "forest":
+                foundGold = randomGold.nextInt(25);
+                myCharacter.setGold(myCharacter.getGold() + foundGold);
+                System.out.println("You discover " + foundGold + " gold!");
+                System.out.println("Total : " + myCharacter.getGold());
+                break;
         }
     }
-
-    public void findGoldPlains(Character myCharacter) {
-        Random randomGold = new Random();
-        int foundGold = randomGold.nextInt(10);
-        int currentGold = myCharacter.getGold() + foundGold;
-        myCharacter.setGold(currentGold);
-        System.out.println("You discover " + foundGold + " gold!");
-        System.out.println("Total : " + myCharacter.getGold());
-    }
-
-    public void findGoldForest(Character myCharacter) {
-        Random randomGold = new Random();
-        int foundGold = randomGold.nextInt(25);
-        myCharacter.setGold(foundGold);
-        System.out.println("You discover " + foundGold);
-        System.out.println("Total " + myCharacter.getGold());
-    }
-
-
     //Enters the shop and displays a list of items.
-    //TODO - modify the quantity functionality
     public void enterShop(Character myCharacter) {
         myCharacter.setLocation("shop");
         System.out.println("Welcome to the shop!");
@@ -229,7 +200,7 @@ public class Event {
             Item key = entry.getKey();
             System.out.println(key + " : " + entry.getValue());
         }
-        while (myCharacter.getLocation() == "shop") {
+        while ("shop".equals(myCharacter.getLocation())) {
             Scanner myInput = new Scanner(System.in);
             shopChoice = myInput.next();
             switch (shopChoice.toLowerCase()) {
@@ -268,7 +239,6 @@ public class Event {
         Random randomNumber = new Random();
         return randomNumber.nextInt(6);
     }
-
 
     //Generate random monster based on value
     //TODO - finish for each location. Verify that it's not modifying the original monster, and only a new instance of it.
@@ -331,7 +301,7 @@ public class Event {
                     break;
                 case "run":
                     System.out.println("coward");
-                    myCharacter.setLocation("plains");
+                    myCharacter.setLocation(currentLocation);
                     break;
                 default:
                     System.out.println("Select an action!");
@@ -340,28 +310,28 @@ public class Event {
         }
         victory(myCharacter, currentMonster, currentLocation);
     }
+
     //Deal damage
     public int attackDamage(Character myCharacter, Monster currentMonster) {
-        int totalDamage = damageDealt(myCharacter) - currentMonster.getDefense();
-        return totalDamage;
+        return damageDealt(myCharacter) - currentMonster.getDefense();
     }
 
-//Hit or Miss
+    //Hit or Miss
     public int hitOrMiss(){
         Random hitMiss = new Random();
         return hitMiss.nextInt(10);
     }
 
-//Calculates Damage Dealt including min/max
+    //Calculates Damage Dealt including min/max
     public int damageDealt(Character myCharacter){
         Random damage = new Random();
         int power = myCharacter.getPower() + myCharacter.getMyWeapon().getPower();
         int maxDamage = power + 50;
         int minDamage = power - 25;
-        int resultDamage = damage.nextInt(maxDamage-minDamage) + minDamage;
-        return resultDamage;
+        return damage.nextInt(maxDamage-minDamage) + minDamage;
     }
 
+    //Calculates the monster attacking back after either a failed or successful attack by the player.
     public int attackBack(Character myCharacter, Monster currentMonster){
         System.out.println("The " + currentMonster.getName() + " attacks!");
         int value = hitOrMiss();
@@ -382,11 +352,13 @@ public class Event {
         return resultDamage;
     }
 
+    //Method to edit the health of the player.
     public void editHealth(Character myCharacter, int resultDamage){
         myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() - resultDamage);
         System.out.println("Health : " + myCharacter.getCurrentHealth() + " / " + myCharacter.getMaxHealth());
     }
 
+    //Method that runs upon victory of a battle.
     //TODO - add victory taunt, exp, gold, drops, etc.
     public void victory(Character myCharacter, Monster currentMonster, String currentLocation){
         System.out.println(currentMonster + " has been slain!");
@@ -399,11 +371,11 @@ public class Event {
     }
 
 
-//MainMenu 1.0 WIP
+    //MainMenu 1.0 WIP
     public void mainMenu(Character myCharacter) {
         String menuChoice;
         Scanner menuInput = new Scanner(System.in);
-        while(myCharacter.getLocation() == "mainMenu"){
+        while(myCharacter.getLocation().equals("mainMenu")){
         System.out.println("[Travel][Shop][Inventory][Stats]");
         menuChoice = menuInput.next();
         switch (menuChoice.toLowerCase()) {
@@ -432,9 +404,10 @@ public class Event {
         }
         }
     }
-//Inventories.Inventory 1.0 WIP
+    //Inventories.Inventory 1.0 WIP
     public void inInventory(Character myCharacter){
         System.out.println(myCharacter.inventory);
+        System.out.println("Gold : " + myCharacter.getGold());
         System.out.println("What would you like to do?");
         System.out.println("[Equip][Exit]");
         String invChoice;
@@ -453,7 +426,7 @@ public class Event {
         }
 
     }
-//Equip Menu 1.0 WIP
+    //Equip Menu 1.0 WIP
     public void equipMenu(Character myCharacter){
         String equipChoice;
         System.out.println("What would you like to equip?");
@@ -468,7 +441,7 @@ public class Event {
                 break;
         }
     }
-//equip armor by choice WIP
+    //equip armor by choice WIP
     //TODO - quantity
     public void equipArmor(Character myCharacter){
         String armorChoice;
@@ -489,7 +462,7 @@ public class Event {
         }
     }
 
-//Level Up!
+    //Level Up! Calls skillCheck.
     public void levelUP(Character myCharacter){
         System.out.println("Congratulations! You have leveled up.");
         switch (myCharacter.getCharClass().toLowerCase()){
@@ -533,29 +506,20 @@ public class Event {
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.45));
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
         }
-        skillCheck(myCharacter);
+        Skill.skillCheck(myCharacter);
     }
-    public void skillCheck(Character myCharacter){
-        switch (myCharacter.getCharClass().toLowerCase()) {
-            case "knight":
-                if(myCharacter.getLevel() == 5){
-                    Skill.knightSkills.put(Skill.stab.getName(), Skill.stab);
-                    System.out.println("You have gained the skill [Stab]!");
-                }
-        }
-    }
-    // equips a weapon. change myWeapon to the weapon you want to equip.
+    //Equips a weapon. change myWeapon to the weapon you want to equip.
     public void equipMyWeapon(Item myWeapon) {
         this.myWeapon = (Weapon)myWeapon;
         System.out.println("You have equipped " + myWeapon);
     }
-    // equips armor. change myArmor to the piece of armor you want to equip.
+    //Equips armor. change myArmor to the piece of armor you want to equip.
     public void equipMyArmor(Item myArmor) {
         if(myArmor instanceof Armor)
         this.myArmor = (Armor)myArmor;
         System.out.println("You have equipped " + myArmor);
     }
-//Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.
+    //Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.
     public void useSkill(Character myCharacter, Skill aMySkill, Monster currentMonster) {
         mySkill = aMySkill;
         System.out.println("You use " + mySkill + "!");
@@ -580,12 +544,13 @@ public class Event {
     }
     /*Asks to choose a skill. You input a skill name (currently a letter) and it will see if you have that in your
     skills.If it does, it executes. If not it will not execute. This currently only works for Knights. */
+    //TODO - fix
     public void getSkillChoice(Character myCharacter, Monster currentMonster) {
         Scanner inputChoice = new Scanner(System.in);
         System.out.println("Choose a skill!");
         skillChoice = inputChoice.next();
         if (skillChoice != null) {
-            if(myCharacter.getSkills().containsKey(Skill.doubleSlash.getName()) && skillChoice.equalsIgnoreCase("d")){
+            if(myCharacter.getSkills().contains(Skill.doubleSlash.getName()) || skillChoice.equalsIgnoreCase("d")){
                 useSkill(myCharacter, Skill.doubleSlash, currentMonster);
             }
             else{

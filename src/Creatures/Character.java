@@ -8,9 +8,8 @@ import Items.Item;
 import Items.Weapon;
 import Skills.Skill;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
 public class Character extends Creature {
 
 //Defines variables for the character
@@ -19,9 +18,9 @@ public class Character extends Creature {
     protected String charClass;
     protected Weapon myWeapon;
     protected Armor myArmor;
-    protected Map skills;
+    public List<Skill> skills = new ArrayList<>();
     public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
-    public static Map<String, Item> inventory = new HashMap<>();
+    public Map<String, Item> inventory = new HashMap<>();
 
     /**
      *
@@ -151,11 +150,11 @@ public class Character extends Creature {
         this.gold = gold;
     }
 
-    public Map getSkills() {
+    public List getSkills() {
         return skills;
     }
 
-    public void setSkills(Map skills) {
+    public void setSkills(List skills) {
         this.skills = skills;
     }
 
@@ -207,7 +206,7 @@ public class Character extends Creature {
                 defense = 15;
                 maxMana = 25;
                 currentMana = maxMana;
-                skills = Skill.knightSkills;
+                skills.add(Skill.doubleSlash);
                 equipMyWeapon(Weapon.knightSword);
                 equipMyArmor(Armor.knightArmor);
                 break;
@@ -219,7 +218,7 @@ public class Character extends Creature {
                 defense = 8;
                 maxMana = 50;
                 currentMana = maxMana;
-                skills = Skill.rangerSkills;
+                skills.add(Skill.triShot);
                 equipMyWeapon(Weapon.rangerBow);
                 equipMyArmor(Armor.rangerArmor);
                 break;
@@ -231,7 +230,7 @@ public class Character extends Creature {
                 defense = 2;
                 maxMana = 100;
                 currentMana = maxMana;
-                skills = Skill.wizardSkills;
+                skills.add(Skill.fireBall);
                 equipMyWeapon(Weapon.wizardStaff);
                 equipMyArmor(Armor.wizardArmor);
                 break;
@@ -243,7 +242,7 @@ public class Character extends Creature {
                 defense = 8;
                 maxMana = 80;
                 currentMana = maxMana;
-                skills = Skill.druidSkills;
+                skills.add(Skill.death);
                 equipMyWeapon(Weapon.druidClaws);
                 equipMyArmor(Armor.druidArmor);
                 break;
@@ -255,7 +254,7 @@ public class Character extends Creature {
                 defense = 4;
                 maxMana = 90;
                 currentMana = maxMana;
-                skills = Skill.priestSkills;
+                skills.add(Skill.cure);
                 equipMyWeapon(Weapon.priestStaff);
                 equipMyArmor(Armor.priestArmor);
                 break;
