@@ -1,6 +1,8 @@
 package Game;
 
 import Creatures.Character;
+import UI.UIMain;
+import javafx.stage.Stage;
 
 /**
  * Created by hjohnson on 10/24/2015.
@@ -21,7 +23,10 @@ public class Main {
         mainEvent.levelUP(newCharacter);
         mainEvent.levelUP(newCharacter);
         mainEvent.levelUP(newCharacter);
+        UIMain mainUI = new UIMain();
+        mainUI.launch(mainUI.getClass());
         mainEvent.mainMenu(newCharacter);
+
         //Game newGame = new Game();
         //newGame.start();
     }

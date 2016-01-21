@@ -3,6 +3,8 @@ package UI; /**
  */
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +21,12 @@ public class UIMain extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
 
+    private ObservableList<Character> charStats = FXCollections.observableArrayList();
+
+    public ObservableList<Character> getCharStats() {
+        return charStats;
+    }
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -28,6 +36,8 @@ public class UIMain extends Application {
         initRootLayout();
         initUIMain();
     }
+
+
 
     public void initRootLayout() {
         try {
@@ -54,6 +64,11 @@ public class UIMain extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(UIMain);
+
+            // Give the controller access to the main app.
+            UIController controller = loader.getController();
+            controller.setMainApp(this);
+
 
         } catch (IOException e) {
             e.printStackTrace();

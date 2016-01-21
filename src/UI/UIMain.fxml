@@ -4,9 +4,48 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UIMain">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UIController">
    <children>
-      <TextArea editable="false" layoutX="20.0" layoutY="14.0" prefHeight="249.0" prefWidth="559.0" text="Test" />
+      <TextArea editable="false" layoutX="20.0" layoutY="14.0" prefHeight="269.0" prefWidth="559.0" text="Stats&#10;" />
+      <GridPane layoutX="38.0" layoutY="53.0" prefHeight="217.0" prefWidth="523.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Name" />
+            <Label text="Class" GridPane.rowIndex="1" />
+            <Label text="Gender" GridPane.rowIndex="2" />
+            <Label text="Level" GridPane.rowIndex="3" />
+            <Label text="EXP" GridPane.rowIndex="4" />
+            <Label text="Power" GridPane.rowIndex="5" />
+            <Label text="Defense" GridPane.rowIndex="6" />
+            <Label fx:id="name" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="charClass" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="gender" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="level" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="experience" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="power" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="defense" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Health" GridPane.rowIndex="7" />
+            <Label text="Weapon -" GridPane.rowIndex="8" />
+            <Label text="Armor -" GridPane.rowIndex="9" />
+            <Label fx:id="health" text="Defense" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="weapon" text="Defense" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label fx:id="armor" text="Defense" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

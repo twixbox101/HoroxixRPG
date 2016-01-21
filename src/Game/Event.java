@@ -389,15 +389,7 @@ public class Event {
                 inInventory(myCharacter);
                 break;
             case "stats":
-                System.out.println("Class: " + myCharacter.getCharClass());
-                System.out.println("Level: " + myCharacter.getLevel());
-                System.out.println("EXP: " + myCharacter.getExp());
-                System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
-                System.out.println("Power: " + (myCharacter.getPower() + myCharacter.getMyWeapon().getPower()));
-                System.out.println("Defense: " + (myCharacter.getDefense() + myCharacter.getMyArmor().getDefense()));
-                System.out.println("Weapon: " + myCharacter.getMyWeapon());
-                System.out.println("Armor: " + myCharacter.getMyArmor());
-                System.out.println("Skills: " + myCharacter.getSkills());
+                viewStats(myCharacter);
                 break;
             default:
                 System.out.println("Please select a valid option.");
@@ -460,6 +452,18 @@ public class Event {
             System.out.println("You don't have any!");
             }
         }
+    }
+
+    public void viewStats(Character myCharacter) {
+        System.out.println("Class: " + myCharacter.getCharClass());
+        System.out.println("Level: " + myCharacter.getLevel());
+        System.out.println("EXP: " + myCharacter.getExp());
+        System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
+        System.out.println("Power: " + (myCharacter.getPower() + myCharacter.getMyWeapon().getPower()));
+        System.out.println("Defense: " + (myCharacter.getDefense() + myCharacter.getMyArmor().getDefense()));
+        System.out.println("Weapon: " + myCharacter.getMyWeapon());
+        System.out.println("Armor: " + myCharacter.getMyArmor());
+        System.out.println("Skills: " + myCharacter.getSkills());
     }
 
     //Level Up! Calls skillCheck.
