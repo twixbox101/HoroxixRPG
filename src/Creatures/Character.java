@@ -184,6 +184,7 @@ public class Character extends Creature {
             name = inputName.next();
             System.out.println("Your Character has been named " + name);
     }
+    //TODO - MAKE CLASSES OBJECTS INSTEAD OF STRINGS
 //ChooseClass method for character
     public void chooseClass() {
         while (!"knight".equalsIgnoreCase(charClass) && !"ranger".equalsIgnoreCase(charClass) && !"wizard".equalsIgnoreCase(charClass) && !"druid".equalsIgnoreCase(charClass) && !"priest".equalsIgnoreCase(charClass)) {

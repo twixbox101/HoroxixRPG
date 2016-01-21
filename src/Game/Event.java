@@ -64,14 +64,13 @@ public class Event {
     }
 
     //Adds item to My Creatures.Character's Inventories.Inventory
-    //TODO - refactor the quantity mechanic to a player value
     public void addItem(Item myItem, Character myCharacter) {
         Item invItem = myCharacter.inventory.get(myItem.getName());
         if (invItem == null) {
             myCharacter.inventory.put(myItem.getName(), myItem);
-            //myItem.setQuantity();
+            myItem.setQuantity(1);
         } else {
-            //myItem.quantity++;
+            myItem.setQuantity(+1);
         }
     }
     //Travel Menu. Select a destination.
@@ -245,7 +244,7 @@ public class Event {
     Monster generateMonster(Character myCharacter) {
         Monster value = new Monster("test", 0, 0, 0, 0, 0, 0, 0, 0, 0);
         String location = myCharacter.getLocation();
-        switch (location) {
+            switch (location) {
             case "plains":
                 Random generator = new Random();
                 int randomIndex = generator.nextInt(Plains.enemyList.size());
@@ -419,7 +418,6 @@ public class Event {
                 break;
             case "exit":
                 System.out.println("You leave.");
-                //mainMenu(myCharacter);
                 break;
             default:
                 System.out.println("Please select a valid option.");
@@ -520,18 +518,16 @@ public class Event {
         System.out.println("You have equipped " + myArmor);
     }
     //Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.
-    public void useSkill(Character myCharacter, Skill aMySkill, Monster currentMonster) {
-        mySkill = aMySkill;
+    public void useSkill(Character myCharacter, Skill skill, Monster currentMonster) {
+        mySkill = skill;
         System.out.println("You use " + mySkill + "!");
         if (mySkill.getHeal() > 0) {
-            int toHeal = myCharacter.getCurrentHealth();
-            myCharacter.setCurrentHealth(toHeal += mySkill.getHeal());
+            myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() + (int) Math.round(mySkill.getHeal()));
             if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
-                int healthCheck = myCharacter.getMaxHealth();
-                myCharacter.setCurrentHealth(healthCheck);
+                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
             }
             System.out.println("Healed for " + mySkill.getHeal() + "!");
-            System.out.println(myCharacter.getCurrentHealth());
+            System.out.println(myCharacter.getCurrentHealth() + myCharacter.getMaxHealth());
         }
         else {
             double newHealth;
@@ -548,6 +544,7 @@ public class Event {
     public void getSkillChoice(Character myCharacter, Monster currentMonster) {
         Scanner inputChoice = new Scanner(System.in);
         System.out.println("Choose a skill!");
+        System.out.println("[1][2][3][4][5][Skill List]");
         skillChoice = inputChoice.next();
         if (skillChoice != null) {
             if(myCharacter.getSkills().contains(Skill.doubleSlash.getName()) || skillChoice.equalsIgnoreCase("d")){
