@@ -15,7 +15,7 @@ import java.util.List;
 
 
 //Initiates the dropList ArrayList
-    public static List<Item> dropList = new ArrayList<>();
+    public static List<Item> dropList = new ArrayList<Item>();
 
     //Adds items to the Locations.Plains droppable item's list
     {
@@ -23,7 +23,7 @@ import java.util.List;
     }
 
     //Initiates the enemyList ArrayList
-    public static List<Monster> enemyList= new ArrayList<>();
+    public static List<Monster> enemyList= new ArrayList<Monster>();
 
 //Adds monsters to the Locations.Plains random encounters
     {
