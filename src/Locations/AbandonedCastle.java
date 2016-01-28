@@ -3,14 +3,13 @@ package Locations;
 import Creatures.Monster;
 import Items.Item;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by horox_000 on 1/12/2016.
  */
-    public class Plains extends Location {
+    public class AbandonedCastle extends Location {
 
 
 
@@ -27,8 +26,8 @@ import java.util.List;
 
 //Adds monsters to the Locations.Plains random encounters
     {
-        enemyList.add(Monster.goblin);
-        enemyList.add(Monster.bat);
+        enemyList.add(Monster.troll);
+        enemyList.add(Monster.skeleton);
     }
 
     //<editor-fold desc="Getters and Setters">
@@ -50,11 +49,11 @@ import java.util.List;
     //</editor-fold>
 
 
-    protected Plains(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
+    protected AbandonedCastle(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
         super(name, levelRequired);
         this.dropList = dropList;
         this.enemyList = enemyList;
 
     }
-    protected static Plains Plains = new Plains("Locations.Plains", 1, enemyList, dropList);
+    protected static AbandonedCastle Forest = new AbandonedCastle("Forest", 5, enemyList, dropList);
 }

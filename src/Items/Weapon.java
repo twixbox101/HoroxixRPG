@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Weapon extends Item {
 //creates map for weapons
-    public Map<String, Weapon> mapOfWeapons = new HashMap<>();
+    public Map<String, Weapon> mapOfWeapons = new HashMap<String, Weapon>();
 
     //<editor-fold desc="Getters and Setters">
     public int getPower() {

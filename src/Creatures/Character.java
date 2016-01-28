@@ -44,6 +44,7 @@ public class Character extends Creature {
         this.charClass = myClass;
 }
 
+
 //<editor-fold desc="Getters and Setters">
 
     public String getName() {

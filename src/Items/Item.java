@@ -58,7 +58,7 @@ public class Item {
 //</editor-fold>
 
     //creates map for items
-    public static Map<Item, Integer> mapOfItems= new HashMap<>();
+    public static Map<Item, Integer> mapOfItems= new HashMap<Item, Integer>();
     //list of items and their values
     public static Item potion = new Item("Potion", 20, 40, 5, 0);
     public static Item elixir = new Item("Elixir", 50, 20, 24, 0);

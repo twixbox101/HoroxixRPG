@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by horox_000 on 1/12/2016.
  */
-    public class Plains extends Location {
+    public class Island extends Location {
 
 
 
@@ -28,7 +28,9 @@ import java.util.List;
 //Adds monsters to the Locations.Plains random encounters
     {
         enemyList.add(Monster.goblin);
-        enemyList.add(Monster.bat);
+        enemyList.add(Monster.barbarian);
+        enemyList.add(Monster.loneWolf);
+        enemyList.add(Monster.hyena);
     }
 
     //<editor-fold desc="Getters and Setters">
@@ -50,11 +52,11 @@ import java.util.List;
     //</editor-fold>
 
 
-    protected Plains(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
+    protected Island(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
         super(name, levelRequired);
         this.dropList = dropList;
         this.enemyList = enemyList;
 
     }
-    protected static Plains Plains = new Plains("Locations.Plains", 1, enemyList, dropList);
+    protected static Island Plains = new Island("Plains", 1, enemyList, dropList);
 }
