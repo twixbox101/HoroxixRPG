@@ -62,6 +62,12 @@ public class Item {
     //list of items and their values
     public static Item potion = new Item("Potion", 20, 40, 5, 0);
     public static Item elixir = new Item("Elixir", 50, 20, 24, 0);
+    public static Item luckyCharm = new Item("Lucky Charm", 50, 20, 24, 0);
+    public static Item eelGuts = new Item("Eel Guts", 50, 20, 24, 0);
+    public static Item poison = new Item("Poison", 50, 20, 24, 0);
+    public static Item expCoin = new Item("EXP Coin", 50, 20, 24, 0);
+    public static Item powerGlove = new Item("Power Glove", 50, 20, 24, 0);
+    public static Item ironCrown = new Item("Iron Crown", 50, 20, 24, 0);
     //adds Items.Item to mapOfItems(To get them use .get)
     static
     {

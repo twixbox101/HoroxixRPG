@@ -6,7 +6,9 @@ import Creatures.Monster;
 import Items.Armor;
 import Items.Item;
 import Items.Weapon;
-import Locations.Location;
+import Locations.AbandonedCastle;
+import Locations.DarkForest;
+import Locations.Island;
 import Locations.Plains;
 import Skills.Skill;
 import java.util.Map;
@@ -28,33 +30,36 @@ public class Event {
     }
 
     //uses a potion to restore 30 currentHealth!
+    //TODO - // FIXME: 1/22/2016
+
     public void usePotion(Character myCharacter) {
-        int howMany = myCharacter.inventory.get(Item.potion).getQuantity();
-        if (howMany > 0) {
-            myCharacter.inventory.put(Item.elixir.getName(), Item.potion);
-            System.out.println("You have used a potion.");
-            System.out.println("30 Health healed!");
-            int myHealth = myCharacter.getCurrentHealth();
-            myCharacter.setCurrentHealth(myHealth + Item.potion.getHeal());
-            if (myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
-                int healthCheck = myCharacter.getMaxHealth();
-                myCharacter.setCurrentHealth(healthCheck);
+        int inventoryLength = myCharacter.inventory.size();
+        for (int i = 0; i < inventoryLength; i++)
+            if (myCharacter.inventory.contains(Item.potion)) {
+                myCharacter.inventory.remove(Item.potion);
+                System.out.println("You have used a potion.");
+                System.out.println(Item.potion.getHeal() + " Health restored!");
+                myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() + Item.potion.getHeal());
+                if (myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
+                    myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
+                }
+            } else {
+                System.out.println("You don't have any elixirs!");
             }
-        } else {
-            System.out.println("You don't have any potions!");
-        }
     }
 
+
     //Uses an elixir to heal 20 mana.
+    //TODO - fix
     public void useElixir(Character myCharacter) {
-        int howMany = myCharacter.inventory.get(Item.elixir).getQuantity();
-        if (howMany > 0) {
-            myCharacter.inventory.put(Item.elixir.getName(), Item.elixir);
+        int inventoryLength = myCharacter.inventory.size();
+        for (int i = 0; i < inventoryLength; i++)
+
+        if (myCharacter.inventory.contains(Item.elixir)) {
+            myCharacter.inventory.remove(Item.elixir);
             System.out.println("You have used an elixir.");
-            System.out.println("20 Mana restored!");
-            int currentMana = myCharacter.getCurrentMana();
-            currentMana += Item.elixir.getHeal();
-            myCharacter.setCurrentMana(currentMana);
+            System.out.println(Item.elixir.getHeal() + " Mana restored!");
+            myCharacter.setCurrentMana(myCharacter.getCurrentMana() + Item.elixir.getHeal());
             if (myCharacter.getCurrentMana() > myCharacter.getMaxMana()) {
                 myCharacter.setCurrentMana(myCharacter.getMaxMana());
             }
@@ -65,12 +70,12 @@ public class Event {
 
     //Adds item to My Creatures.Character's Inventories.Inventory
     public void addItem(Item myItem, Character myCharacter) {
-        Item invItem = myCharacter.inventory.get(myItem.getName());
-        if (invItem == null) {
-            myCharacter.inventory.put(myItem.getName(), myItem);
-            myItem.setQuantity(1);
-        } else {
+
+        if (myCharacter.inventory.contains(myItem)) {
             myItem.setQuantity(+1);
+        } else {
+            myCharacter.inventory.add(myItem);
+            myItem.setQuantity(1);
         }
     }
     //Travel Menu. Select a destination.
@@ -80,14 +85,14 @@ public class Event {
         System.out.println("Where would you like to go?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals("travel")) {
-            System.out.println("[Plains][Forest][Mountains][Island][Swamp][Info][Exit]");
+            System.out.println("[P]lains|[F]orest|[C]astle|[I]sland|[S]wamp]|i[N]fo]|e[X]it|");
             travelChoice = myInput.next();
             switch (travelChoice.toLowerCase()) {
-                case "plains":
+                case "p":
                     myCharacter.setLocation("plains");
                     atLocation(myCharacter, myCharacter.getLocation());
                     break;
-                case "forest":
+                case "f":
                     if (myCharacter.getLevel() < 5) {
                         System.out.println("Your level is not high enough for this area");
                     } else {
@@ -95,25 +100,28 @@ public class Event {
                         atLocation(myCharacter, myCharacter.getLocation());
                     }
                     break;
-                case "mountains":
+                case "c":
                     if (myCharacter.getLevel() < 10) {
                         System.out.println("Your level is not high enough for this area");
                     } else {
-                        myCharacter.setLocation("mountains");
+                        myCharacter.setLocation("castle");
+                        atLocation(myCharacter, myCharacter.getLocation());
                     }
                     break;
-                case "island":
+                case "i":
                     if (myCharacter.getLevel() < 15) {
                         System.out.println("Your level is not high enough for this area");
                     } else {
                         myCharacter.setLocation("island");
+                        atLocation(myCharacter, myCharacter.getLocation());
                     }
                     break;
-                case "swamp":
+                case "s":
                     if (myCharacter.getLevel() < 20) {
                         System.out.println("Your level is not high enough for this area");
                     } else {
                         myCharacter.setLocation("swamp");
+                        atLocation(myCharacter, myCharacter.getLocation());
                     }
                     break;
                 case "dev":
@@ -123,15 +131,15 @@ public class Event {
                     myCharacter.setMyArmor(Armor.rubyArmor);
                     System.out.println("dev!");
                     break;
-                case "info":
-                    System.out.println("[Locations.Plains : Levels 1-5]\n" +
-                            "[Forest: Levels 5-10]\n" +
-                            "[Mountains : Levels 10-15]\n" +
+                case "n":
+                    System.out.println("[Plains : Levels 1-5]\n" +
+                            "[Dark Forest: Levels 5-10]\n" +
+                            "[Abandoned Castle : Levels 10-15]\n" +
                             "[Island : Levels 15-20]\n" +
                             "[Swamp : Levels 20+]\n"
                     );
                     break;
-                case "exit":
+                case "x":
                     System.out.println("You decide not to travel");
                     myCharacter.setLocation("mainMenu");
                     break;
@@ -148,10 +156,10 @@ public class Event {
         System.out.println("What would you like to do?");
         Scanner myInput = new Scanner(System.in);
         while (myCharacter.getLocation().equals(currentLocation)) {
-            System.out.println("[Explore][Inventory][Leave]");
+            System.out.println("[E]xplore|[I]nventory|e[X]it|");
             String choice = myInput.next();
             switch (choice.toLowerCase()) {
-                case "explore":
+                case "e":
                     System.out.println("You explore.");
                     generateRandom();
                     if (generateRandom() <= 2) {
@@ -159,10 +167,10 @@ public class Event {
                     } else
                         enterBattle(myCharacter);
                     break;
-                case "inventory":
+                case "i":
                     inInventory(myCharacter);
                     break;
-                case "leave":
+                case "x":
                     System.out.println("You decide to leave");
                     myCharacter.setLocation("travel");
                     break;
@@ -177,13 +185,25 @@ public class Event {
         Random randomGold = new Random();
         switch (currentLocation){
             case "plains":
-                int foundGold = randomGold.nextInt(10);
+                int foundGold = randomGold.nextInt(10) + 1;
                 myCharacter.setGold(myCharacter.getGold() + foundGold);
                 System.out.println("You discover " + foundGold + " gold!");
                 System.out.println("Total : " + myCharacter.getGold());
                 break;
             case "forest":
-                foundGold = randomGold.nextInt(25);
+                foundGold = randomGold.nextInt(25) + 10;
+                myCharacter.setGold(myCharacter.getGold() + foundGold);
+                System.out.println("You discover " + foundGold + " gold!");
+                System.out.println("Total : " + myCharacter.getGold());
+                break;
+            case "castle":
+                foundGold = randomGold.nextInt(33) + 12;
+                myCharacter.setGold(myCharacter.getGold() + foundGold);
+                System.out.println("You discover " + foundGold + " gold!");
+                System.out.println("Total : " + myCharacter.getGold());
+                break;
+            case "island":
+                foundGold = randomGold.nextInt(50) + 15;
                 myCharacter.setGold(myCharacter.getGold() + foundGold);
                 System.out.println("You discover " + foundGold + " gold!");
                 System.out.println("Total : " + myCharacter.getGold());
@@ -192,6 +212,7 @@ public class Event {
     }
     //Enters the shop and displays a list of items.
     public void enterShop(Character myCharacter) {
+
         myCharacter.setLocation("shop");
         System.out.println("Welcome to the shop!");
         System.out.println("What can I get you?");
@@ -206,7 +227,7 @@ public class Event {
                 case "potion":
                     if (myCharacter.getGold() >= Item.potion.getPrice()) {
                         System.out.println("You have purchased a Potion!");
-                        myCharacter.inventory.put(Item.potion.getName(), Item.potion);
+                        myCharacter.inventory.add(Item.potion);
                         Item.potion.setQuantity(Item.potion.getQuantity() + 1);
                         myCharacter.setGold(myCharacter.getGold() - Item.potion.getPrice());
                     } else {
@@ -216,7 +237,7 @@ public class Event {
                 case "elixir":
                     if (myCharacter.getGold() >= Item.elixir.getPrice()) {
                         System.out.println("You have purchased an Elixir!");
-                        myCharacter.inventory.put(Item.elixir.getName(), Item.elixir);
+                        myCharacter.inventory.add(Item.elixir);
                         Item.elixir.setQuantity(Item.elixir.getQuantity() + 1);
                         myCharacter.setGold(myCharacter.getGold() - Item.elixir.getPrice());
                     } else {
@@ -242,17 +263,31 @@ public class Event {
     //Generate random monster based on value
     //TODO - finish for each location. Verify that it's not modifying the original monster, and only a new instance of it.
     Monster generateMonster(Character myCharacter) {
-        Monster value = new Monster("test", 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        Monster value = new Monster("test", 0, 0, 0, 0, 0, 0, 0, 0, 0, Item.elixir);
         String location = myCharacter.getLocation();
+        Random generator = new Random();
             switch (location) {
-            case "plains":
-                Random generator = new Random();
-                int randomIndex = generator.nextInt(Plains.enemyList.size());
-                Monster monster = Plains.enemyList.get(randomIndex);
-                System.out.println(monster.getName());
-                return monster;
-            case "b":
-                System.out.println("ok");
+                case "plains":
+                    int randomIndex = generator.nextInt(Plains.enemyList.size());
+                    Monster monster = Plains.enemyList.get(randomIndex);
+                    System.out.println(monster.getName());
+                    return monster;
+                case "forest":
+                    int randomIndex2 = generator.nextInt(DarkForest.enemyList.size());
+                    Monster monster2 = DarkForest.enemyList.get(randomIndex2);
+                    System.out.println(monster2.getName());
+                    return monster2;
+                case "castle":
+                    int randomIndex3 = generator.nextInt(AbandonedCastle.enemyList.size());
+                    Monster monster3 = AbandonedCastle.enemyList.get(randomIndex3);
+                    System.out.println(monster3.getName());
+                    return monster3;
+                case "island":
+                    int randomIndex4 = generator.nextInt(Island.enemyList.size());
+                    Monster monster4 = Island.enemyList.get(randomIndex4);
+                    System.out.println(monster4.getName());
+                    return monster4;
+
         }
         return value;
     }
@@ -265,7 +300,7 @@ public class Event {
     }
 
     //Battle System 1.0
-    //TODO - Run system
+    //TODO - Run system, Item System
     public void fight(Character myCharacter, Monster currentMonster) {
         int currentMonsterHealth = currentMonster.getMaxHealth();
         String currentLocation = myCharacter.getLocation();
@@ -274,10 +309,10 @@ public class Event {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             System.out.println("What do you do?");
-            System.out.println("[Attack][Skill][Item][Run]");
+            System.out.println("[A]ttack|[S]kill|[I]tem|[R]un|");
             battleChoice = battleInput.next();
             switch (battleChoice.toLowerCase()) {
-                case "attack":
+                case "a":
                     System.out.println("You attack!");
                     int value = hitOrMiss();
                     if(value < 2){
@@ -292,13 +327,13 @@ public class Event {
                     attackBack(myCharacter, currentMonster);
                     }
                     break;
-                case "skill":
+                case "s":
                     getSkillChoice(myCharacter, currentMonster);
                     break;
-                case "item":
-                    System.out.println(myCharacter.inventory);
+                case "i":
+                    inInventory(myCharacter);
                     break;
-                case "run":
+                case "r":
                     System.out.println("coward");
                     myCharacter.setLocation(currentLocation);
                     break;
@@ -366,6 +401,12 @@ public class Event {
         System.out.println("Total EXP: " + myCharacter.getExp());
         System.out.println(currentMonster.getName() + " dropped " + currentMonster.getGold() + " gold!");
         myCharacter.setGold(myCharacter.getGold() + currentMonster.getGold());
+        myCharacter.inventory.add(currentMonster.getDropItem());
+        levelCheck(myCharacter);
+        int ifDrop = generateRandom();
+        if(ifDrop < 3){
+        System.out.println("The " + currentMonster + " dropped " + currentMonster.getDropItem() + "!");
+        }
         myCharacter.setLocation(currentLocation);
     }
 
@@ -375,19 +416,19 @@ public class Event {
         String menuChoice;
         Scanner menuInput = new Scanner(System.in);
         while(myCharacter.getLocation().equals("mainMenu")){
-        System.out.println("[Travel][Shop][Inventory][Stats]");
+        System.out.println("[T]ravel|[S]hop|[I]nventory|St[A]ts|");
         menuChoice = menuInput.next();
         switch (menuChoice.toLowerCase()) {
-            case "travel":
+            case "t":
                 travel(myCharacter);
                 break;
-            case "shop":
+            case "s":
                 enterShop(myCharacter);
                 break;
-            case "inventory":
+            case "i":
                 inInventory(myCharacter);
                 break;
-            case "stats":
+            case "a":
                 viewStats(myCharacter);
                 break;
             default:
@@ -400,21 +441,44 @@ public class Event {
         System.out.println(myCharacter.inventory);
         System.out.println("Gold : " + myCharacter.getGold());
         System.out.println("What would you like to do?");
-        System.out.println("[Equip][Exit]");
+        System.out.println("[E]quip|[U]se|e[X]it|");
         String invChoice;
         Scanner menuInput = new Scanner(System.in);
         invChoice = menuInput.next();
         switch(invChoice.toLowerCase()){
-            case "equip":
+            case "e":
                 equipMenu(myCharacter);
                 break;
-            case "exit":
+            case "u":
+                useMenu(myCharacter);
+                break;
+            case "x":
                 System.out.println("You leave.");
                 break;
             default:
                 System.out.println("Please select a valid option.");
         }
 
+    }
+
+    public void useMenu(Character myCharacter){
+        String useChoice;
+        System.out.println(myCharacter.inventory);
+        System.out.println("What item would you like to use?");
+        System.out.println("[P]otion|[E]lixir|e[X]it|");
+        Scanner menuInput = new Scanner(System.in);
+        useChoice = menuInput.next();
+        switch(useChoice.toLowerCase()){
+            case "p":
+                usePotion(myCharacter);
+                break;
+            case "e":
+                useElixir(myCharacter);
+                break;
+            case "x":
+                System.out.println("You exit.");
+                break;
+        }
     }
     //Equip Menu 1.0 WIP
     public void equipMenu(Character myCharacter){
@@ -432,25 +496,53 @@ public class Event {
         }
     }
     //equip armor by choice WIP
-    //TODO - quantity
+    //TODO - quantity, change to display inventory, add armor based on number?
     public void equipArmor(Character myCharacter){
         String armorChoice;
         Scanner menuInput = new Scanner(System.in);
         armorChoice = menuInput.next();
         System.out.println("Please type the name of the armor you'd like to equip.");
-        if(myCharacter.inventory.containsKey(armorChoice)){
-            Item armorItem = myCharacter.inventory.get(armorChoice);
-            int checkAmount = armorItem.getQuantity();
-            if(checkAmount > 0) {
-                //armorItem.quantity -= 1;
-                equipMyArmor(armorItem);
+        int inventoryLength = myCharacter.inventory.size();
+        for (int i = 0; i < inventoryLength; i++) {
+            if (armorChoice.equals(myCharacter.inventory.get(i).getName())) {
+                Item armorItem = myCharacter.inventory.get(i);
+                int checkAmount = armorItem.getQuantity();
+                if (checkAmount > 0) {
+                    armorItem.setQuantity(armorItem.getQuantity() - 1);
+                    equipMyArmor(armorItem);
+                } else {
+                    System.out.println("You don't have any!");
+                }
             }
-            else
-            {
-            System.out.println("You don't have any!");
-            }
+        }}
+
+    /*public Item findInInventory(Character myCharacter, String menuChoice){
+        boolean done = false;
+        Item result;
+        while (!done) {
+            System.out.println ("Please enter a name:");
+            String searchName = input.nextLine();
+            if (searchName.equals("DONE")) {
+                done = true;
+            } else {
+                System.out.println ("Please enter a gender:");
+                String searchGender = input.nextLine();
+                // Search the ArrayList.
+                for (YourObject item: nameList) {
+                    // See if the gender is in the ArrayList
+                    if (searchGender.equals(item.getGender())) {
+                        // See if the name matches the gender in the ArrayList
+                        if (searchName.equals(item.getName())) {
+                            result = item;
+
+    }*/
+
+    public void levelCheck(Character myCharacter){
+        if(myCharacter.getExp() >= myCharacter.getExpLevel()){
+            levelUP(myCharacter);
         }
     }
+
 
     public void viewStats(Character myCharacter) {
         System.out.println("Class: " + myCharacter.getCharClass());
@@ -471,6 +563,8 @@ public class Event {
             case "knight":
                 myCharacter.setMaxHealth((int) Math.round(myCharacter.getMaxHealth() * 1.65));
                 myCharacter.setDefense((int) Math.round(myCharacter.getDefense() * 1.25));
+                myCharacter.setExpLevel((int) Math.round(myCharacter.getExpLevel() * 1.5));
+                myCharacter.setExp(0);
                 myCharacter.setLevel(myCharacter.getLevel() + 1);
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.25));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.15));
@@ -479,6 +573,8 @@ public class Event {
             case "ranger":
                 myCharacter.setMaxHealth((int) Math.round(myCharacter.getMaxHealth() * 1.45));
                 myCharacter.setDefense((int) Math.round(myCharacter.getDefense() * 1.15));
+                myCharacter.setExpLevel((int) Math.round(myCharacter.getExpLevel() * 1.5));
+                myCharacter.setExp(0);
                 myCharacter.setLevel(myCharacter.getLevel() + 1);
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.45));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.25));
@@ -487,6 +583,8 @@ public class Event {
             case "wizard":
                 myCharacter.setMaxHealth((int) Math.round(myCharacter.getMaxHealth() * 1.25));
                 myCharacter.setDefense((int) Math.round(myCharacter.getDefense() * 1.10));
+                myCharacter.setExpLevel((int) Math.round(myCharacter.getExpLevel() * 1.5));
+                myCharacter.setExp(0);
                 myCharacter.setLevel(myCharacter.getLevel() + 1);
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.65));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.50));
@@ -495,6 +593,8 @@ public class Event {
             case "druid":
                 myCharacter.setMaxHealth((int) Math.round(myCharacter.getMaxHealth() * 1.50));
                 myCharacter.setDefense((int) Math.round(myCharacter.getDefense() * 1.20));
+                myCharacter.setExpLevel((int) Math.round(myCharacter.getExpLevel() * 1.5));
+                myCharacter.setExp(0);
                 myCharacter.setLevel(myCharacter.getLevel() + 1);
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.30));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.30));
@@ -503,6 +603,8 @@ public class Event {
             case "priest":
                 myCharacter.setMaxHealth((int) Math.round(myCharacter.getMaxHealth() * 1.40));
                 myCharacter.setDefense((int) Math.round(myCharacter.getDefense() * 1.15));
+                myCharacter.setExpLevel((int) Math.round(myCharacter.getExpLevel() * 1.5));
+                myCharacter.setExp(0);
                 myCharacter.setLevel(myCharacter.getLevel() + 1);
                 myCharacter.setPower((int) Math.round(myCharacter.getPower() * 1.10));
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.45));

@@ -3,24 +3,40 @@ package Creatures; /**
  */
 
 
+import Items.Accessory;
 import Items.Armor;
 import Items.Item;
 import Items.Weapon;
 import Skills.Skill;
+import javafx.fxml.FXML;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.*;
+import java.util.List;
 
 public class Character extends Creature {
 
 //Defines variables for the character
+    private TextArea textArea;
     public String location;
     protected String gender;
     protected String charClass;
     protected Weapon myWeapon;
     protected Armor myArmor;
+    protected int expLevel;
+    protected Accessory myAccessory;
     public List<Skill> skills = new ArrayList<>();
-    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0, 0);
-    public Map<String, Item> inventory = new HashMap<>();
+    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0,0, 0);
+    public static List<Item> getInventory() {
+        return inventory;
+    }
+    public static void setInventory(List<Item> inventory) {
+        Character.inventory = inventory;
+    }
+    public static List<Item> inventory = new ArrayList<>();
 
     /**
      *
@@ -38,10 +54,11 @@ public class Character extends Creature {
      * @param gold current gold carried by Creatures.Character
      */
 //defines the Creatures.Character class with his//hers arguments
-    public Character(String name, String gender, String myClass, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold) {
+    public Character(String name, String gender, String myClass, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int expLevel, int gold) {
         super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
         this.gender = gender;
         this.charClass = myClass;
+        this.expLevel = expLevel;
 }
 
 
@@ -61,6 +78,14 @@ public class Character extends Creature {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public int getExpLevel() {
+        return expLevel;
+    }
+
+    public void setExpLevel(int expLevel) {
+        this.expLevel = expLevel;
     }
 
     public String getCharClass() {
@@ -176,15 +201,20 @@ public class Character extends Creature {
     }
 
 
+
+
     //</editor-fold>
 
     //ChooseName method for character
     public void chooseName(){
-        Scanner inputName = new Scanner( System.in );
-            System.out.print("Please name your Character!");
+            Scanner inputName = new Scanner( System.in );
+            System.out.println("Please name your Character!");
             name = inputName.next();
             System.out.println("Your Character has been named " + name);
+
+
     }
+
     //TODO - MAKE CLASSES OBJECTS INSTEAD OF STRINGS
 //ChooseClass method for character
     public void chooseClass() {
@@ -207,6 +237,7 @@ public class Character extends Creature {
                 power = 80;
                 defense = 15;
                 maxMana = 25;
+                expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.doubleSlash);
                 equipMyWeapon(Weapon.knightSword);
@@ -219,6 +250,7 @@ public class Character extends Creature {
                 power = 95;
                 defense = 8;
                 maxMana = 50;
+                expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.triShot);
                 equipMyWeapon(Weapon.rangerBow);
@@ -231,6 +263,7 @@ public class Character extends Creature {
                 power = 120;
                 defense = 2;
                 maxMana = 100;
+                expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.fireBall);
                 equipMyWeapon(Weapon.wizardStaff);
@@ -243,6 +276,7 @@ public class Character extends Creature {
                 power = 85;
                 defense = 8;
                 maxMana = 80;
+                expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.death);
                 equipMyWeapon(Weapon.druidClaws);
@@ -255,6 +289,7 @@ public class Character extends Creature {
                 power = 105;
                 defense = 4;
                 maxMana = 90;
+                expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.cure);
                 equipMyWeapon(Weapon.priestStaff);

@@ -3,7 +3,6 @@ package Locations;
 import Creatures.Monster;
 import Items.Item;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +26,10 @@ import java.util.List;
 
 //Adds monsters to the Locations.Plains random encounters
     {
-        enemyList.add(Monster.goblin);
-        enemyList.add(Monster.barbarian);
-        enemyList.add(Monster.loneWolf);
-        enemyList.add(Monster.hyena);
+        enemyList.add(Monster.seaSerpent);
+        enemyList.add(Monster.tropicalWarrior);
+        enemyList.add(Monster.giantCrab);
+        enemyList.add(Monster.skeletalParrot);
     }
 
     //<editor-fold desc="Getters and Setters">
@@ -58,5 +57,5 @@ import java.util.List;
         this.enemyList = enemyList;
 
     }
-    protected static Island Plains = new Island("Plains", 1, enemyList, dropList);
+    protected static Island Island = new Island("Island", 15, enemyList, dropList);
 }

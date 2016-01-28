@@ -42,26 +42,26 @@ public class Armor extends Item {
     //creates hashmap of armor
     Map<String,Armor> mapOfArmor = new HashMap<>();
 //lists all armor to add to hashmap
-    public static Armor woodArmor = new Armor("Wood Items.Armor", 45, 10, 10, 25);
-    public static Armor knightArmor = new Armor("Knight's Items.Armor", 0, 3, 1, 5);
-    public static Armor rangerArmor = new Armor("Ranger's Items.Armor", 0, 1, 1, 3);
+    public static Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
+    public static Armor knightArmor = new Armor("Knight's Armor", 0, 3, 1, 5);
+    public static Armor rangerArmor = new Armor("Ranger's Armor", 0, 1, 1, 3);
     public static Armor wizardArmor = new Armor("Wizard's Robes", 0, 1, 1, 2);
-    public static Armor druidArmor = new Armor("Druid's Items.Armor", 0, 3, 1, 4);
+    public static Armor druidArmor = new Armor("Druid's Armor", 0, 3, 1, 4);
     public static Armor priestArmor = new Armor("Priest's Robes", 0, 0, 1, 9);
-    public static Armor silverArmor = new Armor("Silver Items.Armor", 120, 35, 50, 60);
-    public static Armor goldArmor = new Armor("Gold Items.Armor", 425, 80, 50, 125);
-    public static Armor mythrilArmor = new Armor("Mythril Items.Armor", 800, 155, 300, 225);
-    public static Armor rubyArmor = new Armor("Ruby Items.Armor", 1400, 355, 625, 450);
-    public static Armor samuraiArmor = new Armor("Samurai Items.Armor", 1600, 300, 400, 600);
+    public static Armor silverArmor = new Armor("Silver Armor", 120, 35, 50, 60);
+    public static Armor goldArmor = new Armor("Gold Armor", 425, 80, 50, 125);
+    public static Armor mythrilArmor = new Armor("Mythril Armor", 800, 155, 300, 225);
+    public static Armor rubyArmor = new Armor("Ruby Armor", 1400, 355, 625, 450);
+    public static Armor samuraiArmor = new Armor("Samurai Armor", 1600, 300, 400, 600);
 
 //adds Items.Armor to mapOfArmor. (To grab use .get())
      {
-        mapOfArmor.put("Wood Items.Armor", woodArmor);
-        mapOfArmor.put("Silver Items.Armor", silverArmor);
-        mapOfArmor.put("Gold Items.Armor", goldArmor);
-        mapOfArmor.put("Mythril Items.Armor", mythrilArmor);
-        mapOfArmor.put("Ruby Items.Armor", rubyArmor);
-        mapOfArmor.put("Samurai Items.Armor", samuraiArmor);
+        mapOfArmor.put("Wood Armor", woodArmor);
+        mapOfArmor.put("Silver Armor", silverArmor);
+        mapOfArmor.put("Gold Armor", goldArmor);
+        mapOfArmor.put("Mythril Armor", mythrilArmor);
+        mapOfArmor.put("Ruby Armor", rubyArmor);
+        mapOfArmor.put("Samurai Armor", samuraiArmor);
     }
 
 //paramater descriptions

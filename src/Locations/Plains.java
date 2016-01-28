@@ -28,7 +28,9 @@ import java.util.List;
 //Adds monsters to the Locations.Plains random encounters
     {
         enemyList.add(Monster.goblin);
-        enemyList.add(Monster.bat);
+        enemyList.add(Monster.barbarian);
+        enemyList.add(Monster.loneWolf);
+        enemyList.add(Monster.hyena);
     }
 
     //<editor-fold desc="Getters and Setters">
@@ -56,5 +58,5 @@ import java.util.List;
         this.enemyList = enemyList;
 
     }
-    protected static Plains Plains = new Plains("Locations.Plains", 1, enemyList, dropList);
+    protected static Plains Plains = new Plains("Plains", 1, enemyList, dropList);
 }

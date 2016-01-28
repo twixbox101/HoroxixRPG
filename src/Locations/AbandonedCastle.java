@@ -28,6 +28,8 @@ import java.util.List;
     {
         enemyList.add(Monster.troll);
         enemyList.add(Monster.skeleton);
+        enemyList.add(Monster.undeadGuard);
+        enemyList.add(Monster.wanderingSpirit);
     }
 
     //<editor-fold desc="Getters and Setters">
@@ -55,5 +57,5 @@ import java.util.List;
         this.enemyList = enemyList;
 
     }
-    protected static AbandonedCastle Forest = new AbandonedCastle("Forest", 5, enemyList, dropList);
+    protected static AbandonedCastle AbandonedCastle = new AbandonedCastle("Abandoned Castle", 10, enemyList, dropList);
 }

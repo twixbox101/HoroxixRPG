@@ -57,5 +57,5 @@ import java.util.List;
         this.enemyList = enemyList;
 
     }
-    protected static DarkForest Forest = new DarkForest("DarkForest", 5, enemyList, dropList);
+    protected static DarkForest Forest = new DarkForest("Dark Forest", 5, enemyList, dropList);
 }

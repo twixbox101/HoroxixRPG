@@ -40,46 +40,33 @@ public class Accessory extends Item {
     //</editor-fold>
 
     //creates hashmap of armor
-    Map<String, Accessory> mapOfArmor = new HashMap<>();
+    Map<String, Accessory> mapOfAccessories = new HashMap<>();
 //lists all armor to add to hashmap
-    public static Accessory woodArmor = new Accessory("Wood Items.Armor", 45, 10, 10, 25);
-    public static Accessory knightArmor = new Accessory("Knight's Items.Armor", 0, 3, 1, 5);
-    public static Accessory rangerArmor = new Accessory("Ranger's Items.Armor", 0, 1, 1, 3);
-    public static Accessory wizardArmor = new Accessory("Wizard's Robes", 0, 1, 1, 2);
-    public static Accessory druidArmor = new Accessory("Druid's Items.Armor", 0, 3, 1, 4);
-    public static Accessory priestArmor = new Accessory("Priest's Robes", 0, 0, 1, 9);
-    public static Accessory silverArmor = new Accessory("Silver Items.Armor", 120, 35, 50, 60);
-    public static Accessory goldArmor = new Accessory("Gold Items.Armor", 425, 80, 50, 125);
-    public static Accessory mythrilArmor = new Accessory("Mythril Items.Armor", 800, 155, 300, 225);
-    public static Accessory rubyArmor = new Accessory("Ruby Items.Armor", 1400, 355, 625, 450);
-    public static Accessory samuraiArmor = new Accessory("Samurai Items.Armor", 1600, 300, 400, 600);
+    public static Accessory ironWristBand = new Accessory("Iron Wristband", 45, 10, 10, 25);
+
 
 //adds Items.Armor to mapOfArmor. (To grab use .get())
      {
-        mapOfArmor.put("Wood Items.Armor", woodArmor);
-        mapOfArmor.put("Silver Items.Armor", silverArmor);
-        mapOfArmor.put("Gold Items.Armor", goldArmor);
-        mapOfArmor.put("Mythril Items.Armor", mythrilArmor);
-        mapOfArmor.put("Ruby Items.Armor", rubyArmor);
-        mapOfArmor.put("Samurai Items.Armor", samuraiArmor);
+        mapOfAccessories.put("Iron Wristband", ironWristBand);
+
     }
 
 //paramater descriptions
     /**
-     * @param armorName name of the Items.Armor.
-     * @param armorPrice price of the Items.Armor for the store.
-     * @param armorDefense defense value of the Items.Armor.
-     * @param armorSell sell value of the Items.Armor.
-     * @param armorHealth added currentHealth value of the Items.Armor.
+     * @param accName name of the Items.Armor.
+     * @param accPrice price of the Items.Armor for the store.
+     * @param accDefense defense value of the Items.Armor.
+     * @param accSell sell value of the Items.Armor.
+     * @param accHealth added currentHealth value of the Items.Armor.
      */
 //defines armor and it's parameters
-    public Accessory(String armorName, int armorPrice, int armorDefense, int armorSell, int armorHealth){
-        super(armorName,armorPrice, 0, armorSell, 0);
-        price = armorPrice;
-        name = armorName;
-        sell = armorSell;
-        defense = armorDefense;
-        health = armorHealth;
+    public Accessory(String accName, int accPrice, int accDefense, int accSell, int accHealth){
+        super(accName,accPrice, 0, accSell, 0);
+        price = accPrice;
+        name = accName;
+        sell = accSell;
+        defense = accDefense;
+        health = accHealth;
 
     }
 //returns name of armor

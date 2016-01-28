@@ -1,9 +1,12 @@
 package Creatures;
 
+import Items.Item;
+
 /**
  Created by Holden Johnson on 10/24/2015.
  */
 public class Monster extends Creature {
+    private Item dropItem;
 
     /**
      *
@@ -19,17 +22,29 @@ public class Monster extends Creature {
      * @param gold gold value obtained from defeating the monster
      */
 
-    public Monster(String name, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold){
+    public Monster(String name, int level, int currentHealth, int maxHealth, int currentMana, int maxMana, int power, int defense, int exp, int gold, Item dropItem){
         super(name, level, currentHealth, maxHealth, currentMana, maxMana, power, defense, exp, gold);
+        this.dropItem = dropItem;
     }
     //Creating Creatures.Monster instances
-    public static Monster currentMonster = new Monster("",0,0,1,0,0,0,0,0,1);
-    public static Monster goblin = new Monster("Goblin",2,150,150,0,0,30,5,20,5);
-    public static Monster bat = new Monster("Bat",1,80,80,5,5,40,2,10,3);
-    public static Monster troll = new Monster("Troll",8,300,300,25,25,90,45,80,25);
-    public static Monster skeleton = new Monster("Skeleton",10,250,250,50,50,120,10,75,30);
-    public static Monster barbarian = new Monster("Barbarian",15,750,750,100,100,500,100,200,75);
-    public static Monster dragon = new Monster("Dragon",25,1000,1000,500,500,800,250,500,250);
+    public static Monster currentMonster = new Monster("",0,0,1,0,0,0,0,0,1, Item.elixir);
+    public static Monster goblin = new Monster("Goblin",1,75,75,0,0,25,2,20,5, Item.potion);
+    public static Monster bat = new Monster("Bat",1,80,80,5,5,40,2,10,3, Item.elixir);
+    public static Monster troll = new Monster("Troll",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster wanderingSpirit = new Monster("Wandering Spirit",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster darkElf = new Monster("Dark Elf",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster pixie = new Monster("Pixie",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster seaSerpent = new Monster("Sea Serpent",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster giantCrab = new Monster("Giant Crab",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster tropicalWarrior = new Monster("Tropical Warrior",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster skeletalParrot = new Monster("Skeletal Parrot",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster centaur = new Monster("Centaur",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster undeadGuard = new Monster("Undead Guard",8,300,300,25,25,90,45,80,25, Item.elixir);
+    public static Monster hyena = new Monster("Hyena",3,130,130,2,2,60,4,35,25, Item.luckyCharm);
+    public static Monster loneWolf = new Monster("Lone Wolf",2,125,125,5,5,55,2,30,10, Item.elixir);
+    public static Monster skeleton = new Monster("Skeleton",10,250,250,50,50,120,10,75,30, Item.elixir);
+    public static Monster barbarian = new Monster("Barbarian",2,150,150,25,25,45,5,35,5, Item.elixir);
+    public static Monster dragon = new Monster("Dragon",25,1000,1000,500,500,800,250,500,250, Item.elixir);
 
     //<editor-fold desc="Getters and Setters">
     public int getCurrentHealth() {
@@ -64,6 +79,14 @@ public class Monster extends Creature {
         this.exp = exp;
     }
 
+    public Item getDropItem() {
+        return dropItem;
+    }
+
+    public void setDropItem(Item dropItem) {
+        this.dropItem = dropItem;
+    }
+
     public int getMaxHealth() {
         return maxHealth;
     }
@@ -85,11 +108,6 @@ public class Monster extends Creature {
     public void setGold(int gold) { this.gold = gold; }
 
     //</editor-fold>
-
-
-
-
-
 
     //Returns actual name of monster
     public String toString() {
