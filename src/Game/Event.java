@@ -6,14 +6,10 @@ import Creatures.Monster;
 import Items.Armor;
 import Items.Item;
 import Items.Weapon;
-import Locations.AbandonedCastle;
-import Locations.DarkForest;
-import Locations.Island;
-import Locations.Plains;
+import Locations.*;
 import Skills.Skill;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Event {
 
@@ -25,13 +21,47 @@ public class Event {
     Monster monsterHealth;
     String travelChoice;
 
+    List<Location> locations = new ArrayList<>();
 
-    public Event() {
+    //MainMenu 1.0 WIP
+    public void mainMenu(Character myCharacter) {
+        String menuChoice;
+        Scanner menuInput = new Scanner(System.in);
+        while(myCharacter.getLocation().equals("mainMenu")){
+            System.out.println("[T]ravel|[S]hop|[I]nventory|St[A]ts|");
+            menuChoice = menuInput.next();
+            switch (menuChoice.toLowerCase()) {
+                case "t":
+                    travel(myCharacter);
+                    break;
+                case "s":
+                    Shop shop = new Shop();
+                    shop.enterShop(myCharacter);
+                    break;
+                case "i":
+                    inInventory(myCharacter);
+                    break;
+                case "a":
+                    viewStats(myCharacter);
+                    break;
+                default:
+                    System.out.println("Please select a valid option.");
+            }
+        }
     }
 
-    //uses a potion to restore 30 currentHealth!
-    //TODO - // FIXME: 1/22/2016
 
+//    public Event() {
+//        initLocation();
+//    }
+
+//    public void initLocation(){
+//        Location forest = new Location("forest");
+//    }
+
+
+
+    //uses a potion to restore 30 currentHealth!
     public void usePotion(Character myCharacter) {
         int inventoryLength = myCharacter.inventory.size();
         for (int i = 0; i < inventoryLength; i++)
@@ -47,10 +77,7 @@ public class Event {
                 System.out.println("You don't have any elixirs!");
             }
     }
-
-
     //Uses an elixir to heal 20 mana.
-    //TODO - fix
     public void useElixir(Character myCharacter) {
         int inventoryLength = myCharacter.inventory.size();
         for (int i = 0; i < inventoryLength; i++)
@@ -70,7 +97,6 @@ public class Event {
 
     //Adds item to My Creatures.Character's Inventories.Inventory
     public void addItem(Item myItem, Character myCharacter) {
-
         if (myCharacter.inventory.contains(myItem)) {
             myItem.setQuantity(+1);
         } else {
@@ -210,49 +236,6 @@ public class Event {
                 break;
         }
     }
-    //Enters the shop and displays a list of items.
-    public void enterShop(Character myCharacter) {
-
-        myCharacter.setLocation("shop");
-        System.out.println("Welcome to the shop!");
-        System.out.println("What can I get you?");
-        for (Map.Entry<Item, Integer> entry : Item.mapOfItems.entrySet()) {
-            Item key = entry.getKey();
-            System.out.println(key + " : " + entry.getValue());
-        }
-        while ("shop".equals(myCharacter.getLocation())) {
-            Scanner myInput = new Scanner(System.in);
-            shopChoice = myInput.next();
-            switch (shopChoice.toLowerCase()) {
-                case "potion":
-                    if (myCharacter.getGold() >= Item.potion.getPrice()) {
-                        System.out.println("You have purchased a Potion!");
-                        myCharacter.inventory.add(Item.potion);
-                        Item.potion.setQuantity(Item.potion.getQuantity() + 1);
-                        myCharacter.setGold(myCharacter.getGold() - Item.potion.getPrice());
-                    } else {
-                        System.out.println("You don't have enough gold!");
-                    }
-                    break;
-                case "elixir":
-                    if (myCharacter.getGold() >= Item.elixir.getPrice()) {
-                        System.out.println("You have purchased an Elixir!");
-                        myCharacter.inventory.add(Item.elixir);
-                        Item.elixir.setQuantity(Item.elixir.getQuantity() + 1);
-                        myCharacter.setGold(myCharacter.getGold() - Item.elixir.getPrice());
-                    } else {
-                        System.out.println("You don't have enough gold!");
-                    }
-                    break;
-                case "exit":
-                    System.out.println("You leave the shop");
-                    myCharacter.setLocation("mainMenu");
-                    break;
-                default:
-                    System.out.println("Please select a valid option.");
-            }
-        }
-    }
 
     //Generate random number
     public int generateRandom() {
@@ -260,41 +243,12 @@ public class Event {
         return randomNumber.nextInt(6);
     }
 
-    //Generate random monster based on value
-    //TODO - finish for each location. Verify that it's not modifying the original monster, and only a new instance of it.
-    Monster generateMonster(Character myCharacter) {
-        Monster value = new Monster("test", 0, 0, 0, 0, 0, 0, 0, 0, 0, Item.elixir);
-        String location = myCharacter.getLocation();
-        Random generator = new Random();
-            switch (location) {
-                case "plains":
-                    int randomIndex = generator.nextInt(Plains.enemyList.size());
-                    Monster monster = Plains.enemyList.get(randomIndex);
-                    System.out.println(monster.getName());
-                    return monster;
-                case "forest":
-                    int randomIndex2 = generator.nextInt(DarkForest.enemyList.size());
-                    Monster monster2 = DarkForest.enemyList.get(randomIndex2);
-                    System.out.println(monster2.getName());
-                    return monster2;
-                case "castle":
-                    int randomIndex3 = generator.nextInt(AbandonedCastle.enemyList.size());
-                    Monster monster3 = AbandonedCastle.enemyList.get(randomIndex3);
-                    System.out.println(monster3.getName());
-                    return monster3;
-                case "island":
-                    int randomIndex4 = generator.nextInt(Island.enemyList.size());
-                    Monster monster4 = Island.enemyList.get(randomIndex4);
-                    System.out.println(monster4.getName());
-                    return monster4;
-
-        }
-        return value;
-    }
 
     //Enters Battle, generates the monster that the character fights
     public void enterBattle(Character myCharacter) {
-        Monster currentMonster = generateMonster(myCharacter);
+        Monster monster = new Monster();
+        Monster currentMonster = monster.generateMonster(myCharacter);
+        currentMonster.setCurrentHealth(currentMonster.getMaxHealth());
         System.out.println("You have encountered a " + currentMonster + "!");
         fight(myCharacter, currentMonster);
     }
@@ -302,10 +256,10 @@ public class Event {
     //Battle System 1.0
     //TODO - Run system, Item System
     public void fight(Character myCharacter, Monster currentMonster) {
-        int currentMonsterHealth = currentMonster.getMaxHealth();
         String currentLocation = myCharacter.getLocation();
+        boolean run = false;
         myCharacter.setLocation("fight");
-        while (myCharacter.getCurrentHealth() >= 1 && currentMonsterHealth >= 1 && !myCharacter.getLocation().equals(currentLocation)) {
+        while (myCharacter.getCurrentHealth() >= 1 && currentMonster.getCurrentHealth() >= 1 && !myCharacter.getLocation().equals(currentLocation)) {
             String battleChoice;
             Scanner battleInput = new Scanner(System.in);
             System.out.println("What do you do?");
@@ -320,15 +274,18 @@ public class Event {
                     else {
                         int damage =  attackDamage(myCharacter, currentMonster);
                         System.out.println("Your attack deals " + damage + " damage!");
-                        currentMonsterHealth -= damage;
-                        System.out.println(currentMonster.getName() + " health remaining: " + currentMonsterHealth + "/ " + currentMonster.getMaxHealth());
+                        currentMonster.setCurrentHealth(currentMonster.getCurrentHealth() - damage);
+                        System.out.println(currentMonster.getName() + " health remaining: " + currentMonster.getCurrentHealth() + "/ " + currentMonster.getMaxHealth());
                     }
-                    if(currentMonsterHealth > 0){
+                    if(currentMonster.getCurrentHealth() > 0){
                     attackBack(myCharacter, currentMonster);
                     }
                     break;
                 case "s":
                     getSkillChoice(myCharacter, currentMonster);
+                    if(currentMonster.getCurrentHealth() > 0){
+                        attackBack(myCharacter, currentMonster);
+                    }
                     break;
                 case "i":
                     inInventory(myCharacter);
@@ -336,13 +293,15 @@ public class Event {
                 case "r":
                     System.out.println("coward");
                     myCharacter.setLocation(currentLocation);
+                    run = true;
                     break;
                 default:
                     System.out.println("Select an action!");
                     break;
             }
         }
-        victory(myCharacter, currentMonster, currentLocation);
+        if(!run){
+        victory(myCharacter, currentMonster, currentLocation);}
     }
 
     //Deal damage
@@ -411,31 +370,7 @@ public class Event {
     }
 
 
-    //MainMenu 1.0 WIP
-    public void mainMenu(Character myCharacter) {
-        String menuChoice;
-        Scanner menuInput = new Scanner(System.in);
-        while(myCharacter.getLocation().equals("mainMenu")){
-        System.out.println("[T]ravel|[S]hop|[I]nventory|St[A]ts|");
-        menuChoice = menuInput.next();
-        switch (menuChoice.toLowerCase()) {
-            case "t":
-                travel(myCharacter);
-                break;
-            case "s":
-                enterShop(myCharacter);
-                break;
-            case "i":
-                inInventory(myCharacter);
-                break;
-            case "a":
-                viewStats(myCharacter);
-                break;
-            default:
-                System.out.println("Please select a valid option.");
-        }
-        }
-    }
+
     //Inventories.Inventory 1.0 WIP
     public void inInventory(Character myCharacter){
         System.out.println(myCharacter.inventory);
@@ -547,8 +482,9 @@ public class Event {
     public void viewStats(Character myCharacter) {
         System.out.println("Class: " + myCharacter.getCharClass());
         System.out.println("Level: " + myCharacter.getLevel());
-        System.out.println("EXP: " + myCharacter.getExp());
+        System.out.println("EXP: " + myCharacter.getExp() + "/" + myCharacter.getExpLevel());
         System.out.println("Health: " + myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
+        System.out.println("Mana: " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
         System.out.println("Power: " + (myCharacter.getPower() + myCharacter.getMyWeapon().getPower()));
         System.out.println("Defense: " + (myCharacter.getDefense() + myCharacter.getMyArmor().getDefense()));
         System.out.println("Weapon: " + myCharacter.getMyWeapon());
@@ -610,6 +546,7 @@ public class Event {
                 myCharacter.setMaxMana((int) Math.round(myCharacter.getMaxMana() * 1.45));
                 myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
         }
+        System.out.println("Level: " + myCharacter.getLevel());
         Skill.skillCheck(myCharacter);
     }
     //Equips a weapon. change myWeapon to the weapon you want to equip.
@@ -624,25 +561,132 @@ public class Event {
         System.out.println("You have equipped " + myArmor);
     }
     //Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.
+    //TODO - calculate MANA costs
     public void useSkill(Character myCharacter, Skill skill, Monster currentMonster) {
         mySkill = skill;
         System.out.println("You use " + mySkill + "!");
-        if (mySkill.getHeal() > 0) {
-            myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() + (int) Math.round(mySkill.getHeal()));
-            if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
-                myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
-            }
-            System.out.println("Healed for " + mySkill.getHeal() + "!");
-            System.out.println(myCharacter.getCurrentHealth() + myCharacter.getMaxHealth());
+        Random random = new Random();
+        int value = random.nextInt(100);
+        switch(mySkill.getType()){
+            case "heal":
+                int healValue = mySkill.getHeal() * myCharacter.getPower();
+                myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() + healValue);
+                myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                if(myCharacter.getCurrentHealth() > myCharacter.getMaxHealth()) {
+                    myCharacter.setCurrentHealth(myCharacter.getMaxHealth());
+                }
+                System.out.println("Healed for " + healValue + "!");
+                System.out.println(myCharacter.getCurrentHealth() + "/" + myCharacter.getMaxHealth());
+                System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                break;
+            case "double":
+                if(value < mySkill.getAccuracy()) {
+                    currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - myCharacter.getPower() * 2 - currentMonster.getDefense()));
+                    int dealt = myCharacter.getPower() * 2 - currentMonster.getDefense();
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("Dealt " + dealt + " damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());}
+
+                else{
+                    System.out.println("Your skill missed!");
+                }
+                break;
+            case "triple":
+                if(value < mySkill.getAccuracy()) {
+                    currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - myCharacter.getPower() * 3 - currentMonster.getDefense()));
+                    int dealt2 = myCharacter.getPower() * 2 - currentMonster.getDefense();
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("Dealt " + dealt2 + " damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());}
+
+                else{
+                    System.out.println("Your skill missed!");
+                    break;
+                }
+            case "death":
+                if(value < mySkill.getAccuracy()) {
+                    System.out.println("Your skill hits!");
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    currentMonster.setCurrentHealth(0);
+                    System.out.println("Death Strikes!");
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                } else {
+                    System.out.println("Your skill missed!");
+                }
+                break;
+            case "self":
+                if(value < mySkill.getAccuracy()) {
+                    System.out.println("Your skill hits!");
+                    currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - myCharacter.getPower() * 4 - currentMonster.getDefense()));
+                    int dealt3 = myCharacter.getPower() * 4 - currentMonster.getDefense();
+                    myCharacter.setCurrentHealth((myCharacter.getCurrentHealth() - myCharacter.getPower() - 50));
+                    int selfDealt = myCharacter.getPower() - 50;
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("You deal " + dealt3 + " damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("The " + mySkill.getName() + " deals " + selfDealt + " damage to yourself!");
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                } else {
+                    System.out.println("Your skill missed!");
+                }
+                break;
+            case "healDamage":
+                if(value < mySkill.getAccuracy()) {
+                    System.out.println("Your skill hits!");
+                    int dealt3 = mySkill.getDamage() - currentMonster.getDefense();
+                    currentMonster.setCurrentHealth(currentMonster.getCurrentHealth() - mySkill.getDamage() - currentMonster.getDefense());
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("Dealt " + dealt3 + " damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("Healed for " + dealt3 + "!");
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                    myCharacter.setCurrentHealth(myCharacter.getCurrentHealth() + dealt3);
+
+                } else {
+                    System.out.println("Your skill missed!");
+                }
+                break;
+            case "crit":
+                if(value < mySkill.getAccuracy()) {
+                    System.out.println("Your skill hits!");
+                    currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - myCharacter.getPower() * 2 + value));
+                    int dealt4 = myCharacter.getPower() * 2 + value;
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("Dealt " + dealt4 + " critical damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                } else {
+                    System.out.println("Your skill missed!");
+                    break;
+                }
+            case "multi":
+                if(value < mySkill.getAccuracy()) {
+                    int multiHits = getMulti();
+                    System.out.println("Hits " + multiHits + " times!");
+                    int dealt5 = myCharacter.getPower() * multiHits - currentMonster.getDefense();
+                    currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - dealt5));
+                    myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
+                    System.out.println("Dealt " + dealt5 + " total damage!");
+                    System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                } else {
+                    System.out.println("Your skill missed!");
+                    break;
+                }
+                break;
+            case "buff":
+                break;
+
         }
-        else {
-            double newHealth;
-            newHealth = currentMonster.getCurrentHealth() - mySkill.getDamage() + currentMonster.getDefense();
-            currentMonster.setCurrentHealth((int) Math.round(newHealth));
-            double damageDealt = mySkill.getDamage() - currentMonster.getDefense();
-            System.out.println("Damage dealt: " + damageDealt + "!");
-            System.out.println(currentMonster.getCurrentHealth() + "/" + currentMonster.getMaxHealth());
-        }
+    }
+
+    public int getMulti(){
+        Random multi = new Random();
+        int value = multi.nextInt(5);
+        return value;
     }
     /*Asks to choose a skill. You input a skill name (currently a letter) and it will see if you have that in your
     skills.If it does, it executes. If not it will not execute. This currently only works for Knights. */
@@ -650,20 +694,83 @@ public class Event {
     public void getSkillChoice(Character myCharacter, Monster currentMonster) {
         Scanner inputChoice = new Scanner(System.in);
         System.out.println("Choose a skill!");
-        System.out.println("[1][2][3][4][5][Skill List]");
+        System.out.println("[1:" + myCharacter.skills.get(0) + "][2:" + myCharacter.skills.get(1) + "][3:" + myCharacter.skills.get(2) + "]" +
+                "[4:" + myCharacter.skills.get(3) + "][5:" + myCharacter.skills.get(4) + "][6:"  + myCharacter.skills.get(5) + "][S]kill List|");
         skillChoice = inputChoice.next();
-        if (skillChoice != null) {
-            if(myCharacter.getSkills().contains(Skill.doubleSlash.getName()) || skillChoice.equalsIgnoreCase("d")){
-                useSkill(myCharacter, Skill.doubleSlash, currentMonster);
-            }
-            else{
-                System.out.println("You don't have that skill!");
-            }
-        }
-        else{
-            System.out.println("Please select a skill.");
+        switch(skillChoice.toLowerCase()){
+            case "1":
+                System.out.println("You use the skill: " + myCharacter.skills.get(0));
+                useSkill(myCharacter, myCharacter.skills.get(0), currentMonster);
+                break;
+            case "2":
+                if(myCharacter.getLevel() < 5){
+                    System.out.println("You don't have that skill!");
+                }
+                else{
+                    System.out.println("You use the skill: " + myCharacter.skills.get(1));
+                    useSkill(myCharacter, myCharacter.skills.get(1), currentMonster);
+                }
+                break;
+            case "3":
+                if(myCharacter.getLevel() < 10){
+                    System.out.println("You don't have that skill!");
+                }
+                else{
+                    System.out.println("You use the skill: " + myCharacter.skills.get(2));
+                    useSkill(myCharacter, myCharacter.skills.get(2), currentMonster);
+                }
+                break;
+            case "4":
+                if(myCharacter.getLevel() < 15){
+                    System.out.println("You don't have that skill!");
+                }
+                else {
+                    System.out.println("You use the skill: " + myCharacter.skills.get(3));
+                    useSkill(myCharacter, myCharacter.skills.get(3), currentMonster);
+                }
+                break;
+            case "5":
+                if(myCharacter.getLevel() < 20){
+                    System.out.println("You don't have that skill!");
+                }
+                else {
+                    System.out.println("You use the skill: " + myCharacter.skills.get(4));
+                    useSkill(myCharacter, myCharacter.skills.get(4), currentMonster);
+                }
+                break;
+            case "6":
+                if(myCharacter.getLevel() < 25){
+                    System.out.println("You don't have that skill!");
+                }
+                else {
+                    System.out.println("You use the skill: " + myCharacter.skills.get(5));
+                    useSkill(myCharacter, myCharacter.skills.get(5), currentMonster);
+                }
+                break;
+            case "s":
+                viewSkills(myCharacter);
         }
     }
+
+    public void viewSkills(Character myCharacter){
+        System.out.println("[1] - " + myCharacter.skills.get(0));
+        if(myCharacter.getLevel() >= 5){
+            System.out.println("[2] - " + myCharacter.skills.get(1));
+        }
+        if(myCharacter.getLevel() >= 10){
+            System.out.println("[3] - " + myCharacter.skills.get(2));
+        }
+        if(myCharacter.getLevel() >= 15){
+            System.out.println("[4] - " + myCharacter.skills.get(3));
+        }
+        if(myCharacter.getLevel() >= 20){
+            System.out.println("[5] - " + myCharacter.skills.get(4));
+        }
+    }
+
+
+
+
     public static void main(String[] args) {
 
 

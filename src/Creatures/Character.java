@@ -20,7 +20,6 @@ import java.util.List;
 public class Character extends Creature {
 
 //Defines variables for the character
-    private TextArea textArea;
     public String location;
     protected String gender;
     protected String charClass;
@@ -29,14 +28,11 @@ public class Character extends Creature {
     protected int expLevel;
     protected Accessory myAccessory;
     public List<Skill> skills = new ArrayList<>();
-    public static Character myCharacter = new Character("", "", "", 1, 1, 1, 1, 1, 1, 0, 0,0, 0);
-    public static List<Item> getInventory() {
-        return inventory;
+    public static Character myCharacter = new Character();
+    public List<Item> inventory = new ArrayList<>();
+
+    public Character() {
     }
-    public static void setInventory(List<Item> inventory) {
-        Character.inventory = inventory;
-    }
-    public static List<Item> inventory = new ArrayList<>();
 
     /**
      *
@@ -240,6 +236,7 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.doubleSlash);
+                addUnkown();
                 equipMyWeapon(Weapon.knightSword);
                 equipMyArmor(Armor.knightArmor);
                 break;
@@ -253,6 +250,7 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.triShot);
+                addUnkown();
                 equipMyWeapon(Weapon.rangerBow);
                 equipMyArmor(Armor.rangerArmor);
                 break;
@@ -266,6 +264,7 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.fireBall);
+                addUnkown();
                 equipMyWeapon(Weapon.wizardStaff);
                 equipMyArmor(Armor.wizardArmor);
                 break;
@@ -279,6 +278,7 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.death);
+                addUnkown();
                 equipMyWeapon(Weapon.druidClaws);
                 equipMyArmor(Armor.druidArmor);
                 break;
@@ -292,10 +292,19 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.cure);
+                addUnkown();
                 equipMyWeapon(Weapon.priestStaff);
                 equipMyArmor(Armor.priestArmor);
                 break;
         }
+    }
+
+    public void addUnkown(){
+        skills.add(Skill.unknown);
+        skills.add(Skill.unknown);
+        skills.add(Skill.unknown);
+        skills.add(Skill.unknown);
+        skills.add(Skill.unknown);
     }
 // gets weapon
     public Weapon getWeapon(){

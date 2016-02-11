@@ -23,6 +23,8 @@ import java.util.List;
     }
 
     //Initiates the enemyList ArrayList
+
+    //TODO - init monsters to their various objects lists in Location.
     public static List<Monster> enemyList= new ArrayList<Monster>();
 
 //Adds monsters to the Locations.Plains random encounters

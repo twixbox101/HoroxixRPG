@@ -68,6 +68,8 @@ public class Item {
     public static Item expCoin = new Item("EXP Coin", 50, 20, 24, 0);
     public static Item powerGlove = new Item("Power Glove", 50, 20, 24, 0);
     public static Item ironCrown = new Item("Iron Crown", 50, 20, 24, 0);
+    public static Item wolfFur = new Item("Wolf Fur", 50, 0, 10, 0);
+    public static Item chippedTooth = new Item("Chipped Tooth", 50, 0, 20, 0);
     //adds Items.Item to mapOfItems(To get them use .get)
     static
     {
