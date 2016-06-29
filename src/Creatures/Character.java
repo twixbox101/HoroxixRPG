@@ -8,12 +8,6 @@ import Items.Armor;
 import Items.Item;
 import Items.Weapon;
 import Skills.Skill;
-import javafx.fxml.FXML;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
@@ -30,6 +24,7 @@ public class Character extends Creature {
     public List<Skill> skills = new ArrayList<>();
     public static Character myCharacter = new Character();
     public List<Item> inventory = new ArrayList<>();
+
 
     public Character() {
     }

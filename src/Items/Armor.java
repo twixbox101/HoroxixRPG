@@ -42,7 +42,8 @@ public class Armor extends Item {
     //creates hashmap of armor
     Map<String,Armor> mapOfArmor = new HashMap<>();
 //lists all armor to add to hashmap
-    public static Armor woodArmor = new Armor("Wood Armor", 45, 10, 10, 25);
+    public static Armor woodArmor = new Armor("Wood Armor", 45, 10, 18, 25);
+    public static Armor dirtyRobes = new Armor("Dirty Robes", 35, 4, 15, 20);
     public static Armor knightArmor = new Armor("Knight's Armor", 0, 3, 1, 5);
     public static Armor rangerArmor = new Armor("Ranger's Armor", 0, 1, 1, 3);
     public static Armor wizardArmor = new Armor("Wizard's Robes", 0, 1, 1, 2);

@@ -595,16 +595,17 @@ public class Event {
             case "triple":
                 if(value < mySkill.getAccuracy()) {
                     currentMonster.setCurrentHealth((currentMonster.getCurrentHealth() - myCharacter.getPower() * 3 - currentMonster.getDefense()));
-                    int dealt2 = myCharacter.getPower() * 2 - currentMonster.getDefense();
+                    int dealt2 = myCharacter.getPower() * 3 - currentMonster.getDefense();
                     myCharacter.setCurrentMana(myCharacter.getCurrentMana() - mySkill.getManaCost());
                     System.out.println("Dealt " + dealt2 + " damage!");
                     System.out.println(currentMonster.getName() + " health remaining : " + currentMonster.getCurrentHealth());
-                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());}
+                    System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
+                    }
 
                 else{
                     System.out.println("Your skill missed!");
-                    break;
                 }
+                break;
             case "death":
                 if(value < mySkill.getAccuracy()) {
                     System.out.println("Your skill hits!");
@@ -660,8 +661,8 @@ public class Event {
                     System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
                 } else {
                     System.out.println("Your skill missed!");
-                    break;
                 }
+                break;
             case "multi":
                 if(value < mySkill.getAccuracy()) {
                     int multiHits = getMulti();
@@ -674,7 +675,6 @@ public class Event {
                     System.out.println("Mana : " + myCharacter.getCurrentMana() + "/" + myCharacter.getMaxMana());
                 } else {
                     System.out.println("Your skill missed!");
-                    break;
                 }
                 break;
             case "buff":
@@ -750,6 +750,12 @@ public class Event {
             case "s":
                 viewSkills(myCharacter);
         }
+    }
+
+    public int diceRoller(){
+        Random dice = new Random();
+        int roll = dice.nextInt(6) + 1;
+        return roll;
     }
 
     public void viewSkills(Character myCharacter){

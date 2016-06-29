@@ -25,6 +25,8 @@ public class Weapon extends Item {
 //list of weapons and their values
     public static Weapon woodSword = new Weapon("Wood Sword", 40, 25, 8);
     public static Weapon knightSword = new Weapon("Knight's Sword", 0, 15, 1);
+    public static Weapon woodBow = new Weapon("Wood Bow", 45, 28, 15);
+    public static Weapon woodStaff = new Weapon("Wood Staff", 40, 20, 12);
     public static Weapon rangerBow = new Weapon("Ranger's Bow", 0, 9, 1);
     public static Weapon wizardStaff = new Weapon("Wizard's Staff", 0, 20, 1);
     public static Weapon druidClaws = new Weapon("Druid's Claws", 0, 12, 1);

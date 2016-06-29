@@ -3,14 +3,17 @@ package Locations;
 import Creatures.Monster;
 import Items.Item;
 
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by horox_000 on 1/12/2016.
  */
     public class DarkForest extends Location {
-
 
 
 //Initiates the dropList ArrayList
@@ -51,10 +54,14 @@ import java.util.List;
     //</editor-fold>
 
 
-    protected DarkForest(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
+    public DarkForest(String name, int levelRequired, List<Monster> enemyList, List<Item> dropList){
         super(name, levelRequired);
         this.dropList = dropList;
         this.enemyList = enemyList;
+
+    }
+
+    public void inForest() {
 
     }
     protected static DarkForest Forest = new DarkForest("Dark Forest", 5, enemyList, dropList);
