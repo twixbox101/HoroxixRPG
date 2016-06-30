@@ -77,7 +77,7 @@ public class Shop {
                     if (myCharacter.getGold() >= Armor.woodArmor.getPrice()) {
                         System.out.println("You have purchased a set of Wood Armor!");
                         myCharacter.inventory.add(Armor.woodArmor);
-                        Item.potion.setQuantity(Armor.woodArmor.getQuantity() + 1);
+                        Armor.woodArmor.setQuantity(Armor.woodArmor.getQuantity() + 1);
                         myCharacter.setGold(myCharacter.getGold() - Armor.woodArmor.getPrice());
                     } else {
                         System.out.println("You don't have enough gold!");
@@ -87,7 +87,7 @@ public class Shop {
                     if (myCharacter.getGold() >= Weapon.woodSword.getPrice()) {
                         System.out.println("You have purchased a Wood Sword!");
                         myCharacter.inventory.add(Weapon.woodSword);
-                        Item.elixir.setQuantity(Weapon.woodSword.getQuantity() + 1);
+                        Weapon.woodSword.setQuantity(Weapon.woodSword.getQuantity() + 1);
                         myCharacter.setGold(myCharacter.getGold() - Weapon.woodSword.getPrice());
                     } else {
                         System.out.println("You don't have enough gold!");

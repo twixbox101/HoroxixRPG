@@ -433,7 +433,7 @@ public class Event {
         String weaponChoice;
         Scanner menuInput = new Scanner(System.in);
         System.out.println("Please type the name of the armor you'd like to equip.");
-        weaponChoice = menuInput.next();
+        weaponChoice = menuInput.nextLine();
         int inventoryLength = myCharacter.inventory.size();
         for (int i = 0; i < inventoryLength; i++) {
             if (weaponChoice.equals(myCharacter.inventory.get(i).getName())) {
@@ -446,6 +446,7 @@ public class Event {
                     System.out.println("You don't have any!");
                 }
             }
+            else System.out.println("You don't have any!");
         }
     }
     //equip armor by choice WIP
