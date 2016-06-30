@@ -51,15 +51,6 @@ public class Event {
     }
 
 
-//    public Event() {
-//        initLocation();
-//    }
-
-//    public void initLocation(){
-//        Location forest = new Location("forest");
-//    }
-
-
 
     //uses a potion to restore 30 currentHealth!
     public void usePotion(Character myCharacter) {
@@ -419,15 +410,42 @@ public class Event {
     public void equipMenu(Character myCharacter){
         String equipChoice;
         System.out.println("What would you like to equip?");
-        System.out.println("[Armor][Weapon]");
+        System.out.println("[A]rmor][W]eapon]|e[X]it");
         Scanner menuInput = new Scanner(System.in);
         equipChoice = menuInput.next();
         switch(equipChoice.toLowerCase()){
-            case "armor":
+            case "a":
                 equipArmor(myCharacter);
                 break;
-            case "weapon":
+            case "w":
+                equipWeapon(myCharacter);
                 break;
+            case "x":
+                System.out.println("You exit.");
+                break;
+            default :
+                System.out.println("Please select a valid option");
+        }
+
+    }
+
+    public void equipWeapon(Character myCharacter){
+        String weaponChoice;
+        Scanner menuInput = new Scanner(System.in);
+        System.out.println("Please type the name of the armor you'd like to equip.");
+        weaponChoice = menuInput.next();
+        int inventoryLength = myCharacter.inventory.size();
+        for (int i = 0; i < inventoryLength; i++) {
+            if (weaponChoice.equals(myCharacter.inventory.get(i).getName())) {
+                Item weaponItem = myCharacter.inventory.get(i);
+                int checkAmount = weaponItem.getQuantity();
+                if (checkAmount > 0 && weaponItem instanceof Weapon) {
+                    weaponItem.setQuantity(weaponItem.getQuantity() - 1);
+                    equipMyWeapon(myCharacter, (Weapon)weaponItem);
+                } else {
+                    System.out.println("You don't have any!");
+                }
+            }
         }
     }
     //equip armor by choice WIP
@@ -550,8 +568,8 @@ public class Event {
         Skill.skillCheck(myCharacter);
     }
     //Equips a weapon. change myWeapon to the weapon you want to equip.
-    public void equipMyWeapon(Item myWeapon) {
-        this.myWeapon = (Weapon)myWeapon;
+    public void equipMyWeapon(Character myCharacter, Weapon myWeapon) {
+        myCharacter.setMyWeapon(myWeapon);
         System.out.println("You have equipped " + myWeapon);
     }
     //Equips armor. change myArmor to the piece of armor you want to equip.

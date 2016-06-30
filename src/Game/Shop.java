@@ -27,19 +27,26 @@ public class Shop {
                     switch (myCharacter.getCharClass().toLowerCase()) {
                         case "knight":
                             enterKnightShop(myCharacter);
+                            break;
                         case "hunter":
                             enterKnightShop(myCharacter);
+                            break;
                         case "druid":
                             enterKnightShop(myCharacter);
+                            break;
                         case "priest":
                             enterKnightShop(myCharacter);
+                            break;
                         case "wizard":
                             enterKnightShop(myCharacter);
+                            break;
                         default:
                             System.out.println("Please select a valid option.");
                     }
+                    break;
                 case "i" :
                     enterItemShop(myCharacter);
+                    break;
                 case "x" :
                     myCharacter.setLocation("mainMenu");
                     break;
