@@ -454,20 +454,21 @@ public class Event {
     public void equipArmor(Character myCharacter){
         String armorChoice;
         Scanner menuInput = new Scanner(System.in);
-        armorChoice = menuInput.next();
+        armorChoice = menuInput.nextLine();
         System.out.println("Please type the name of the armor you'd like to equip.");
         int inventoryLength = myCharacter.inventory.size();
         for (int i = 0; i < inventoryLength; i++) {
             if (armorChoice.equals(myCharacter.inventory.get(i).getName())) {
                 Item armorItem = myCharacter.inventory.get(i);
                 int checkAmount = armorItem.getQuantity();
-                if (checkAmount > 0) {
+                if (checkAmount > 0 && armorItem instanceof Armor) {
                     armorItem.setQuantity(armorItem.getQuantity() - 1);
-                    equipMyArmor(armorItem);
+                    equipMyArmor(myCharacter, (Armor)armorItem);
                 } else {
                     System.out.println("You don't have any!");
                 }
             }
+            else System.out.println("You don't have any!");
         }}
 
     /*public Item findInInventory(Character myCharacter, String menuChoice){
@@ -574,9 +575,8 @@ public class Event {
         System.out.println("You have equipped " + myWeapon);
     }
     //Equips armor. change myArmor to the piece of armor you want to equip.
-    public void equipMyArmor(Item myArmor) {
-        if(myArmor instanceof Armor)
-        this.myArmor = (Armor)myArmor;
+    public void equipMyArmor(Character myCharacter, Armor myArmor) {
+        myCharacter.setMyArmor(myArmor);
         System.out.println("You have equipped " + myArmor);
     }
     //Uses a skill. If it's a healing spell, or healing is > 0, it will run the healing code. Else it will run the damage code.

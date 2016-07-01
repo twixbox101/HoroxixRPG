@@ -200,7 +200,7 @@ public class Character extends Creature {
     public void chooseName(){
             Scanner inputName = new Scanner( System.in );
             System.out.println("Please name your Character!");
-            name = inputName.next();
+            name = inputName.nextLine();
             System.out.println("Your Character has been named " + name);
 
 
@@ -231,9 +231,9 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.doubleSlash);
-                addUnkown();
-                equipMyWeapon(Weapon.knightSword);
-                equipMyArmor(Armor.knightArmor);
+                addUnknown();
+                initialEquipWeapon(Weapon.knightSword);
+                initialEquipArmor(Armor.knightArmor);
                 break;
             case "ranger":
                 maxHealth = 95;
@@ -245,9 +245,9 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.triShot);
-                addUnkown();
-                equipMyWeapon(Weapon.rangerBow);
-                equipMyArmor(Armor.rangerArmor);
+                addUnknown();
+                initialEquipWeapon(Weapon.rangerBow);
+                initialEquipArmor(Armor.rangerArmor);
                 break;
             case "wizard":
                 maxHealth = 80;
@@ -259,9 +259,9 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.fireBall);
-                addUnkown();
-                equipMyWeapon(Weapon.wizardStaff);
-                equipMyArmor(Armor.wizardArmor);
+                addUnknown();
+                initialEquipWeapon(Weapon.wizardStaff);
+                initialEquipArmor(Armor.wizardArmor);
                 break;
             case "druid":
                 maxHealth = 100;
@@ -273,9 +273,9 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.death);
-                addUnkown();
-                equipMyWeapon(Weapon.druidClaws);
-                equipMyArmor(Armor.druidArmor);
+                addUnknown();
+                initialEquipWeapon(Weapon.druidClaws);
+                initialEquipArmor(Armor.druidArmor);
                 break;
             case "priest":
                 maxHealth = 85;
@@ -287,14 +287,14 @@ public class Character extends Creature {
                 expLevel = 100;
                 currentMana = maxMana;
                 skills.add(Skill.cure);
-                addUnkown();
-                equipMyWeapon(Weapon.priestStaff);
-                equipMyArmor(Armor.priestArmor);
+                addUnknown();
+                initialEquipWeapon(Weapon.priestStaff);
+                initialEquipArmor(Armor.priestArmor);
                 break;
         }
     }
 
-    public void addUnkown(){
+    public void addUnknown(){
         skills.add(Skill.unknown);
         skills.add(Skill.unknown);
         skills.add(Skill.unknown);
@@ -306,11 +306,11 @@ public class Character extends Creature {
         return myWeapon;
     }
 // equips a weapon. change myWeapon to the weapon you want to equip.
-    public void equipMyWeapon(Weapon myWeapon) {
+    public void initialEquipWeapon(Weapon myWeapon) {
         this.myWeapon = myWeapon;
     }
 // equips armor. change myArmor to the piece of armor you want to equip.
-    public void equipMyArmor(Armor myArmor) {
+    public void initialEquipArmor(Armor myArmor) {
         this.myArmor = myArmor;
     }
 //choose gender method
@@ -336,7 +336,7 @@ public class Character extends Creature {
 
 
         //equips a weapon to myCharacter
-        //    myCharacter.equipMyWeapon(Items.Weapon.goldSword);
+        //    myCharacter.initialEquipWeapon(Items.Weapon.goldSword);
         //displays characters weapon + power
         //    System.out.println(myCharacter.power + myCharacter.getWeapon().power);
 

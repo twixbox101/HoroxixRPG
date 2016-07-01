@@ -5,6 +5,8 @@ import Items.Item;
 import Items.Weapon;
 import com.sun.xml.internal.bind.v2.TODO;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -50,12 +52,18 @@ public class Shop {
                 case "x" :
                     myCharacter.setLocation("mainMenu");
                     break;
+                case "t" :
+                    enterNewShop(myCharacter);
+                    break;
                 default:
                     System.out.println("Please select a valid option.");
 
             }
             }
         }
+
+
+
 
 
     public void enterKnightShop(Character myCharacter){
@@ -101,6 +109,64 @@ public class Shop {
                     System.out.println("Please select a valid option.");
             }
         }
+    }
+
+    public void enterNewShop(Character myCharacter) {
+        myCharacter.setLocation("newShop");
+        System.out.println("Welcome to the New shop!");
+        Map whichMap = whichShop(myCharacter);
+        Iterator entries = whichMap.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry entry = (Map.Entry) entries.next();
+            Integer key = (Integer)entry.getKey();
+            Integer value = (Integer)entry.getValue();
+            System.out.println(+ key + " : " + value);
+        }
+        while(myCharacter.getLocation().equals("newShop")){
+            String shopChoice;
+            Scanner myInput = new Scanner(System.in);
+            shopChoice = myInput.next();
+            int shopLength = whichMap.size();
+            for (int i = 0; i < shopLength; i++) {
+                if (shopChoice.equals(whichMap.get(i)) && whichMap.get(i) instanceof Item){
+                    Item item = (Item)whichMap.get(i);
+                    if(myCharacter.getGold() >= item.getPrice()) {
+                        myCharacter.inventory.add(item);
+                        item.setQuantity(item.getQuantity() + 1);
+                        myCharacter.setGold(myCharacter.getGold() - item.getPrice());
+                        System.out.println("Purchased a " + item.getName() + "!");
+                    }
+                    else{
+                        System.out.println("You don't have enough gold!");
+                }}
+                else {
+                    System.out.println("You can't purchase that!");
+                }
+            }
+        }
+    }
+
+    public Map whichShop(Character myCharacter){
+        String myClass = myCharacter.getCharClass();
+        Map map = new HashMap<Item, Integer>();
+        switch (myClass) {
+            case "knight" :
+                map = Item.mapOfKnightItems;
+                break;
+            case "wizard" :
+                map = Item.mapOfWizardItems;
+                break;
+            case "ranger" :
+                map = Item.mapOfHunterItems;
+                break;
+            case "priest" :
+                map = Item.mapOfPriestItems;
+                break;
+            case "druid" :
+                map = Item.mapOfDruidItems;
+                break;
+        }
+        return map;
     }
 
 

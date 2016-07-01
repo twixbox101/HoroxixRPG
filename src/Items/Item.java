@@ -62,6 +62,8 @@ public class Item {
     public static Map<Item, Integer> mapOfKnightItems= new HashMap<Item, Integer>();
     public static Map<Item, Integer> mapOfHunterItems= new HashMap<Item, Integer>();
     public static Map<Item, Integer> mapOfPriestItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfDruidItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfWizardItems= new HashMap<Item, Integer>();
     //list of items and their values
     public static Item potion = new Item("Potion", 20, 40, 5, 0);
     public static Item elixir = new Item("Elixir", 50, 20, 24, 0);
