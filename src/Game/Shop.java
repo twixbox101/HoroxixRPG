@@ -114,37 +114,45 @@ public class Shop {
     public void enterNewShop(Character myCharacter) {
         myCharacter.setLocation("newShop");
         System.out.println("Welcome to the New shop!");
-        Map whichMap = whichShop(myCharacter);
+        Map <Item, Integer> whichMap = whichShop(myCharacter);
         Iterator entries = whichMap.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry entry = (Map.Entry) entries.next();
-            Integer key = (Integer)entry.getKey();
+            Item key = (Item)entry.getKey();
             Integer value = (Integer)entry.getValue();
-            System.out.println(+ key + " : " + value);
+            System.out.println(key + " : " + value);
         }
-        while(myCharacter.getLocation().equals("newShop")){
+        System.out.println("What would you like to purchase?");
+        while(myCharacter.getLocation().equals("newShop")) {
             String shopChoice;
             Scanner myInput = new Scanner(System.in);
-            shopChoice = myInput.next();
-            int shopLength = whichMap.size();
-            for (int i = 0; i < shopLength; i++) {
-                if (shopChoice.equals(whichMap.get(i)) && whichMap.get(i) instanceof Item){
-                    Item item = (Item)whichMap.get(i);
-                    if(myCharacter.getGold() >= item.getPrice()) {
-                        myCharacter.inventory.add(item);
-                        item.setQuantity(item.getQuantity() + 1);
-                        myCharacter.setGold(myCharacter.getGold() - item.getPrice());
-                        System.out.println("Purchased a " + item.getName() + "!");
+            shopChoice = myInput.nextLine();
+            Iterator options = whichMap.entrySet().iterator();
+            while (options.hasNext()) {
+                Map.Entry entry = (Map.Entry) options.next();{
+                    Item item = (Item) entry.getKey();
+                    if (shopChoice.equals(item.getName()) && item instanceof Item) {
+                        if (myCharacter.getGold() >= item.getPrice()) {
+                            myCharacter.inventory.add(item);
+                            item.setQuantity(item.getQuantity() + 1);
+                            myCharacter.setGold(myCharacter.getGold() - item.getPrice());
+                            System.out.println("Purchased a " + item.getName() + "!");
+                        } else {
+                            System.out.println("You don't have enough gold!");
+                        }
                     }
+                    else if (shopChoice.toLowerCase().equals("x")){
+                        System.out.println("You leave the shop!");
+                        myCharacter.setLocation("mainMenu");
+                        break;
+                        }
                     else{
-                        System.out.println("You don't have enough gold!");
-                }}
-                else {
-                    System.out.println("You can't purchase that!");
-                }
+                            System.out.println("You can't purchase that!");
+                    }
+
             }
         }
-    }
+    }}
 
     public Map whichShop(Character myCharacter){
         String myClass = myCharacter.getCharClass();

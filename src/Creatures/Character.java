@@ -232,7 +232,7 @@ public class Character extends Creature {
                 currentMana = maxMana;
                 skills.add(Skill.doubleSlash);
                 addUnknown();
-                initialEquipWeapon(Weapon.knightSword);
+                initialEquipWeapon(Weapon.trainingSword);
                 initialEquipArmor(Armor.knightArmor);
                 break;
             case "ranger":
@@ -246,7 +246,7 @@ public class Character extends Creature {
                 currentMana = maxMana;
                 skills.add(Skill.triShot);
                 addUnknown();
-                initialEquipWeapon(Weapon.rangerBow);
+                initialEquipWeapon(Weapon.trainingBow);
                 initialEquipArmor(Armor.rangerArmor);
                 break;
             case "wizard":
@@ -260,7 +260,7 @@ public class Character extends Creature {
                 currentMana = maxMana;
                 skills.add(Skill.fireBall);
                 addUnknown();
-                initialEquipWeapon(Weapon.wizardStaff);
+                initialEquipWeapon(Weapon.trainingStaff);
                 initialEquipArmor(Armor.wizardArmor);
                 break;
             case "druid":
@@ -274,7 +274,7 @@ public class Character extends Creature {
                 currentMana = maxMana;
                 skills.add(Skill.death);
                 addUnknown();
-                initialEquipWeapon(Weapon.druidClaws);
+                initialEquipWeapon(Weapon.trainingClaws);
                 initialEquipArmor(Armor.druidArmor);
                 break;
             case "priest":

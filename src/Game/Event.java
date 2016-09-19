@@ -23,6 +23,7 @@ public class Event {
 
     List<Location> locations = new ArrayList<>();
 
+
     //MainMenu 1.0 WIP
     public void mainMenu(Character myCharacter) {
         String menuChoice;
@@ -367,7 +368,7 @@ public class Event {
         System.out.println(myCharacter.inventory);
         System.out.println("Gold : " + myCharacter.getGold());
         System.out.println("What would you like to do?");
-        System.out.println("[E]quip|[U]se|e[X]it|");
+        System.out.println("[E]quip|[U]se|[C]raft|e[X]it|");
         String invChoice;
         Scanner menuInput = new Scanner(System.in);
         invChoice = menuInput.next();
@@ -377,6 +378,9 @@ public class Event {
                 break;
             case "u":
                 useMenu(myCharacter);
+                break;
+            case "c":
+                craftMenu(myCharacter);
                 break;
             case "x":
                 System.out.println("You leave.");
@@ -388,6 +392,26 @@ public class Event {
     }
 
     public void useMenu(Character myCharacter){
+        String useChoice;
+        System.out.println(myCharacter.inventory);
+        System.out.println("What item would you like to use?");
+        System.out.println("[P]otion|[E]lixir|e[X]it|");
+        Scanner menuInput = new Scanner(System.in);
+        useChoice = menuInput.next();
+        switch(useChoice.toLowerCase()){
+            case "p":
+                usePotion(myCharacter);
+                break;
+            case "e":
+                useElixir(myCharacter);
+                break;
+            case "x":
+                System.out.println("You exit.");
+                break;
+        }
+    }
+    //TODO make craft menu
+    public void craftMenu(Character myCharacter){
         String useChoice;
         System.out.println(myCharacter.inventory);
         System.out.println("What item would you like to use?");

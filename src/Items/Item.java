@@ -57,13 +57,7 @@ public class Item {
     }
 //</editor-fold>
 
-    //creates map for items
-    public static Map<Item, Integer> mapOfItems= new HashMap<Item, Integer>();
-    public static Map<Item, Integer> mapOfKnightItems= new HashMap<Item, Integer>();
-    public static Map<Item, Integer> mapOfHunterItems= new HashMap<Item, Integer>();
-    public static Map<Item, Integer> mapOfPriestItems= new HashMap<Item, Integer>();
-    public static Map<Item, Integer> mapOfDruidItems= new HashMap<Item, Integer>();
-    public static Map<Item, Integer> mapOfWizardItems= new HashMap<Item, Integer>();
+
     //list of items and their values
     public static Item potion = new Item("Potion", 20, 40, 5, 0);
     public static Item elixir = new Item("Elixir", 50, 20, 24, 0);
@@ -75,20 +69,18 @@ public class Item {
     public static Item ironCrown = new Item("Iron Crown", 50, 20, 24, 0);
     public static Item wolfFur = new Item("Wolf Fur", 50, 0, 10, 0);
     public static Item chippedTooth = new Item("Chipped Tooth", 50, 0, 20, 0);
+    //creates map for items
+    public static Map<Item, Integer> mapOfItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfKnightItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfHunterItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfPriestItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfDruidItems= new HashMap<Item, Integer>();
+    public static Map<Item, Integer> mapOfWizardItems= new HashMap<Item, Integer>();
     //adds Items.Item to mapOfItems(To get them use .get)
     static {
         //Regular items
         mapOfItems.put(potion, potion.getPrice());
         mapOfItems.put(elixir, elixir.getPrice());
-        //Knight items
-        mapOfKnightItems.put(Weapon.woodSword, Weapon.woodSword.getPrice());
-        mapOfKnightItems.put(Armor.woodArmor, Armor.woodArmor.getPrice());
-        //Hunter items
-        mapOfHunterItems.put(Weapon.woodBow, Weapon.woodBow.getPrice());
-        mapOfHunterItems.put(Armor.dirtyRobes, Armor.dirtyRobes.getPrice());
-        //Priest items
-        mapOfPriestItems.put(Weapon.woodStaff, Weapon.woodStaff.getPrice());
-        mapOfPriestItems.put(Armor.dirtyRobes, Armor.dirtyRobes.getPrice());
     }
 
 

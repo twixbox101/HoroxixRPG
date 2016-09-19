@@ -23,14 +23,15 @@ public class Weapon extends Item {
     //</editor-fold>
 
 //list of weapons and their values
+
     public static Weapon woodSword = new Weapon("Wood Sword", 40, 25, 8);
-    public static Weapon knightSword = new Weapon("Knight's Sword", 0, 15, 1);
+    public static Weapon trainingSword = new Weapon("Training Sword", 0, 15, 1);
     public static Weapon woodBow = new Weapon("Wood Bow", 45, 28, 15);
     public static Weapon woodStaff = new Weapon("Wood Staff", 40, 20, 12);
-    public static Weapon rangerBow = new Weapon("Ranger's Bow", 0, 9, 1);
-    public static Weapon wizardStaff = new Weapon("Wizard's Staff", 0, 20, 1);
-    public static Weapon druidClaws = new Weapon("Druid's Claws", 0, 12, 1);
-    public static Weapon priestStaff = new Weapon("Priest's Staff", 0, 8, 1);
+    public static Weapon trainingBow = new Weapon("Training Bow", 0, 9, 1);
+    public static Weapon trainingStaff = new Weapon("Training Staff", 0, 20, 1);
+    public static Weapon trainingClaws = new Weapon("Training Claws", 0, 12, 1);
+    public static Weapon priestStaff = new Weapon("Training Staff", 0, 8, 1);
     public static Weapon silverSword = new Weapon("Silver Sword", 150, 80, 45);
     public static Weapon goldSword = new Weapon("Gold Sword", 450, 300, 125);
     public static Weapon mythrilSword = new Weapon("Mythril Sword", 750, 575, 325);
@@ -49,7 +50,18 @@ public class Weapon extends Item {
         mapOfWeapons.put("Katana", katana);
         mapOfWeapons.put("Excalibur", excalibur);
         mapOfWeapons.put("Ultima Items.Weapon", ultimaWeapon);
-        mapOfWeapons.put("Knight's Sword", knightSword);
+        mapOfWeapons.put("Knight's Sword", trainingSword);
+    }
+
+    static {
+        mapOfKnightItems.put(Weapon.woodSword, Weapon.woodSword.getPrice());
+        mapOfKnightItems.put(Armor.woodArmor, Armor.woodArmor.getPrice());
+        //Hunter items
+        mapOfHunterItems.put(Weapon.woodBow, Weapon.woodBow.getPrice());
+        mapOfHunterItems.put(Armor.dirtyRobes, Armor.dirtyRobes.getPrice());
+        //Priest items
+        mapOfPriestItems.put(Weapon.woodStaff, Weapon.woodStaff.getPrice());
+        mapOfPriestItems.put(Armor.dirtyRobes, Armor.dirtyRobes.getPrice());
     }
 //creates the variables/string
 
@@ -63,6 +75,7 @@ public class Weapon extends Item {
         name = weaponName;
         sell = weaponSell;
         power = weaponPower;
+
 
     }
 //simplifies object to a legible word
